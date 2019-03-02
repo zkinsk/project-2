@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS dogs_day_out;
+CREATE DATABASE dogs_day_out;
+
+DROP DATABASE IF EXISTS test_db;
+CREATE DATABASE test_db;
