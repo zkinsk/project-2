@@ -28,7 +28,7 @@ require("./routes/htmlRoutes")(app);
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
-// clearing the `test_db`
+// clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
