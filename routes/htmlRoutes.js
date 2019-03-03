@@ -2,11 +2,25 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
+  
+  app.get("/user/profile", (request, response) => {
+      response.render("Profile", {
+        title: 'User Profile',
+      });
+  });
+  
+  app.get("/user/new", (request, response) => {
+      response.render("setup", {
+        title: 'New User',
+      });
+  });
+
   app.get("/", (request, response) => {
     db.Dog
-      .findAll()
+      .findAll({})
       .then((results) => {
         response.render("index", {
+          title: 'Dogs Day Out',
           msg: "Welcome!",
           dogs: results,
         });
