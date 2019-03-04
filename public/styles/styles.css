@@ -1,3 +1,20 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+.active-day {
+  padding: 0 !important;
+}
+
+.active-day-link {
+  background-color: #6cfdc1;
+  color: #000000;
+  display: block;
+  padding: .5em .75em;
+  width: 100%;
+}
+
+.active-day-link:focus,
+.active-day-link:hover {
+  background-color: #b4ffe6;
+}

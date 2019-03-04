@@ -15,6 +15,12 @@ module.exports = function(app) {
       });
   });
 
+  app.get("/calendar", (request, response) => {
+    response.render("calendar", {
+      title: "Calendar",
+    });
+  });
+
   app.get("/", (request, response) => {
     db.Dog
       .findAll({})
