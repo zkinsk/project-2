@@ -2,7 +2,6 @@
   line-height: 2.5;
 }
 
-<<<<<<< HEAD
 .active-day {
   padding: 0 !important;
 }
@@ -18,10 +17,4 @@
 .active-day-link:focus,
 .active-day-link:hover {
   background-color: #b4ffe6;
-=======
-.calendar {
-  height: 400px;
-  width: 100%;
-  background-color: greenyellow;
->>>>>>> tweaks
 }
