@@ -18,3 +18,8 @@
 .active-day-link:hover {
   background-color: #b4ffe6;
 }
+
+
+#map {
+  height: 400px;
+}
