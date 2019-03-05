@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
-    "password": "Asaavd101",
-=======
     "password": "boonbooni",
->>>>>>> 87cb921078276ff643fe1bab7ac76d21918a5c65
     "database": "dogs_day_out",
     "host": "localhost",
     "dialect": "mysql"
