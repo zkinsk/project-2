@@ -5,7 +5,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
   // Load index page
   
-  app.get("/user/profile", (request, response) => {
+  app.get("/user/profile", isAuthenticated, (request, response) => {
       response.render("Profile", {
         title: 'User Profile',
       });
