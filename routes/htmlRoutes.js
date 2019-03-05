@@ -1,7 +1,9 @@
 var db = require("../models");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+
 
 module.exports = function(app) {
-  app.get("/calendar", (request, response) => {
+  app.get("/calendar", isAuthenticated, (request, response) => {
     response.render("calendar", {
       title: "Calendar",
     });
@@ -20,12 +22,11 @@ module.exports = function(app) {
   });
   
   app.get("/user/new", (request, response) => {
-      response.render("setup", {
-        title: "New User",
+      response.render("createAccount", {
+        title: 'New User',
       });
   });
 
-  // Load index page
   app.get("/", (request, response) => {
     db.Dog
       .findAll({})
