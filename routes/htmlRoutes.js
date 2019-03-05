@@ -12,12 +12,12 @@ module.exports = function(app) {
   });
   
   app.get("/user/new", (request, response) => {
-      response.render("setup", {
+      response.render("createAccount", {
         title: 'New User',
       });
   });
 
-  app.get("/calendar", (request, response) => {
+  app.get("/calendar", isAuthenticated,(request, response) => {
     response.render("calendar", {
       title: "Calendar",
     });
