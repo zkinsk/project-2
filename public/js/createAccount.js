@@ -7,7 +7,6 @@ $(document).ready(function() {
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("click", function(event) {
     event.preventDefault();
-    alert("click");
     var userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
@@ -30,6 +29,7 @@ $(document).ready(function() {
       password: password
     }).then(function(data) {
       window.location.replace(data);
+      // eslint-disable-next-line prettier/prettier
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   }

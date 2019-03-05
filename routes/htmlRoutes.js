@@ -15,7 +15,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/user/profile", (request, response) => {
+  app.get("/user/profile", isAuthenticated, (request, response) => {
       response.render("Profile", {
         title: "User Profile",
       });
