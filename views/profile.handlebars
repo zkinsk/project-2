@@ -7,11 +7,11 @@
       <div class="level-left">
         <div class="content is-pulled-left">
           <h2 class="subtitle">Your Info</h2>
-          <div class="field">
-            <label class="label">Your Public Name</label>
+          <div class="field is-grouped">
             <div class="control">
-              <input class="input" type="text" />
+              <input class="input" type="text" placeholder={{{user-name}}}/>
             </div>
+            <button class="control button">Update Public Name</button>
           </div>
         </div>
       </div>
@@ -45,6 +45,7 @@
 
 <button class="button" id="addDogBtn">Add a dog</button>
 
+<!-- new dog modal -->
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
@@ -52,13 +53,13 @@
       <div class="field">
         <label class="label">Dog's Name</label>
         <div class="control">
-          <input class="input" type="text" />
+          <input class="input" type="text" id="dogName" />
         </div>
       </div>
       <div class="field">
         <label class="label">Dog's Gender</label>
         <div class="control">
-          <select class="select">
+          <select class="select" id="dogGender">
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
@@ -66,7 +67,7 @@
       </div>
       <div class="field">
         <label class="label">Dog's Weight (in pounds)</label>
-        <input class="input" type="text" />
+        <input class="input" type="number" id="dogWeight" />
       </div>
       <div class="field">
         <label class="label">Dog's Bio</label>
@@ -74,12 +75,13 @@
           class="input"
           type="text"
           placeholder="Tell us about your dog!"
+          id="dogBio"
         />
       </div>
       <div class="field">
         <label class="label">How energetic is your dog?</label>
         <div class="control">
-          <select class="select">
+          <select class="select" id="dogEnergy">
             <option value="1">1 (Not at all)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -92,7 +94,7 @@
       <div class="field">
         <label class="label">How patient is your dog?</label>
         <div class="control">
-          <select class="select">
+          <select class="select" id="dogPatience">
             <option value="1">1 (Not at all)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -107,7 +109,7 @@
           >How dominant does your dog tend to be with other dogs?</label
         >
         <div class="control">
-          <select class="select">
+          <select class="select" id="dogDominance">
             <option value="1">1 (Not at all)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -123,11 +125,12 @@
               class="input"
               type="text"
               placeholder="Your dog's profile picture URL"
+              id="dogImg"
             />
           </div>
         </div>
       </div>
-      <button class="button">Submit</button>
+      <button class="button" id="submitDogBtn">Submit</button>
     </div>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
