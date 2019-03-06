@@ -10,12 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Dog.associate = (models) => {
-    models.Dog.belongsTo(models.Owner, {
+    models.Dog.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
-
   return Dog;
 };
