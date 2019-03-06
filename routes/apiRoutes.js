@@ -32,6 +32,29 @@ module.exports = function(app) {
       });
   });//end of dog delete
 
+  app.get("/api/event", (request, response) => {
+    let options = {
+      include: [
+        {
+          model: db.Park,
+        },
+      ],
+    };
+
+    // This allows getting events for a specific day by specifying it like `/api/event?date=2019-03-09`.
+    if (request.query.date) {
+      options.where = {
+        date: request.query.date,
+      };
+    }
+
+    db.Event
+      .findAll(options)
+      .then((events) => {
+        response.json(events);
+      });
+  });//end of get events
+
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
     // So we're sending the user back the route to the members page because the redirect will happen on the front end
