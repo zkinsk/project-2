@@ -39,6 +39,12 @@ module.exports = function(app) {
       });
   });
 
+  app.get("/search", isAuthenticated, (request, response) => {
+    response.render("search", {
+      title: "Search meetups",
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", (request, response) => {
     response.render("404");

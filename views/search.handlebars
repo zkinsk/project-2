@@ -1,0 +1,30 @@
+<!-- search bar -->
+<div class="field is-grouped">
+     <p>
+       <input id="searchinput" name="search" class="input" type="text" placeholder="Search users, dogs, locations...">
+     </p>
+     <p class="control">
+       <a id="searchbutton" type="submit" class="button is-info"> 
+       Find a meetup!
+       </a>
+     </p>
+</div>
+
+{{!-- <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+></script>
+<script src="/js/profile.js"></script> --}}
+<script type="text/javascript">
+    $("#searchbutton").on("click", function(event){
+        console.log("clicked")
+        var input = $("#searchinput").val()
+        console.log(input)
+        $.ajax("/api/search/" + input, {
+            type: "GET",
+        }).then(function(data) {
+            console.log(data);
+            }
+        )
+    })
+</script>

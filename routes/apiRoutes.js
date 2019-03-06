@@ -72,4 +72,35 @@ module.exports = function(app) {
     }
   });
 
+  app.get("/api/search/:input", function(req, res) {
+    console.log(req.params.input, "hit api")
+    var searchInput = req.params.input;
+    var data = {
+      dogs:[],
+      owners:[]
+    }
+
+      db.Owner.findAll({
+        where: {
+          name: searchInput
+        }
+      })
+      .then((owner) => {
+        data.owners = owner;
+
+        db.Dog.findAll({
+          where: {
+            name: searchInput
+          }
+        })
+        .then((dog) => {
+          data.dog = dog;
+
+          res.json(data);
+        });
+      });
+      
+    //check to see why dogs is repeating
+    
+  });  
 };//end of module exports
