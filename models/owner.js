@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   });
 
-  Owner.associate = (models) => {
-    models.Owner.hasMany(models.Dog, {
-      onDelete: "CASCADE",
-    });
-  };
+  // Owner.associate = (models) => {
+  //   models.Owner.hasMany(models.Dog, {
+  //     onDelete: "CASCADE",
+  //   });
+  // };
 
   return Owner;
 };
