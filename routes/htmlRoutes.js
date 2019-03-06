@@ -1,17 +1,16 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-
 module.exports = function(app) {
   app.get("/calendar", isAuthenticated, (request, response) => {
     response.render("calendar", {
-      title: "Calendar",
+      title: "Calendar"
     });
   });
 
   app.get("/day", isAuthenticated, (request, response) => {
     response.render("day", {
-      title: "Day",
+      title: "Day"
     });
   });
 
@@ -26,23 +25,21 @@ module.exports = function(app) {
         title: "User Profile",
       });
   });
-  
+
   app.get("/user/new", (request, response) => {
-      response.render("createAccount", {
-        title: 'New User',
-      });
+    response.render("createAccount", {
+      title: "New User"
+    });
   });
 
   app.get("/", (request, response) => {
-    db.Dog
-      .findAll({})
-      .then((results) => {
-        response.render("index", {
-          title: "Dogs Day Out",
-          msg: "Welcome!",
-          dogs: results,
-        });
+    db.Dog.findAll({}).then(results => {
+      response.render("index", {
+        title: "Dogs Day Out",
+        msg: "Welcome!",
+        dogs: results
       });
+    });
   });
 
   // Render 404 page for any unmatched routes
