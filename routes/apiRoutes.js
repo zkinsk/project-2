@@ -3,7 +3,8 @@ var passport = require("../config/passport");
 
 
 module.exports = function(app) {
-
+  // *************************
+  // **** dog api routes *****
   app.get("/api/dog", (request, response) => {
     db.Dog
       .findAll()
@@ -32,10 +33,13 @@ module.exports = function(app) {
       });
   });//end of dog delete
 
+  // **** dog api routes *****
+  // *************************
+  
+  // **********************************
+  // **** Login & user api routes *****
+
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
     res.json("/user/profile");
   });//end of login
 
@@ -70,6 +74,29 @@ module.exports = function(app) {
         user: {id: req.user.id}
       });
     }
-  });
+  });//end of user_data
+
+  // **** Login & user api routes *****
+  // **********************************
+
+  // **********************************
+  // ******* Parks api routes *********
+  app.get("/api/park/:id?", function(req, res){
+    if (req.params.id){
+      db.Park.findOne({
+        where: {id: req.params.id}
+      }).then( (park)=>{
+        res.json(park)
+      })
+    }else{
+      db.Park.findAll().then( (parks) => {
+        res.json(parks);
+      });
+    }
+  }) //end of park get
+
+  // ******* Parks api routes *********
+  // **********************************
+
 
 };//end of module exports

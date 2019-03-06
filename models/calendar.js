@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Calendar = sequelize.define("Calendar", {
-    park_name: DataTypes.STRING,
-    user_name: DataTypes.STRING,
+    park_id: DataTypes.STRING,
+    user_id: DataTypes.STRING,
     date: DataTypes.DATE,
     time: DataTypes.STRING,
   });
