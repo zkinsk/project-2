@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-// import { userInfo } from "os";
 var userID;
 $(document).ready(function(){
   $.get("/api/user_data").then(function(data){
@@ -20,35 +18,23 @@ $(".modal-close").click(function() {
 $("#submitDogBtn").click(function(event){
   event.preventDefault();
 
-    var newDog = {
-      name: $("#dogName").val().trim(),
-      gender: $("#dogGender").val().trim(),
-      weight: $("#dogWeight").val().trim(),
-      bio: $("#dogBio").val().trim(),
-      energy: $("#dogEnergy").val().trim(),
-      patience: $("#dogPatience").val().trim(),
-      dominance: $("#dogDominance").val().trim(),
-      image: $("#dogImg").val().trim(),
-      UserId: userID
-    };
+  var newDog = {
+    name: $("#dogName").val().trim(),
+    gender: $("#dogGender").val().trim(),
+    weight: $("#dogWeight").val().trim(),
+    bio: $("#dogBio").val().trim(),
+    energy: $("#dogEnergy").val().trim(),
+    patience: $("#dogPatience").val().trim(),
+    dominance: $("#dogDominance").val().trim(),
+    image: $("#dogImg").val().trim(),
+    UserId: userID
+  };
   
-    $.ajax("/api/dog", {
-      type: "POST",
-      data: newDog
-    }).then(
-      function() {
-        location.reload();
-      })
-
-
-
+  $.ajax("/api/dog", {
+    type: "POST",
+    data: newDog
+  }).then(
+    function() {
+      location.reload();
+    });
 });
-=======
-$(document).ready(function() {
-  // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
-  $.get("/api/user_data").then(function(data) {
-    console.log(data);
-  });
-});
->>>>>>> Stashed changes

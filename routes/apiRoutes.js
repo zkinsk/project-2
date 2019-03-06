@@ -43,7 +43,22 @@ module.exports = function(app) {
     res.json("/user/profile");
   });//end of login
 
-  app.post("/api/signup", function(req, res) {
+  app.get("/api/user/count/:name", (req, res) => {
+    console.log("Looking for user");
+    db.User.count({
+      where: {email: req.params.name}
+    }).then( (result) => {
+      // console.log(result);
+      res.json(result);
+    }).catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
+  });
+
+
+  app.post("/api/signup", (req, res) => {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
@@ -57,12 +72,12 @@ module.exports = function(app) {
     });
   });//end of signup
 
-  app.get("/logout", function(req, res) {
+  app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
   });//end of logout
 
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -81,7 +96,7 @@ module.exports = function(app) {
 
   // **********************************
   // ******* Parks api routes *********
-  app.get("/api/park/:id?", function(req, res){
+  app.get("/api/park/:id?", (req, res) => {
     if (req.params.id){
       db.Park.findOne({
         where: {id: req.params.id}
@@ -93,7 +108,7 @@ module.exports = function(app) {
         res.json(parks);
       });
     }
-  }) //end of park get
+  }); //end of park get
 
   // ******* Parks api routes *********
   // **********************************
