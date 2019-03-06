@@ -9,7 +9,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/day", (request, response) => {
+  app.get("/day", isAuthenticated, (request, response) => {
     response.render("day", {
       title: "Day",
     });
@@ -22,7 +22,7 @@ module.exports = function(app) {
   });
 
   app.get("/user/profile", isAuthenticated, (request, response) => {
-      response.render("Profile", {
+      response.render("profile", {
         title: "User Profile",
       });
   });
