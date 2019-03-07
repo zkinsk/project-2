@@ -39,6 +39,7 @@ $(document).ready(function() {
           emailInput.val("");
           passwordInput.val("");
         }
+
       }
     });//end of async get
   });//end of signup click binding
