@@ -47,7 +47,15 @@ function initMap() {
     "Phideaux Dog Park",
   ];
 
-  for(const name of places) {
+  for (const name of places) {
     addPlace(name);
   }
 }
+
+// TEST CODE!! Remove This!
+$(() => {
+  $.get("/api/event?date=2019-03-09")
+    .then((response) => {
+      console.log(response);
+    });
+});
