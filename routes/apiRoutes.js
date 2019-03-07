@@ -1,9 +1,9 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
+const Op = db.sequelize.Op;
 
 module.exports = function(app) {
-
   app.get("/api/dog", (request, response) => {
     db.Dog
       .findAll()
@@ -31,6 +31,56 @@ module.exports = function(app) {
         response.json(dog);
       });
   });//end of dog delete
+
+  app.get("/api/event", (request, response) => {
+    let options = {
+      include: [
+        {
+          model: db.Park,
+        },
+      ],
+    };
+
+    // This allows getting events for a specific day by specifying it like `/api/event?date=2019-03-09`.
+    if (request.query.date) {
+      options.where = {
+        date: request.query.date,
+      };
+    }
+
+    db.Event
+      .findAll(options)
+      .then((events) => {
+        response.json(events);
+      });
+  });//end of get events
+
+  app.get("/api/event/date", (request, response) => {
+    const options = {
+      attributes: [
+        [db.sequelize.fn("DISTINCT", db.sequelize.col("date")), "date"],
+      ],
+    };
+
+    // This allows getting event dates for a month by specifying it like `/api/event/date?month=2019-03`.
+    if (request.query.month) {
+      const startDate = new Date(request.query.month + "-01T00:00:00");
+      const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1);
+
+      options.where = {
+        date: {
+          [Op.gte]: startDate,
+          [Op.lt]: endDate,
+        },
+      };
+    }
+    
+    db.Event
+      .findAll(options)
+      .then((events) => {
+        response.json(events);
+      });
+  });// end of get event dates
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
