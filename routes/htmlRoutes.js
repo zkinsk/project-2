@@ -17,9 +17,7 @@ module.exports = function(app) {
           date: request.params.date,
         },
         include: [
-          {
-            model: db.Park,
-          },
+          {model: db.Park},
         ],
         order: [
           [db.Event.associations.Park, "name", "ASC"],
@@ -41,7 +39,7 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/event/:id", (request, response) => {
+  app.get("/event/:id", isAuthenticated, (request, response) => {
     response.render("event", {
       title: "Event",
     });
@@ -75,7 +73,7 @@ module.exports = function(app) {
   });
 };
 
-// Day Page Utility............................................................
+// Day Page Utilities..........................................................
 
 /** Define an order for the time of day names, since alphabetical doesn't make sense. */
 function getTimeSortOrder(time) {
