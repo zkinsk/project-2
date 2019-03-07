@@ -4,16 +4,20 @@ var passport = require("../config/passport");
 const Op = db.sequelize.Op;
 
 module.exports = function(app) {
-  // *************************
-  // **** dog api routes *****
 
-  app.get("/api/dog", (request, response) => {
+    // *************************
+  // **** dog api routes *****
+  app.get("/api/dog/:id", (req, res) => {
     db.Dog
-      .findAll()
+      .findAll({
+        where: {
+          UserID: req.params.id
+        }
+      })
       .then((dogs) => {
-        response.json(dogs);
+        res.json(dogs);
       });
-  });//end of get all dogs
+  });//end of get all dogs by user id
 
   app.post("/api/dog", (request, response) => {
     db.Dog

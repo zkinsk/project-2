@@ -1,6 +1,8 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
+var userID;
+
 module.exports = function(app) {
   app.get("/calendar", isAuthenticated, (request, response) => {
     response.render("calendar", {
@@ -29,13 +31,13 @@ module.exports = function(app) {
 
   app.get("/event", (request, response) => {
     response.render("event", {
-      title: "Event",
+      title: "Event"
     });
   });
 
-  app.get("/user/profile", isAuthenticated, (request, response) => {
-    response.render("profile", {
-      title: "User Profile",
+  app.get("/user/profile", isAuthenticated, (request, response, next) => {
+      response.render("profile", {
+        title: "User Profile",
     });
   });
 
@@ -50,6 +52,7 @@ module.exports = function(app) {
   })
 
   app.get("/", (request, response) => {
+
     response.render("index", {
       title: "Dogs Day Out",
     });
