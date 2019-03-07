@@ -35,7 +35,7 @@ module.exports = function(app) {
       });
   });//end of dog delete
 
-  // **** dog api routes *****
+  // ^^^^^ dog api routes ^^^^
   // *************************
   
  
@@ -91,6 +91,7 @@ module.exports = function(app) {
 
  // **********************************
   // **** Login & user api routes *****
+
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     res.json("/user/profile");
   });//end of login
@@ -108,7 +109,6 @@ module.exports = function(app) {
       // res.status(422).json(err.errors[0].message);
     });
   });
-
 
   app.post("/api/signup", (req, res) => {
     console.log(req.body);
@@ -143,7 +143,7 @@ module.exports = function(app) {
     }
   });//end of user_data
 
-  // **** Login & user api routes *****
+  // ^^^ Login & user api routes ^^^^^
   // **********************************
 
   // **********************************
@@ -162,7 +162,7 @@ module.exports = function(app) {
     }
   }); //end of park get
 
-  // ******* Parks api routes *********
+  // ^^^^^^ Parks api routes ^^^^^^^^^^
   // **********************************
 
 

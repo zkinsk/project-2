@@ -14,21 +14,31 @@ $(document).ready(function() {
     event.preventDefault();
     var userData = {
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
+      passwordChek: passwordVerify.val().trim()
     };
-    $.get("/api/user/count" + userData.email).then ( function(result){
+    console.log(userData.email);
+    let userCount = "/api/user/count/";
+    userCount += userData.email;
+    console.log(userCount);
+    $.get(userCount).then ( function(result){
+    console.log("searching");
       console.log(result);
-      // if (result)
-      if (!userData.email || !userData.password) {
-        return;
-      }
-      else if (passwordInput !== passwordVerify){
-        $(".modal").toggleClass("is-active");
+      if (result === 1){
+        modalAlert("That user already exists!");
       }else{
-        // If we have an email and password, run the signUpUser function
-        signUpUser(userData.email, userData.password);
-        emailInput.val("");
-        passwordInput.val("");
+        if (!userData.email || !userData.password) {
+          modalAlert("Please complete user info.");
+          return;
+        }
+        else if (userData.password !== userData.passwordChek){
+          modalAlert("Passwords do not match!");
+        }else{
+          // If we have an email and password, run the signUpUser function
+          signUpUser(userData.email, userData.password);
+          emailInput.val("");
+          passwordInput.val("");
+        }
       }
     });//end of async get
   });//end of signup click binding
@@ -68,7 +78,10 @@ function checkPasswordMatch() {
   }
 }
 
-
+function modalAlert(text){
+  $(".modal h1").text(text);
+  $(".modal").toggleClass("is-active");
+}
 
 
 
