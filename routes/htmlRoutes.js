@@ -9,10 +9,23 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/day", isAuthenticated, (request, response) => {
-    response.render("day", {
-      title: "Day",
-    });
+  app.get("/day/:date", isAuthenticated, (request, response) => {
+    db.Event
+      .count({
+        where: {
+          date: request.params.date,
+        },
+      })
+      .then((count) => {
+        if (count > 0) {
+          response.render("day", {
+            title: "Day",
+            dayDate: request.params.date,
+          });
+        } else {
+          response.render("404");
+        }
+      });
   });
 
   app.get("/event", (request, response) => {
@@ -22,27 +35,21 @@ module.exports = function(app) {
   });
 
   app.get("/user/profile", isAuthenticated, (request, response) => {
-      response.render("profile", {
-        title: "User Profile",
-      });
+    response.render("profile", {
+      title: "User Profile",
+    });
   });
   
   app.get("/user/new", (request, response) => {
-      response.render("createAccount", {
-        title: 'New User',
-      });
+    response.render("createAccount", {
+      title: 'New User',
+    });
   });
 
   app.get("/", (request, response) => {
-    db.Dog
-      .findAll({})
-      .then((results) => {
-        response.render("index", {
-          title: "Dogs Day Out",
-          msg: "Welcome!",
-          dogs: results,
-        });
-      });
+    response.render("index", {
+      title: "Dogs Day Out",
+    });
   });
 
   // Render 404 page for any unmatched routes

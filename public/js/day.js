@@ -50,12 +50,9 @@ function initMap() {
   for (const name of places) {
     addPlace(name);
   }
-}
 
-// TEST CODE!! Remove This!
-$(() => {
-  $.get("/api/event?date=2019-03-09")
+  $.get("/api/event?date=" + date)
     .then((response) => {
       console.log(response);
     });
-});
+}
