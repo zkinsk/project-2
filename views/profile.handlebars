@@ -1,7 +1,7 @@
 <div class="section">
   <div class="container">
     <div class="content">
-      <h1 class="title">Your Profile</h1>
+      <h1 class="title">{{title}}</h1>
     </div>
     <nav class="level">
       <div class="level-left">
@@ -9,7 +9,7 @@
           <h2 class="subtitle">Your Info</h2>
           <div class="field is-grouped">
             <div class="control">
-              <input class="input" type="text" placeholder={{{user-name}}}/>
+              <input class="input" type="text" placeholder="{{{user-name}}}" />
             </div>
             <button class="control button">Update Public Name</button>
           </div>
@@ -25,13 +25,8 @@
     <nav class="level">
       <div class="level-left">
         <div class="content">
-          <h2 class="subtitle">Your Dog's Info</h2>
-          <p>Dog's Name</p>
-          <p>Dog's Gender</p>
-          <p>Dog's Weight</p>
-          <p>Dog's Energy Level</p>
-          <p>Dog's Patience Level</p>
-          <p>Dog's Dominance Level</p>
+          <h2 class="subtitle" id="dogSubtitle">Your Dog(s)  <button class="button" id="addDogBtn">Add a dog</button>
+          </h2>
         </div>
       </div>
       <div class="level-right">
@@ -43,7 +38,6 @@
   </div>
 </div>
 
-<button class="button" id="addDogBtn">Add a dog</button>
 
 <!-- new dog modal -->
 <div class="modal">

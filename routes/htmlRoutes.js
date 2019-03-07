@@ -1,6 +1,8 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
+var userID;
+
 module.exports = function(app) {
   app.get("/calendar", isAuthenticated, (request, response) => {
     response.render("calendar", {
@@ -16,14 +18,23 @@ module.exports = function(app) {
 
   app.get("/event", (request, response) => {
     response.render("event", {
-      title: "Event",
+      title: "Event"
     });
   });
 
-  app.get("/user/profile", isAuthenticated, (request, response) => {
+  app.get("/user/profile", isAuthenticated, (request, response, next) => {
+
+    // db.Dog.findAll({
+    //   where: {
+    //     UserID: userID
+    //   }
+    // }).then(results => {
+    //   console.log(results);
       response.render("profile", {
         title: "User Profile",
-      });
+      //   dogs: results
+      // });
+    });
   });
 
   app.get("/user/new", (request, response) => {
@@ -33,6 +44,7 @@ module.exports = function(app) {
   });
 
   app.get("/", (request, response) => {
+    console.log(request.UserID);
     db.Dog.findAll({}).then(results => {
       response.render("index", {
         title: "Dogs Day Out",
