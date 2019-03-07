@@ -9,7 +9,8 @@
         <ul id="park-list">
           {{#each parks as |park|}}
             <li>
-              {{park.name}}
+              <span class="park-name">{{park.name}}</span>
+              <button class="button is-small show-on-map" data-park-id="{{park.id}}">Show on map</button>
 
               <ul>
                 {{#each events as |event|}}

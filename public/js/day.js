@@ -2,6 +2,7 @@
 
 let infoWindow;
 let map;
+let markers = new Map();
 
 function addParksToMap(parks) {
   for (const park of parks) {
@@ -9,6 +10,8 @@ function addParksToMap(parks) {
       map: map,
       position: new google.maps.LatLng(park.lat, park.lon),
     });
+
+    markers.set(park.id, marker);
   
     google.maps.event.addListener(marker, "click", function() {
       const coordinates = encodeURIComponent(park.lat + "," + park.lon);
@@ -33,4 +36,12 @@ function initMap() {
   infoWindow = new google.maps.InfoWindow();
 
   addParksToMap(parks);
+
+  $(".show-on-map").click((event) => {
+    const button = $(event.currentTarget);
+    const parkId = button.data("park-id");
+    const marker = markers.get(parkId);
+    map.panTo(marker.getPosition());
+    google.maps.event.trigger(marker, "click");
+  });
 }
