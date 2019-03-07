@@ -7,7 +7,17 @@
         <h2 class="title is-4">Parks</h2>
 
         <ul id="park-list">
-          <!--addEventsToList() in day.js populates this list.-->
+          {{#each parks as |park|}}
+            <li>
+              {{park.name}}
+
+              <ul>
+                {{#each events as |event|}}
+                  <li><a href="/event/{{event.id}}">{{event.time}}</a></li>
+                {{/each}}
+              </ul>
+            </li>
+          {{/each}}
         </ul>
       </div>
 
@@ -21,7 +31,7 @@
 </section>
 
 <script>
-  const date = "{{{dayDate}}}";
+  const parks = {{{parksJson}}};
 </script>
 <script src="/js/day.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtEDdN0-B2gjvrFrQ1qIAaMklPbm7YUTM&callback=initMap"></script>

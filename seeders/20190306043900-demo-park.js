@@ -11,6 +11,27 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          name: "Churchill Dog Park",
+          lat: 37.5239282,
+          lon: -77.4126637,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Northside Dog Park",
+          lat: 37.5977001,
+          lon: -77.4436564,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Phideaux Dog Park",
+          lat: 37.5198621,
+          lon: -77.483193,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           name: "Rockwood Park",
           lat: 37.448200,
           lon: -77.582310,
