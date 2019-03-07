@@ -10,6 +10,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Rockwood Park",
+          lat: 37.448200,
+          lon: -77.582310,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ], {});
   },
 

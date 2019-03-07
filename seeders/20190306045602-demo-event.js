@@ -11,6 +11,22 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          date: "2019-03-09",
+          time: "Afternoon",
+          ParkId: 2,
+          UserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          date: "2019-03-09",
+          time: "Evening",
+          ParkId: 2,
+          UserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ], {});
   },
 
