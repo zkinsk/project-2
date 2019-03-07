@@ -10,10 +10,23 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/day", isAuthenticated, (request, response) => {
-    response.render("day", {
-      title: "Day"
-    });
+  app.get("/day/:date", isAuthenticated, (request, response) => {
+    db.Event
+      .count({
+        where: {
+          date: request.params.date,
+        },
+      })
+      .then((count) => {
+        if (count > 0) {
+          response.render("day", {
+            title: "Day",
+            dayDate: request.params.date,
+          });
+        } else {
+          response.render("404");
+        }
+      });
   });
 
   app.get("/event", (request, response) => {
@@ -23,17 +36,8 @@ module.exports = function(app) {
   });
 
   app.get("/user/profile", isAuthenticated, (request, response, next) => {
-
-    // db.Dog.findAll({
-    //   where: {
-    //     UserID: userID
-    //   }
-    // }).then(results => {
-    //   console.log(results);
       response.render("profile", {
         title: "User Profile",
-      //   dogs: results
-      // });
     });
   });
 
@@ -44,13 +48,9 @@ module.exports = function(app) {
   });
 
   app.get("/", (request, response) => {
-    console.log(request.UserID);
-    db.Dog.findAll({}).then(results => {
-      response.render("index", {
-        title: "Dogs Day Out",
-        msg: "Welcome!",
-        dogs: results
-      });
+
+    response.render("index", {
+      title: "Dogs Day Out",
     });
   });
 
