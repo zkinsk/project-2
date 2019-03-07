@@ -8,6 +8,9 @@
        Find a meetup!
        </a>
      </p>
+     <p>
+       {{{hbsObject}}}
+     </p>
 </div>
 
 {{!-- <script
@@ -22,8 +25,8 @@
         console.log(input)
         $.ajax("/api/search/" + input, {
             type: "GET",
-        }).then(function(data) {
-            console.log(data);
+        }).then(function(hbsObject) {
+            console.log(hbsObject);
             }
         )
     })

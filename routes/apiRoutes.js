@@ -75,7 +75,7 @@ module.exports = function(app) {
   app.get("/api/search/:input", function(req, res) {
     console.log(req.params.input, "hit api")
     var searchInput = req.params.input;
-    var data = {
+    var hbsObject = {
       dogs:[],
       owners:[]
     }
@@ -86,7 +86,7 @@ module.exports = function(app) {
         }
       })
       .then((owner) => {
-        data.owners = owner;
+        hbsObject.owners = owner;
 
         db.Dog.findAll({
           where: {
@@ -94,9 +94,9 @@ module.exports = function(app) {
           }
         })
         .then((dog) => {
-          data.dog = dog;
+          hbsObject.dog = dog;
 
-          res.json(data);
+          res.render(hbsObject);
         });
       });
       
