@@ -45,6 +45,10 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/seeds", (request, response) => {
+    response.render("seeds", {title: "Seed page"})
+  })
+
   app.get("/", (request, response) => {
     response.render("index", {
       title: "Dogs Day Out",

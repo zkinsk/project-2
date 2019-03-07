@@ -162,6 +162,17 @@ module.exports = function(app) {
     }
   }); //end of park get
 
+  app.post("/api/park/seeds", (req, res) => {
+    console.log(req.body);
+    db.Park.create({
+      name: req.body.name,
+      lat: req.body.lat,
+      lon: req.body.lon
+    }).then( (park)=>{
+      res.json(park);
+    })
+  });
+
   // ^^^^^^ Parks api routes ^^^^^^^^^^
   // **********************************
 

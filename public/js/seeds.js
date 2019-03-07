@@ -1,4 +1,4 @@
-var park = [
+var parks = [
   {
     name: "Barker Field",
     lat: 37.5391116,
@@ -25,3 +25,16 @@ var park = [
     lon: -77.5840857
   }
 ];
+
+$("#parkSeeds").click(function(){
+  console.log("Park Seeds being added");
+  parks.forEach( (park) => {
+    $.post("/api/park/seeds",{
+      name: park.name,
+      lat: park.lat,
+      lon: park.lon
+    }).then( (response) => {
+    console.log(response);
+    });
+  })
+});
