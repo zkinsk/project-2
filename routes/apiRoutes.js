@@ -4,6 +4,9 @@ var passport = require("../config/passport");
 const Op = db.sequelize.Op;
 
 module.exports = function(app) {
+  // *************************
+  // **** dog api routes *****
+
   app.get("/api/dog", (request, response) => {
     db.Dog
       .findAll()
@@ -32,6 +35,10 @@ module.exports = function(app) {
       });
   });//end of dog delete
 
+  // ^^^^^ dog api routes ^^^^
+  // *************************
+  
+ 
   app.get("/api/event", (request, response) => {
     let options = {
       include: [
@@ -82,14 +89,28 @@ module.exports = function(app) {
       });
   });// end of get event dates
 
+ // **********************************
+  // **** Login & user api routes *****
+
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
     res.json("/user/profile");
   });//end of login
 
-  app.post("/api/signup", function(req, res) {
+  app.get("/api/user/count/:name", (req, res) => {
+    console.log("Looking for user");
+    db.User.count({
+      where: {email: req.params.name}
+    }).then( (result) => {
+      // console.log(result);
+      res.json(result);
+    }).catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
+  });
+
+  app.post("/api/signup", (req, res) => {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
@@ -103,12 +124,12 @@ module.exports = function(app) {
     });
   });//end of signup
 
-  app.get("/logout", function(req, res) {
+  app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
   });//end of logout
 
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -117,9 +138,32 @@ module.exports = function(app) {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
-        user: req.user
+        user: {id: req.user.id}
       });
     }
-  });
+  });//end of user_data
+
+  // ^^^ Login & user api routes ^^^^^
+  // **********************************
+
+  // **********************************
+  // ******* Parks api routes *********
+  app.get("/api/park/:id?", (req, res) => {
+    if (req.params.id){
+      db.Park.findOne({
+        where: {id: req.params.id}
+      }).then( (park)=>{
+        res.json(park)
+      })
+    }else{
+      db.Park.findAll().then( (parks) => {
+        res.json(parks);
+      });
+    }
+  }); //end of park get
+
+  // ^^^^^^ Parks api routes ^^^^^^^^^^
+  // **********************************
+
 
 };//end of module exports

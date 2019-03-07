@@ -1,11 +1,10 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-
 module.exports = function(app) {
   app.get("/calendar", isAuthenticated, (request, response) => {
     response.render("calendar", {
-      title: "Calendar",
+      title: "Calendar"
     });
   });
 
@@ -39,10 +38,10 @@ module.exports = function(app) {
       title: "User Profile",
     });
   });
-  
+
   app.get("/user/new", (request, response) => {
     response.render("createAccount", {
-      title: 'New User',
+      title: "New User"
     });
   });
 

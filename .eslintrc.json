@@ -6,7 +6,7 @@
     },
     "extends": "prettier",
     "plugins": [
-        "prettier"
+    
       ],
     "rules": {
         "no-duplicate-case":"error",
