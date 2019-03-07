@@ -28,9 +28,10 @@ module.exports = function(app) {
       .then((events) => {
         if (events.length > 0) {
           const parks = formatEventsForHandlebars(events);
+          const date = formatDate(request.params.date);
 
           response.render("day", {
-            title: "Day",
+            title: date,
             parks: parks,
             parksJson: JSON.stringify(parks),
           });
@@ -113,4 +114,16 @@ function formatEventsForHandlebars(events) {
   }
 
   return parks;
+}
+
+function formatDate(dateOnly) {
+  const date = new Date(dateOnly + "T00:00:00");
+  const dateString = date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    weekday: "long",
+    year: "numeric",
+  });
+  
+  return dateString;
 }

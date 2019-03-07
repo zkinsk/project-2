@@ -2,7 +2,7 @@
 
 let infoWindow;
 let map;
-let markers = new Map();
+let markers = new Map(); // Don't get confused! This is a *hash map* and not a google map.
 
 function addParksToMap(parks) {
   for (const park of parks) {
@@ -26,7 +26,17 @@ function addParksToMap(parks) {
   }
 }
 
-// This is the entry point callback for when a connection to the google maps API is established.
+function setUpShowOnMapButtons() {
+  $(".show-on-map").click((event) => {
+    const button = $(event.currentTarget);
+    const parkId = button.data("park-id");
+    const marker = markers.get(parkId);
+    map.panTo(marker.getPosition());
+    google.maps.event.trigger(marker, "click");
+  });
+}
+
+// This is the entry point callback specified in the script tag for the google maps API.
 function initMap() {
   map = new google.maps.Map($("#map")[0], {
     center: {lat: 37.5407, lng: -77.4360},
@@ -36,12 +46,5 @@ function initMap() {
   infoWindow = new google.maps.InfoWindow();
 
   addParksToMap(parks);
-
-  $(".show-on-map").click((event) => {
-    const button = $(event.currentTarget);
-    const parkId = button.data("park-id");
-    const marker = markers.get(parkId);
-    map.panTo(marker.getPosition());
-    google.maps.event.trigger(marker, "click");
-  });
+  setUpShowOnMapButtons();
 }
