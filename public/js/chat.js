@@ -39,7 +39,8 @@ function chatUpdate(){
     chatDB.on("child_added", function(chat){
         // console.log(chat)
         let userName = chat.val().user;
-        let chatT = chat.val().chatTextDB
+        let chatT = chat.val().chatTextDB;
+        let currentId = chat.val().userId;
         if (userName === playerName){
             var text = $("<p>").text(chatT);
             var message = $("<div>").append(text);
@@ -47,6 +48,7 @@ function chatUpdate(){
         }else{
             var text = $("<p>").html('<span class="chatName">' + userName + ': </span>' + chatT)
             var message = $("<div>").append(text);
+            message.attr({"data-user-id": currentId})
             message.addClass("otherChat");
         }
 
@@ -54,8 +56,16 @@ function chatUpdate(){
     });
 };
 
+function userReview(){
+  $("#chatArea").on("click", ".otherChat", function(){
+    let userID = $(this).attr("data-user-id")
+    alert("User Id: " + userID + " was clicked");
+  })
+}
+
 $(document).ready(function(){
   chat();
   chatUpdate();
+  userReview()
 
 })
