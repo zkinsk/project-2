@@ -4,40 +4,33 @@ var passport = require("../config/passport");
 const Op = db.sequelize.Op;
 
 module.exports = function(app) {
-
-    // *************************
+  // *************************
   // **** dog api routes *****
   app.get("/api/dog/:id", (req, res) => {
-    db.Dog
-      .findAll({
-        where: {
-          UserID: req.params.id
-        }
-      })
-      .then((dogs) => {
-        res.json(dogs);
-      });
-  });//end of get all dogs by user id
+    db.Dog.findAll({
+      where: {
+        UserID: req.params.id
+      }
+    }).then(dogs => {
+      res.json(dogs);
+    });
+  }); //end of get all dogs by user id
 
   app.post("/api/dog", (request, response) => {
-    db.Dog
-      .create(request.body)
-      .then((dog) => {
-        response.json(dog);
-      });
-  });//end of create new dog
+    db.Dog.create(request.body).then(dog => {
+      response.json(dog);
+    });
+  }); //end of create new dog
 
   app.delete("/api/dog/:id", (request, response) => {
-    db.Dog
-      .destroy({
-        where: {
-          id: request.params.id
-        }
-      })
-      .then((dog) => {
-        response.json(dog);
-      });
-  });//end of dog delete
+    db.Dog.destroy({
+      where: {
+        id: request.params.id
+      }
+    }).then(dog => {
+      response.json(dog);
+    });
+  }); //end of dog delete
 
   // ^^^^^ dog api routes ^^^^
   // *************************
@@ -45,49 +38,53 @@ module.exports = function(app) {
   app.get("/api/event/date", (request, response) => {
     const options = {
       attributes: [
-        [db.sequelize.fn("DISTINCT", db.sequelize.col("date")), "date"],
-      ],
+        [db.sequelize.fn("DISTINCT", db.sequelize.col("date")), "date"]
+      ]
     };
 
     // This allows getting event dates for a month by specifying it like `/api/event/date?month=2019-03`.
     if (request.query.month) {
       const startDate = new Date(request.query.month + "-01T00:00:00");
-      const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1);
+      const endDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth() + 1,
+        1
+      );
 
       options.where = {
         date: {
           [Op.gte]: startDate,
-          [Op.lt]: endDate,
-        },
+          [Op.lt]: endDate
+        }
       };
     }
-    
-    db.Event
-      .findAll(options)
-      .then((events) => {
-        response.json(events);
-      });
-  });// end of get event dates
 
- // **********************************
+    db.Event.findAll(options).then(events => {
+      response.json(events);
+    });
+  }); // end of get event dates
+
+  // **********************************
   // **** Login & user api routes *****
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     res.json("/user/profile");
-  });//end of login
+  }); //end of login
 
   app.get("/api/user/count/:name", (req, res) => {
     console.log("Looking for user");
     db.User.count({
-      where: {email: req.params.name}
-    }).then( (result) => {
-      // console.log(result);
-      res.json(result);
-    }).catch(function(err) {
-      console.log(err);
-      res.json(err);
-      // res.status(422).json(err.errors[0].message);
-    });
+      where: { email: req.params.name }
+    })
+      .then(result => {
+        // console.log(result);
+        res.json(result);
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+        // res.status(422).json(err.errors[0].message);
+      });
   });
 
   app.post("/api/signup", (req, res) => {
@@ -95,33 +92,59 @@ module.exports = function(app) {
     db.User.create({
       email: req.body.email,
       password: req.body.password
-    }).then(function() {
-      res.redirect(307, "/api/login");
-    }).catch(function(err) {
-      console.log(err);
-      res.json(err);
-      // res.status(422).json(err.errors[0].message);
-    });
-  });//end of signup
+    })
+      .then(function() {
+        res.redirect(307, "/api/login");
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+        // res.status(422).json(err.errors[0].message);
+      });
+  }); //end of signup
 
   app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
-  });//end of logout
+  }); //end of logout
 
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
-    }
-    else {
+    } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
-        user: {id: req.user.id}
+        user: { id: req.user.id, name: req.user.name }
       });
     }
-  });//end of user_data
+  }); //end of user_data
+
+  app.put("/api/user/name/:id", (req, res) => {
+    db.User.update(
+      {
+        name: req.body.name
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(name => {
+      res.json(name);
+    });
+  });
+
+  app.get("/api/user/name/:id", (req, res) => {
+    db.User.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(name => {
+      res.json(name);
+    });
+  });
 
   // ^^^ Login & user api routes ^^^^^
   // **********************************
@@ -129,14 +152,14 @@ module.exports = function(app) {
   // **********************************
   // ******* Parks api routes *********
   app.get("/api/park/:id?", (req, res) => {
-    if (req.params.id){
+    if (req.params.id) {
       db.Park.findOne({
-        where: {id: req.params.id}
-      }).then( (park)=>{
-        res.json(park)
-      })
-    }else{
-      db.Park.findAll().then( (parks) => {
+        where: { id: req.params.id }
+      }).then(park => {
+        res.json(park);
+      });
+    } else {
+      db.Park.findAll().then(parks => {
         res.json(parks);
       });
     }
@@ -148,13 +171,11 @@ module.exports = function(app) {
       name: req.body.name,
       lat: req.body.lat,
       lon: req.body.lon
-    }).then( (park)=>{
+    }).then(park => {
       res.json(park);
-    })
+    });
   });
 
   // ^^^^^^ Parks api routes ^^^^^^^^^^
   // **********************************
-
-
-};//end of module exports
+}; //end of module exports
