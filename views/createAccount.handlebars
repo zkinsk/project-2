@@ -3,58 +3,63 @@
   <div class="container">
     <!-- title box -->
     <div class="content">
-      <h1 class="title">New User Profile Page</h1>
+      <h1 class="title">New User Page</h1>
     </div>
+   <div class="modal" id="passModal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="modal-card">
+        <section class="modal-card-body">
+          <div class="content has-text-centered">
+            <h1>Passwords do not match</h1>
+          </div>
+        </section>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
     <!-- form area -->
     <div class="columns">
       <!-- owner form -->
       <div class="column">
-        <!-- username field -->
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input id="email-input" class="input" type="email" placeholder="Your email" />
-          </div>
-        </div>
-        <!-- password field -->
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input id="password-input" class="input" type="password"  placeholder="Your new password"/>
-          </div>
-        </div>
-        <!-- re-enter password field -->
-        <div class="field">
-          <label class="label">Re-Enter Password</label>
-          <div class="control">
-            <input id="password-check" class="input"type="password" placeholder="Re-enter your new password"/>
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Location</label>
-          <div class="control">
-            <div class="select">
-              <select>
-                <option>Richmond, VA</option>
-              </select>
+        <form id="signup">
+          <!-- username field -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input id="email-input" class="input" type="email" placeholder="Your email" />
             </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label">Profile Picture</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Your profile picture URL"
-            />
+          <!-- password field -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input id="password-input" class="input" type="password"  placeholder="Your new password"/>
+            </div>
           </div>
-        </div>
-      <button class="button">Submit</button>
+          <!-- re-enter password field -->
+          <div class="field">
+            <label class="label">Re-Enter Password</label>
+            <div class="control">
+              <input id="password-check" class="input"type="password" placeholder="Re-enter your new password" onChange="checkPasswordMatch();"/>
+            </div>
+            <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
+          </div>
+          <div class="field">
+            <label class="label">Location</label>
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option>Richmond, VA</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="button">Submit</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
-<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/createAccount.js"></script>

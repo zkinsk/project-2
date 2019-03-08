@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Dog = sequelize.define("Dog", {
     name: DataTypes.STRING,
+    gender: DataTypes.STRING,
     bio: DataTypes.STRING,
     weight: DataTypes.INTEGER,
     energy: DataTypes.INTEGER,
@@ -9,12 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Dog.associate = (models) => {
-    models.Dog.belongsTo(models.Owner, {
+    models.Dog.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
-
   return Dog;
 };

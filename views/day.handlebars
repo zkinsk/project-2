@@ -1,56 +1,24 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">Saturday, March 9<sup>th</sup></h1>
+    <h1 class="title">{{{title}}}</h1>
 
     <div class="columns">
       <div class="column is-half content">
         <h2 class="title is-4">Parks</h2>
 
-        <ul>
-          <li>
-            Barker Field
-            <ul>
-              <li>Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </li>
+        <ul id="park-list">
+          {{#each parks as |park|}}
+            <li>
+              <span class="park-name">{{park.name}}</span>
+              <button class="button is-small show-on-map" data-park-id="{{park.id}}">Show on map</button>
 
-          <li>
-            Rockwood Park
-            <ul>
-              <li>Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </li>
-
-          <li>
-            Church Hill Dog Park
-            <ul>
-              <li>Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </li>
-
-          <li>
-            Northside Dog Park
-            <ul>
-              <li>Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </li>
-
-          <li>
-            Phideaux Dog Park
-            <ul>
-              <li>Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </li>
+              <ul>
+                {{#each events as |event|}}
+                  <li><a href="/event/{{event.id}}">{{event.time}}</a></li>
+                {{/each}}
+              </ul>
+            </li>
+          {{/each}}
         </ul>
       </div>
 
@@ -63,5 +31,8 @@
   </div>
 </section>
 
+<script>
+  const parks = {{{parksJson}}};
+</script>
 <script src="/js/day.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtEDdN0-B2gjvrFrQ1qIAaMklPbm7YUTM&libraries=places&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtEDdN0-B2gjvrFrQ1qIAaMklPbm7YUTM&callback=initMap"></script>

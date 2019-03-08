@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "verywow4",
+    "password": "",
     "database": "dogs_day_out",
     "host": "localhost",
     "dialect": "mysql"
