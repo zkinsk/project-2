@@ -10,12 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
-
-    models.Event.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
   };
 
   return Event;
