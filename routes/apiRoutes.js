@@ -178,7 +178,7 @@ module.exports = function(app) {
 
   // ^^^^^^ Parks api routes ^^^^^^^^^^
   // **********************************
-}; //end of module exports
+
   app.get("/api/search/:input", function(req, res) {
     console.log(req.params.input, "hit api")
     var searchInput = req.params.input;
@@ -210,4 +210,7 @@ module.exports = function(app) {
     //check to see why dogs is repeating
     
   });  
-};//end of module exports
+
+
+}; //end of module exports
+
