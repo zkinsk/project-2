@@ -1,16 +1,17 @@
 <div class="section">
   <div class="container">
     <div class="content">
-      <h1 class="title">{{title}}</h1>
+      <h1 class="title">{{ title }}</h1>
     </div>
     <nav class="level">
       <div class="level-left">
         <div class="content is-pulled-left">
           <h2 class="subtitle">Your Info</h2>
           <div class="field is-grouped">
-            <div class="control" id="nameControl">
-            </div>
-            <button class="control button" id="nameBtn">Update Public Name</button>
+            <div class="control" id="nameControl"></div>
+            <button class="control button" id="nameBtn">
+              Update Public Name
+            </button>
           </div>
         </div>
       </div>
@@ -21,22 +22,14 @@
       </div>
     </nav>
     <hr />
-    <nav class="level">
-      <div class="level-left">
-        <div class="content">
-          <h2 class="subtitle" id="dogSubtitle">Your Dog(s)  <button class="button" id="addDogBtn">Add a dog</button>
-          </h2>
-        </div>
-      </div>
-      <div class="level-right">
-        <figure class="image is-pulled-right is-128x128">
-          <img src="https://bulma.io/images/placeholders/128x128.png" />
-        </figure>
-      </div>
-    </nav>
+    <div class="content" id="dogContent">
+      <h2 class="subtitle" id="dogSubtitle">
+        Your Dog(s) <button class="button" id="addDogBtn">Add a dog</button>
+      </h2>
+    </div>
+
   </div>
 </div>
-
 
 <!-- new dog modal -->
 <div class="modal">
