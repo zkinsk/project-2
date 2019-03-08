@@ -10,7 +10,9 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
-var playerName = "Not You";
+var playerName = localStorage.getItem("userName");
+var userId = localStorage.getItem("userId");
+
 
 
 // chat functions
@@ -22,8 +24,9 @@ function chat(){
     //   console.log(chatText);
       if (chatText != ""){
         chatDB.push({
-            user: "test user",
-            // user: playerName,
+            user: playerName,
+            userId: userId,
+            event: 1,
             chatTextDB: chatText
           });
       }
