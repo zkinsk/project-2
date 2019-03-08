@@ -69,6 +69,10 @@
 }
 
 /* Day Page */
+.show-on-map {
+  margin-left: 1em;
+}
+
 #map {
   height: 400px;
 }
