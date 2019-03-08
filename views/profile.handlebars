@@ -1,58 +1,132 @@
 <div class="section">
   <div class="container">
     <div class="content">
-      <h1 class="title">Your Profile</h1>
+      <h1 class="title">{{title}}</h1>
     </div>
-    <div class="columns">
-      <!-- profile area -->
-      <div class="column is-half">
-        <nav class="level">
-          <div class="level-left">
-            <div class="content is-pulled-left">
-              <h2 class="subtitle">Your Info</h2>
+    <nav class="level">
+      <div class="level-left">
+        <div class="content is-pulled-left">
+          <h2 class="subtitle">Your Info</h2>
+          <div class="field is-grouped">
+            <div class="control" id="nameControl">
             </div>
-          </div>
-          <div class="level-right">
-            <figure class="image is-128x128">
-              <img src="https://bulma.io/images/placeholders/128x128.png" />
-            </figure>
-          </div>
-        </nav>
-        <hr />
-        <nav class="level">
-          <div class="level-left">
-            <div class="content">
-              <h2 class="subtitle">Your Dog's Info</h2>
-              <p>Dog's Name</p>
-              <p>Dog's Weight</p>
-              <p>Dog's Energy Level</p>
-              <p>Dog's Patience Level</p>
-              <p>Dog's Dominance Level</p>
-            </div>
-          </div>
-          <div class="level-right">
-            <figure class="image is-pulled-right is-128x128">
-              <img src="https://bulma.io/images/placeholders/128x128.png" />
-            </figure>
-          </div>
-        </nav>
-      </div>
-
-      <!-- calendar area -->
-      <div class="column is-half">
-        <div class="container">
-          <div class="calendar">
-            <p>Calendar Area</p>
+            <button class="control button" id="nameBtn">Update Public Name</button>
           </div>
         </div>
       </div>
-    </div>
+      <div class="level-right">
+        <figure class="image is-128x128">
+          <img src="https://bulma.io/images/placeholders/128x128.png" />
+        </figure>
+      </div>
+    </nav>
+    <hr />
+    <nav class="level">
+      <div class="level-left">
+        <div class="content">
+          <h2 class="subtitle" id="dogSubtitle">Your Dog(s)  <button class="button" id="addDogBtn">Add a dog</button>
+          </h2>
+        </div>
+      </div>
+      <div class="level-right">
+        <figure class="image is-pulled-right is-128x128">
+          <img src="https://bulma.io/images/placeholders/128x128.png" />
+        </figure>
+      </div>
+    </nav>
   </div>
 </div>
 
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-></script>
-<script src="/js/profile.js"></script>
 
+<!-- new dog modal -->
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <div class="field">
+        <label class="label">Dog's Name</label>
+        <div class="control">
+          <input class="input" type="text" id="dogName" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Dog's Gender</label>
+        <div class="control">
+          <select class="select" id="dogGender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Dog's Weight (in pounds)</label>
+        <input class="input" type="number" id="dogWeight" />
+      </div>
+      <div class="field">
+        <label class="label">Dog's Bio</label>
+        <input
+          class="input"
+          type="text"
+          placeholder="Tell us about your dog!"
+          id="dogBio"
+        />
+      </div>
+      <div class="field">
+        <label class="label">How energetic is your dog?</label>
+        <div class="control">
+          <select class="select" id="dogEnergy">
+            <option value="1">1 (Not at all)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6 (Very energetic)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">How patient is your dog?</label>
+        <div class="control">
+          <select class="select" id="dogPatience">
+            <option value="1">1 (Not at all)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6 (Very patient)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label"
+          >How dominant does your dog tend to be with other dogs?</label
+        >
+        <div class="control">
+          <select class="select" id="dogDominance">
+            <option value="1">1 (Not at all)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6 (Very dominant)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label">Profile Picture</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="Your dog's profile picture URL"
+              id="dogImg"
+            />
+          </div>
+        </div>
+      </div>
+      <button class="button" id="submitDogBtn">Submit</button>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<script src="/js/profile.js"></script>

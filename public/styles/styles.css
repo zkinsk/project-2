@@ -2,6 +2,7 @@
   line-height: 2.5;
 }
 
+/* Calendar Page */
 .active-day {
   padding: 0 !important;
 }
@@ -19,6 +20,58 @@
   background-color: #b4ffe6;
 }
 
+/* Event Page */
+.attendee {
+  color: #0000df;
+}
+
+.attendee:focus,
+.attendee:hover {
+  color: #7fafdf;
+}
+
+.chat {
+  border: .1em solid #000000;
+  padding: 1em;
+}
+
+.display-name {
+  color: #ffffff;
+}
+
+.display-name:focus,
+.display-name:hover {
+  color: #00009f;
+}
+
+.post {
+  background-color: #9999ff;
+  clear: both;
+  padding: .5em;
+  margin-top: .5em;
+}
+
+.post:first-child {
+  margin-top: 0;
+}
+
+.post-contents {
+  color: #000000;
+}
+
+.your-post {
+  background-color: #f3aeae;
+}
+
+
+#create-post {
+  padding-top: 1em;
+}
+
+/* Day Page */
+.show-on-map {
+  margin-left: 1em;
+}
 
 #map {
   height: 400px;

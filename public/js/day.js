@@ -2,33 +2,41 @@
 
 let infoWindow;
 let map;
-let service;
+let markers = new Map(); // Don't get confused! This is a *hash map* and not a google map.
 
-function createMarker(place) {
-  const marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-  });
+function addParksToMap(parks) {
+  for (const park of parks) {
+    const marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(park.lat, park.lon),
+    });
 
-  google.maps.event.addListener(marker, "click", function() {
-    infoWindow.setContent(place.name);
-    infoWindow.open(map, this);
+    markers.set(park.id, marker);
+  
+    google.maps.event.addListener(marker, "click", function() {
+      const coordinates = encodeURIComponent(park.lat + "," + park.lon);
+      const directionsLink = "https://www.google.com/maps/dir/?api=1&destination=" + coordinates;
+
+      const content = "<h1>" + park.name + "</h1>"
+        + "<a href=\"" + directionsLink + "\">Get Directions</a>";
+
+      infoWindow.setContent(content);
+      infoWindow.open(map, this);
+    });
+  }
+}
+
+function setUpShowOnMapButtons() {
+  $(".show-on-map").click((event) => {
+    const button = $(event.currentTarget);
+    const parkId = button.data("park-id");
+    const marker = markers.get(parkId);
+    map.panTo(marker.getPosition());
+    google.maps.event.trigger(marker, "click");
   });
 }
 
-function addPlace(name) {
-  const request = {
-    query: name,
-    fields: ["name", "geometry"],
-  };
-
-  service.findPlaceFromQuery(request, (results, status) => {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-      createMarker(results[0]);
-    }
-  });
-}
-
+// This is the entry point callback specified in the script tag for the google maps API.
 function initMap() {
   map = new google.maps.Map($("#map")[0], {
     center: {lat: 37.5407, lng: -77.4360},
@@ -37,17 +45,6 @@ function initMap() {
 
   infoWindow = new google.maps.InfoWindow();
 
-  service = new google.maps.places.PlacesService(map);
-
-  const places = [
-    "Barker Field",
-    "Rockwood Park",
-    "Church Hill Dog Park",
-    "Northside Dog Park",
-    "Phideaux Dog Park",
-  ];
-
-  for(const name of places) {
-    addPlace(name);
-  }
+  addParksToMap(parks);
+  setUpShowOnMapButtons();
 }
