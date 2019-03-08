@@ -12,26 +12,36 @@ module.exports = function(app) {
 
   app.get("/day/:date", isAuthenticated, (request, response) => {
     db.Event
-      .count({
+      .findAll({
         where: {
           date: request.params.date,
         },
+        include: [
+          {model: db.Park},
+        ],
+        order: [
+          [db.Event.associations.Park, "name", "ASC"],
+        ],
       })
-      .then((count) => {
-        if (count > 0) {
+      .then((events) => {
+        if (events.length > 0) {
+          const parks = formatEventsForHandlebars(events);
+          const date = formatDate(request.params.date);
+
           response.render("day", {
-            title: "Day",
-            dayDate: request.params.date,
+            title: date,
+            parks: parks,
+            parksJson: JSON.stringify(parks),
           });
         } else {
-          response.render("404");
+          response.status(404).render("404");
         }
       });
   });
 
-  app.get("/event", (request, response) => {
+  app.get("/event/:id", isAuthenticated, (request, response) => {
     response.render("event", {
-      title: "Event"
+      title: "Event",
     });
   });
 
@@ -52,7 +62,6 @@ module.exports = function(app) {
   })
 
   app.get("/", (request, response) => {
-
     response.render("index", {
       title: "Dogs Day Out",
     });
@@ -63,3 +72,56 @@ module.exports = function(app) {
     response.render("404");
   });
 };
+
+// Day Page Utilities..........................................................
+
+/** Define an order for the time of day names, since alphabetical doesn't make sense. */
+function getTimeSortOrder(time) {
+  switch (time) {
+    case "Morning":   return 0;
+    case "Afternoon": return 1;
+    case "Evening":   return 2;
+    default:          return 0;
+  }
+}
+
+function formatEventsForHandlebars(events) {
+  let parks = [];
+  let parkName = null;
+  let park = null;
+
+  for (const event of events) {
+    if (event.Park.name !== parkName) {
+      park = event.Park;
+      park.events = [];
+      parks.push(park);
+
+      parkName = park.name;
+    }
+
+    park.events.push({
+      id: event.id,
+      time: event.time,
+    });
+  }
+
+  for (const park of parks) {
+    park.events.sort((a, b) => {
+      return getTimeSortOrder(a.time) - getTimeSortOrder(b.time);
+    });
+  }
+
+  return parks;
+}
+
+function formatDate(dateOnly) {
+  const date = new Date(dateOnly + "T00:00:00");
+  const dateString = date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    weekday: "long",
+    year: "numeric",
+  });
+  
+  return dateString;
+}

@@ -41,30 +41,6 @@ module.exports = function(app) {
 
   // ^^^^^ dog api routes ^^^^
   // *************************
-  
- 
-  app.get("/api/event", (request, response) => {
-    let options = {
-      include: [
-        {
-          model: db.Park,
-        },
-      ],
-    };
-
-    // This allows getting events for a specific day by specifying it like `/api/event?date=2019-03-09`.
-    if (request.query.date) {
-      options.where = {
-        date: request.query.date,
-      };
-    }
-
-    db.Event
-      .findAll(options)
-      .then((events) => {
-        response.json(events);
-      });
-  });//end of get events
 
   app.get("/api/event/date", (request, response) => {
     const options = {
