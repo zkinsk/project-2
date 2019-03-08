@@ -26,7 +26,11 @@ $(document).ready(function() {
         console.log("Client Side API User ID: " + userID);
         var x;
         for (x in response) {
-          var dogName = $("<p><strong>" + response[x].name + "</strong></p>");
+          var dogName = $(
+            "<div class='content'><p><strong>" +
+              response[x].name +
+              "</strong></p>"
+          );
           var dogBio = $("<p>" + response[x].bio + "</p>");
           var dogGender = $(
             "<p>" +
@@ -61,19 +65,36 @@ $(document).ready(function() {
               response[x].name +
               "'s Dominance Level: " +
               response[x].dominance +
-              "</p>"
+              "</p></div>"
+          );
+          var dogPic = $(
+            "<figure class='image is-128x128 is-inline-block'><img src='https://bulma.io/images/placeholders/128x128.png'/></figure>"
           );
           var lineBreak = $("<hr>");
-          $("#dogSubtitle").after(
+          var dogLevel = $(
+            "<nav class='level dogLevel'></nav>"
+          );
+          // var dogColumns = $("<div class='columns'></div>")
+          var dogInfoColumn = $(
+            "<div class='column is-half dogInfoColumn'></div>"
+          );
+          var dogPicColumn = $(
+            "<div class='column is-half has-text-centered dogPicColumn'></div>"
+          );
+          $(dogInfoColumn).prepend(
             dogName,
             dogBio,
             dogGender,
             dogWeight,
             dogEnergy,
             dogPatience,
-            dogDominance,
-            lineBreak
+            dogDominance
           );
+          $(dogPicColumn).prepend(dogPic);
+          $(dogLevel).prepend(dogInfoColumn, dogPicColumn);
+          // $(dogLevel).prepend(dogColumns);
+          $(dogLevel).append(lineBreak);
+          $("#dogContent").append(dogLevel);
         }
       });
     });
