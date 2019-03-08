@@ -5,7 +5,11 @@ $(document).ready(function() {
   $.get("/api/user_data")
     .then(function(data) {
       userID = data.user.id;
+      userName = data.user.name;
       console.log("Client Side Initial User ID: " + userID);
+      console.log("Display Name: " + userName);
+      var nameField = $(`<input class="input" type="text" placeholder="${userName}" id="nameInput"></input>`);
+      $("#nameControl").prepend(nameField);
     })
     .then(function() {
       apiCall = "/api/dog/";
@@ -13,7 +17,6 @@ $(document).ready(function() {
       $.get(apiCall).then(function(response) {
         console.log("Client Side API User ID: " + userID);
         var x;
-        var results;
         for (x in response) {
           var dogName = $("<p><strong>" + response[x].name + "</strong></p>")
           var dogBio = $("<p>" + response[x].bio + "</p>");
@@ -75,3 +78,15 @@ $("#submitDogBtn").click(function(event) {
     location.reload();
   });
 });
+
+$("#nameBtn").click(function(){
+  var newName = $("#nameInput").val().trim();
+  var apiURL = "/api/user/name/";
+  apiURL += userID;
+
+  $.ajax({
+    url: apiURL,
+    method: "PUT",
+    data: {name: newName}
+  })
+})

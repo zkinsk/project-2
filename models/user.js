@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
+      defaultValue: "Anonymous",
       allowNull: true
     }
   });

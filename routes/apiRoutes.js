@@ -118,10 +118,22 @@ module.exports = function(app) {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
-        user: {id: req.user.id}
+        user: {id: req.user.id, name: req.user.name}
       });
     }
   });//end of user_data
+
+  app.put("/api/user/name/:id", (req, res) => {
+    db.User.update({
+      name: req.body.name
+    }, {
+      where: {
+        id: req.params.id
+      }
+    }).then((name) => {
+      res.json(name);
+    })
+  })
 
   // ^^^ Login & user api routes ^^^^^
   // **********************************
