@@ -213,7 +213,7 @@ module.exports = function(app) {
 
   app.post("/api/upload", (request, response) => {
     console.log(request.headers["content-length"]);
-    
+
     const image = {
       url: "https://haha.wow/",
     };
