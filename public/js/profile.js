@@ -154,12 +154,16 @@ $("#submitDogBtn").click(function(event) {
     UserId: userID
   };
 
-  $.ajax("/api/dog", {
-    type: "POST",
-    data: newDog
-  }).then(function() {
-    location.reload();
-  });
+  if (newDog.name, newDog.gender, newDog.weight, newDog.bio, newDog.energy, newDog.patience, newDog.dominance, newDog.image) {
+    $.ajax("/api/dog", {
+      type: "POST",
+      data: newDog
+    }).then(function() {
+      location.reload();
+    });
+  } else {
+    alert("Please fill out the entire form.");
+  }
 });
 
 $(document).on("click", "#dogDeleteBtn", function() {
