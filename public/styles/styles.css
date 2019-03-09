@@ -80,63 +80,64 @@
 /* *************************
 *************************
 chat box css */
-#chatBox{
-  height: 300px;
-  width: 100%;
-  overflow: hidden;
-  /* background-color: #e9ecef; */
-  background-color: hsl(206, 36%, 20%);
-  padding: 5px;
-  border: 5px solid #212528;
-  border-radius: 3px;
-  
-}
-#chatForm {
-  border-bottom: solid black 1px
-}
-#chatArea{
-  position: relative;
-  background-color: hsl(206, 36%, 20%);
-  overflow:auto;
-  height: 250px;
-  border-radius: 3px;
-}
-#chatArea p {
-  margin: 0;
-}
-.myChat {
-  margin-left: auto;
-  text-align: right;
-  margin-top: 1px;
-  margin-right: 3px;
-  max-width: 80%;
-}
-.myChat p {
-  background-color: #8afe37;
-  padding: 0px 5px 0px 5px;
-  border: 1px transparent solid;
-  border-radius: 6px;
-  display: inline-block;
-}
-.chatName {
-color: #dff3ff;
-}
+  #chatBox{
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    /* background-color: #e9ecef; */
+    background-color: hsl(206, 36%, 20%);
+    padding: 5px;
+    border: 5px solid #212528;
+    border-radius: 3px;
+    
+  }
+  #chatForm {
+    border-bottom: solid black 1px
+  }
+  #chatArea{
+    position: relative;
+    background-color: hsl(206, 36%, 20%);
+    overflow:auto;
+    height: 250px;
+    border-radius: 3px;
+  }
+  #chatArea p {
+    margin: 0;
+    cursor: pointer;
+  }
+  .myChat {
+    margin-left: auto;
+    text-align: right;
+    margin-top: 1px;
+    margin-right: 3px;
+    max-width: 80%;
+  }
+  .myChat p {
+    background-color: #8afe37;
+    padding: 0px 5px 0px 5px;
+    border: 1px transparent solid;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .chatName {
+  color: #dff3ff;
+  }
 
-.otherChat {
-  margin-left: 3px;
-  margin-right: auto;
-  margin-top: 1px;
-  max-width: 80%;
+  .otherChat {
+    margin-left: 3px;
+    margin-right: auto;
+    margin-top: 1px;
+    max-width: 80%;
 
-}
-.otherChat p {
-  background-color: #52b4ff;
-  padding:  0px 5px 0px 5px;
-  border: 1px transparent solid;
-  border-radius: 6px;
-  display: inline-block;
+  }
+  .otherChat p {
+    background-color: #52b4ff;
+    padding:  0px 5px 0px 5px;
+    border: 1px transparent solid;
+    border-radius: 6px;
+    display: inline-block;
 
-}
+  }
 
 /* *************************
 *************************
