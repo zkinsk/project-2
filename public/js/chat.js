@@ -54,17 +54,21 @@ function chatUpdate(){
     });
 };
 
-function userReview(){
+function buttonActions(){
   $("#chatArea").on("click", ".otherChat", function(){
     let userID = $(this).attr("data-user-id")
-    // console.log("User Id: " + userID + " was clicked");
+    userReview(userId);
+  })//end of chatArea Click
+}
+
+function userReview(userID){
     let apiCall = "/api/dog/";
     apiCall += userID;
     $.get(apiCall).then(function(response) {
       console.log(response);
       infoModal(response)
     });
-  })//end of chatArea Click
+
 }//end of user review
 
 function infoModal(response){
@@ -99,7 +103,7 @@ function infoModal(response){
 $(document).ready(function(){
   chat();
   chatUpdate();
-  userReview();
+  buttonActions();
   $(".modal-background").click(function() {
     $(".modal-card-title, .modal-card-body").empty()
     $("#dogInfoModal").toggleClass("is-active");
