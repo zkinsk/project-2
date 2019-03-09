@@ -3,10 +3,13 @@
     <div class="content">
       <h1 class="title">{{ title }}</h1>
     </div>
-    <nav class="level">
-      <div class="level-left">
-        <div class="content is-pulled-left">
-          <h2 class="subtitle">Your Info</h2>
+
+    <!-- start of owner section -->
+    <div class="content">
+      <h2 class="subtitle">Your Info</h2>
+      <nav class="level">
+        <!-- name columns -->
+        <div class="column is-half">
           <div class="field is-grouped">
             <div class="control" id="nameControl"></div>
             <button class="control button" id="nameBtn">
@@ -14,20 +17,22 @@
             </button>
           </div>
         </div>
-      </div>
-      <div class="level-right">
-        <figure class="image is-128x128">
-          <img src="https://bulma.io/images/placeholders/128x128.png" />
-        </figure>
-      </div>
-    </nav>
-    <hr />
-    <div class="content" id="dogContent">
-      <h2 class="subtitle" id="dogSubtitle">
-        Your Dog(s) <button class="button" id="addDogBtn">Add a dog</button>
-      </h2>
-    </div>
+        <!-- pic column -->
+        <div class="column is-half has-text-centered">
+          <figure class="image is-128x128 is-inline-block">
+            <img src="https://bulma.io/images/placeholders/128x128.png" />
+          </figure>
+        </div>
+      </nav>
 
+      <!-- start of dog section -->
+      <hr />
+      <div class="content" id="dogContent">
+        <h2 class="subtitle" id="dogSubtitle">
+          Your Dog(s) <button class="button" id="addDogBtn">Add a dog</button>
+        </h2>
+      </div>
+    </div>
   </div>
 </div>
 
