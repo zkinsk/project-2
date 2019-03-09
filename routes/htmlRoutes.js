@@ -55,18 +55,24 @@ module.exports = function(app) {
   });
 
   app.get("/user/new", (request, response) => {
-    response.render("createAccount", {
-      title: "New User"
+    response.render("createAccount", 
+    {
+      title: "New User",
+      layout: "login"
     });
   });
+
+  // res.render('home', {layout: 'viewBLayout.hbs'});
 
   app.get("/seeds", (request, response) => {
     response.render("seeds", {title: "Seed page"})
   })
 
   app.get("/", (request, response) => {
-    response.render("index", {
+    response.render("index", 
+    {
       title: "Dogs Day Out",
+      layout: "login"
     });
   });
 

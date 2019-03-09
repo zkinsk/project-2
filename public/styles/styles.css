@@ -9,22 +9,17 @@
 }
 
 /* Calendar Page */
-.active-day {
-  padding: 0 !important;
-}
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
 
-.active-day-link {
-  background-color: #6cfdc1;
-  color: #000000;
-  display: block;
-  padding: .5em .75em;
-  width: 100%;
-}
-
-.active-day-link:focus,
-.active-day-link:hover {
-  background-color: #b4ffe6;
-}
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
 /* Event Page */
 .attendee {
@@ -181,3 +176,4 @@ chat box css */
 /* *************************
 *************************
 chat box css */
+
