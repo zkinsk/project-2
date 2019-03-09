@@ -10,26 +10,24 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
-var playerName = localStorage.getItem("userName");
+var myUserName = localStorage.getItem("userName");
 var userId = localStorage.getItem("userId");
 
-
-
-// chat functions
+// when chat form is submitted, push chat text and user data to firebase db
 function chat(){
-  $("#chatButton").click(function(event){
+  $("#chatForm").submit(function(event){
       event.preventDefault();
-    //   console.log("click");
+      console.log("click");
       let chatText = $("#chatInput").val()
     //   console.log(chatText);
       if (chatText != ""){
         chatDB.push({
-            user: playerName,
-            userId: userId,
-            event: 1,
-            chatTextDB: chatText
-          });
-      }
+          user: myUserName,
+          userId: userId,
+          event: 1,
+          chatTextDB: chatText
+        });
+      };
       $("#chatInput").val("");
     })
 };
@@ -41,7 +39,7 @@ function chatUpdate(){
         let userName = chat.val().user;
         let chatT = chat.val().chatTextDB;
         let currentId = chat.val().userId;
-        if (userName === playerName){
+        if (userName === myUserName){
             var text = $("<p>").text(chatT);
             var message = $("<div>").append(text);
             message.addClass("myChat");
@@ -59,13 +57,55 @@ function chatUpdate(){
 function userReview(){
   $("#chatArea").on("click", ".otherChat", function(){
     let userID = $(this).attr("data-user-id")
-    alert("User Id: " + userID + " was clicked");
-  })
-}
+    // console.log("User Id: " + userID + " was clicked");
+    let apiCall = "/api/dog/";
+    apiCall += userID;
+    $.get(apiCall).then(function(response) {
+      console.log(response);
+      infoModal(response)
+    });
+  })//end of chatArea Click
+}//end of user review
+
+function infoModal(response){
+  let ouput;
+  if (response.length){
+    console.log("defined")
+    let theirUserName = response[0].User.name;
+    $(".modal-card-title").text(theirUserName + " and their dog:")
+    response.forEach(dog => {
+      let dogDiv = /*html*/`
+      <div class="dog-modal-content">
+        <div class="clearfix">
+        <h2 class="float-left">${dog.name}: &nbsp </h2><p> ${dog.bio}</p>
+        </div>
+        <p>Gender: ${dog.gender}</p>
+        <p>Energy Level: ${dog.energy}</p>
+        <p>Patience Level: ${dog.patience}</p>
+        <p>Dominance Level: ${dog.dominance}</p>
+      </div>
+      `
+      $(".modal-card-body").append(dogDiv);
+    })
+  }else{
+    console.log("not defined");
+    output = "They have no Pets!"
+    $(".modal-card-title").text(output)
+    $(".modal-card-body").text("Try another User!");
+  };
+  $("#dogInfoModal").toggleClass("is-active");
+}//end of info modal
 
 $(document).ready(function(){
   chat();
   chatUpdate();
-  userReview()
+  userReview();
+  $(".modal-background").click(function() {
+    $(".modal-card-title, .modal-card-body").empty()
+    $("#dogInfoModal").toggleClass("is-active");
+  });
 
-})
+})//end of doc.ready
+
+
+

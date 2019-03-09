@@ -23,6 +23,7 @@ $(document).ready(function() {
       apiCall = "/api/dog/";
       apiCall += userID;
       $.get(apiCall).then(function(response) {
+        console.log(response);
         var x;
         // loops through results and creates HTML elements for each dog
         for (x in response) {

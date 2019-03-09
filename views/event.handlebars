@@ -1,4 +1,21 @@
-{{!-- <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8"> --}}
+{{!-- dog info modal --}}
+<div class="modal" id="dogInfoModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal Title</p>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <footer class="modal-card-foot">
+      {{!-- <button class="button is-success">Save changes</button>
+      <button class="button">Cancel</button> --}}
+    </footer>
+  </div>
+</div>
+{{!-- end modal --}}
+
 <section class="section">
   <div class="container">
     <h1 class="title">Event</h1>
@@ -6,19 +23,19 @@
     <div class="columns">
       <div class="column is-two-thirds">
         <div id="chatBox">
-          <form id="chatForm">
-            <div class="input-group actionButtons">
-              <input autocomplete="off" type="text" class="form-control" id="chatInput" placeholder="Chat it up!">
-              <div class="input-group-append">
-                <button type="submit" id="chatButton" value="send" class="btn btn-outline-warning btn-sm"><i class="fas fa-share"></i></button>
-              </div>
+          <form class="field has-addons" id="chatForm">
+            <div class="control is-expanded">
+              <input class="input" id="chatInput" type="text" placeholder="Chat It Up!">
+            </div>
+            <div class="control">
+              <button class="button is-info" type="submit" id="chatButton"><i class="fas fa-share"></i></button>
             </div>
           </form>
           <div id="chatArea">
             {{!-- chat messages get pushed to here --}}
           </div>
-        </div>
-
+        </div>  
+        {{!-- end of chat box --}}
       </div>
 
       <div class="column is-one-third">
