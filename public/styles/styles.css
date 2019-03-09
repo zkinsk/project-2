@@ -1,3 +1,9 @@
+#nameInput::placeholder {
+  color: red;
+  opacity: 1; /* Firefox */
+}
+
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -98,7 +104,7 @@ chat box css */
     position: relative;
     background-color: hsl(206, 36%, 20%);
     overflow:auto;
-    height: 250px;
+    height: 220px;
     border-radius: 3px;
   }
   #chatArea p {

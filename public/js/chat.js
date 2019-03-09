@@ -13,27 +13,7 @@ var chatDB = database.ref("/event/chat");
 var playerName = localStorage.getItem("userName");
 var userId = localStorage.getItem("userId");
 
-
-
-// chat functions
-// function chat(){
-//   $("#chatButton").click(function(event){
-//       event.preventDefault();
-//     //   console.log("click");
-//       let chatText = $("#chatInput").val()
-//     //   console.log(chatText);
-//       if (chatText != ""){
-//         chatDB.push({
-//             user: playerName,
-//             userId: userId,
-//             event: 1,
-//             chatTextDB: chatText
-//           });
-//       }
-//       $("#chatInput").val("");
-//     })
-// };
-
+// when chat form is submitted, push chat text and user data to firebase db
 function chat(){
   $("#chatForm").submit(function(event){
       event.preventDefault();
@@ -77,13 +57,35 @@ function chatUpdate(){
 function userReview(){
   $("#chatArea").on("click", ".otherChat", function(){
     let userID = $(this).attr("data-user-id")
-    alert("User Id: " + userID + " was clicked");
-  })
-}
+    console.log("User Id: " + userID + " was clicked");
+    let apiCall = "/api/dog/";
+    apiCall += userID;
+    $.get(apiCall).then(function(response) {
+      console.log(response);
+      // infoModal(response)
+    });
+  })//end of chatArea Click
+}//end of user review
+
+function infoModal(response){
+  let ouput;
+  if (response !== undefind){
+    response.forEach(dog => {
+
+    })
+  }else{output = "Has no Pets!"};
+  $(".modal").toggleClass("is-active");
+}//end of info modal
 
 $(document).ready(function(){
   chat();
   chatUpdate();
-  userReview()
+  userReview();
+  $(".modal-close").click(function() {
+    $("#dogInfoModal").toggleClass("is-active");
+  });
 
-})
+})//end of doc.ready
+
+
+
