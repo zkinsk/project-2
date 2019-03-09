@@ -74,6 +74,30 @@
   padding-top: 1em;
 }
 
+/* ***************************** */
+/* ********event page modal***** */ 
+  .dog-modal-content{
+    padding-bottom: 20px;
+  }
+  .dog-modal-content h2{
+    font-size: 130%;
+  }
+  h2 + p{
+    padding-top: 5px;
+    /* color: red; */
+  }
+  .float-left {
+    float: left;
+  }
+
+  .clearfix:after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+/* ********event page modal***** */
+/* *****************************
+
 /* Day Page */
 .show-on-map {
   margin-left: 1em;

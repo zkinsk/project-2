@@ -10,11 +10,36 @@ module.exports = function(app) {
     db.Dog.findAll({
       where: {
         UserID: req.params.id
-      }
-    }).then(dogs => {
+      },
+      include: [{
+        model: db.User, 
+        required: true, 
+        attributes:["name"]
+      }]
+    }).then( dogs => {
+      // console.log(dogs[0].User.dataValues.name);
+      // console.log(dogs);
       res.json(dogs);
+    }) .catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
     });
   }); //end of get all dogs by user id
+
+  // models.Orders.findAll({
+  //   where: {'orderStatus' : req.query.orderStatus},
+  //   limit: req.query.limitTo,
+  //   include: [models.Accounts],
+    
+  //   order: 'orderDateAdded DESC'
+  //   }).then( function (orders, error) {
+  //   if(error) {
+  //     return res.send(error);
+  //   }
+  //   console.log(orders);
+  //   });
+    
 
   app.post("/api/dog", (request, response) => {
     db.Dog.create(request.body).then(dog => {

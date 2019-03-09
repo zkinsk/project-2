@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
-var playerName = localStorage.getItem("userName");
+var myUserName = localStorage.getItem("userName");
 var userId = localStorage.getItem("userId");
 
 // when chat form is submitted, push chat text and user data to firebase db
@@ -22,7 +22,7 @@ function chat(){
     //   console.log(chatText);
       if (chatText != ""){
         chatDB.push({
-          user: playerName,
+          user: myUserName,
           userId: userId,
           event: 1,
           chatTextDB: chatText
@@ -39,7 +39,7 @@ function chatUpdate(){
         let userName = chat.val().user;
         let chatT = chat.val().chatTextDB;
         let currentId = chat.val().userId;
-        if (userName === playerName){
+        if (userName === myUserName){
             var text = $("<p>").text(chatT);
             var message = $("<div>").append(text);
             message.addClass("myChat");
@@ -57,31 +57,51 @@ function chatUpdate(){
 function userReview(){
   $("#chatArea").on("click", ".otherChat", function(){
     let userID = $(this).attr("data-user-id")
-    console.log("User Id: " + userID + " was clicked");
+    // console.log("User Id: " + userID + " was clicked");
     let apiCall = "/api/dog/";
     apiCall += userID;
     $.get(apiCall).then(function(response) {
       console.log(response);
-      // infoModal(response)
+      infoModal(response)
     });
   })//end of chatArea Click
 }//end of user review
 
 function infoModal(response){
   let ouput;
-  if (response !== undefind){
+  if (response.length){
+    console.log("defined")
+    let theirUserName = response[0].User.name;
+    $(".modal-card-title").text(theirUserName + " and their dog:")
     response.forEach(dog => {
-
+      let dogDiv = /*html*/`
+      <div class="dog-modal-content">
+        <div class="clearfix">
+        <h2 class="float-left">${dog.name}: &nbsp </h2><p> ${dog.bio}</p>
+        </div>
+        <p>Gender: ${dog.gender}</p>
+        <p>Energy Level: ${dog.energy}</p>
+        <p>Patience Level: ${dog.patience}</p>
+        <p>Dominance Level: ${dog.dominance}</p>
+      </div>
+      `
+      $(".modal-card-body").append(dogDiv);
     })
-  }else{output = "Has no Pets!"};
-  $(".modal").toggleClass("is-active");
+  }else{
+    console.log("not defined");
+    output = "They have no Pets!"
+    $(".modal-card-title").text(output)
+    $(".modal-card-body").text("Try another User!");
+  };
+  $("#dogInfoModal").toggleClass("is-active");
 }//end of info modal
 
 $(document).ready(function(){
   chat();
   chatUpdate();
   userReview();
-  $(".modal-close").click(function() {
+  $(".modal-background").click(function() {
+    $(".modal-card-title, .modal-card-body").empty()
     $("#dogInfoModal").toggleClass("is-active");
   });
 
