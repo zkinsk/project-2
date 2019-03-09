@@ -21,3 +21,7 @@ VALUES
 INSERT INTO dogs (name, gender, bio, weight, energy, patience, dominance, UserId, createdAt, updatedAt)
 VALUES
 	("Gumbo", "Male", "A Good Boy", 70, 3, 6, 2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    
+INSERT INTO attendances (UserId, EventId, createdAt, updatedAt)
+VALUES
+	(1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
