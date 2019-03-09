@@ -6,6 +6,7 @@ var config = {
   storageBucket: "dog-day-chat.appspot.com",
   messagingSenderId: "302121490364"
 };
+let currentEvent = 2;
 firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
@@ -24,7 +25,7 @@ function chat(){
         chatDB.push({
           user: myUserName,
           userId: myUserId,
-          event: 1,
+          event: currentEvent,
           chatTextDB: chatText
         });
       };
@@ -34,7 +35,7 @@ function chat(){
 
 // update chat box with chat text as it is send to the database
 function chatUpdate(){
-    chatDB.on("child_added", function(chat){
+    chatDB.orderByChild("event").equalTo(currentEvent).on("child_added", function(chat){
         // console.log(chat)
         let userName = chat.val().user;
         let chatT = chat.val().chatTextDB;
