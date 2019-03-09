@@ -12,9 +12,8 @@ $(document).ready(function(){
       },
       dayClick: function(date) {
         console.log('clicked ' + date.format());
-        window.location.href = "/event/:id";
+        window.location.href = "/day/:date";
       },
     });
   });
 });
-
