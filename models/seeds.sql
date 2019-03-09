@@ -13,3 +13,11 @@ VALUES
 	("2019-03-09", "Afternoon", 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ("2019-03-09", "Afternoon", 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ("2019-03-09", "Evening", 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    
+INSERT INTO users (email, password, name, createdAt, updatedAt)
+VALUES
+	("dawso.andrew@gmail.com", "$2a$10$hUin0YPkLkKwpqoyw.rptum5iT.1iZE.qCOMzReeGfkzFOKJ6Uize", "Andrew", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO dogs (name, gender, bio, weight, energy, patience, dominance, UserId, createdAt, updatedAt)
+VALUES
+	("Gumbo", "Male", "A Good Boy", 70, 3, 6, 2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
