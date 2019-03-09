@@ -76,3 +76,13 @@
 #map {
   height: 400px;
 }
+
+/* Profile Page */
+.invalid-feedback {
+  color: #ff0000;
+  display: none;
+}
+
+#upload-progress {
+  display: none;
+}

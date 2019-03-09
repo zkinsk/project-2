@@ -19,6 +19,18 @@
         <figure class="image is-128x128">
           <img src="https://bulma.io/images/placeholders/128x128.png" />
         </figure>
+
+        <!--File Upload Test-->
+        <div>
+          <form id="picture-upload">
+            <input type="file" name="file" accept="image/*">
+            <button class="button">Upload</button>
+          </form>
+
+          <progress id="upload-progress"></progress>
+
+          <div id="upload-feedback" class="invalid-feedback">The file upload failed.</div>
+        </div>
       </div>
     </nav>
     <hr />

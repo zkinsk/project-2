@@ -209,8 +209,15 @@ module.exports = function(app) {
       
     //check to see why dogs is repeating
     
-  });  
+  });
 
-
+  app.post("/api/upload", (request, response) => {
+    console.log(request.headers["content-length"]);
+    
+    const image = {
+      url: "https://haha.wow/",
+    };
+    response.json(image);
+  });
 }; //end of module exports
 

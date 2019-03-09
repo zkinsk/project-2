@@ -1,5 +1,6 @@
 var userID;
 var apiCall;
+let pictureUploadRequest = null;
 
 $(document).ready(function() {
   $.get("/api/user_data")
@@ -161,4 +162,49 @@ $("#nameBtn").click(function() {
   }).then(function() {
     location.reload();
   });
+});
+
+$("#picture-upload").submit((event) => {
+  event.preventDefault();
+
+  // Prevent submission while uploading by canceling the upload and restarting.
+  if (pictureUploadRequest) {
+    pictureUploadRequest.abort();
+    pictureUploadRequest = null;
+  }
+
+  $("#upload-feedback").hide();
+  $("#upload-progress").show();
+
+  pictureUploadRequest = $.ajax({
+      url: "/api/upload",
+      type: "POST",
+      data: new FormData($("#picture-upload")[0]),
+      cache: false,
+      contentType: false,
+      processData: false,
+      xhr: () => {
+        const myXhr = $.ajaxSettings.xhr();
+        if (myXhr.upload) {
+          myXhr.upload.addEventListener("progress", (event) => {
+              if (event.lengthComputable) {
+                $("#upload-progress").attr({
+                  value: event.loaded,
+                  max: event.total,
+                });
+              }
+            }, false);
+        }
+        return myXhr;
+      },
+    })
+    .then((response) => {
+      console.log(response);
+      $("#upload-progress").hide();
+    })
+    .catch((error) => {
+      console.error(error);
+      $("#upload-feedback").show();
+      $("#upload-progress").hide();
+    });
 });
