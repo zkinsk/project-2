@@ -207,35 +207,31 @@ module.exports = function(app) {
   app.get("/api/search/:input", function(req, res) {
     console.log(req.params.input, "hit api")
     var searchInput = req.params.input;
-    var hbsObject = {
+    var data = {
       dogs:[],
       owners:[]
     }
-
-      db.Owner.findAll({
+      db.Owners.findAll({
         where: {
           name: searchInput
         }
       })
-      .then((owner) => {
-        hbsObject.owners = owner;
+      .then((owners) => {
+        data.owners = owners;
 
-        db.Dog.findAll({
+        db.Dogs.findAll({
           where: {
             name: searchInput
           }
         })
-        .then((dog) => {
-          hbsObject.dog = dog;
+        .then((dogs) => {
+          data.dogs = dogs;
 
-          res.render(hbsObject);
+          res.render(data);
         });
       });
-      
-    //check to see why dogs is repeating
-    
+      console.log(data)    
   });  
-
 
 }; //end of module exports
 
