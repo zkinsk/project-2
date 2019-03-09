@@ -6,19 +6,27 @@
     <div class="columns">
       <div class="column is-two-thirds">
         <div id="chatBox">
-          <form id="chatForm">
+          {{!-- <form id="chatForm">
             <div class="input-group actionButtons">
               <input autocomplete="off" type="text" class="form-control" id="chatInput" placeholder="Chat it up!">
               <div class="input-group-append">
                 <button type="submit" id="chatButton" value="send" class="btn btn-outline-warning btn-sm"><i class="fas fa-share"></i></button>
               </div>
             </div>
+          </form> --}}
+          <form class="field has-addons" id="chatForm">
+            <div class="control is-expanded">
+              <input class="input" id="chatInput" type="text" placeholder="Chat It Up!">
+            </div>
+            <div class="control">
+              <button class="button is-info" type="submit" id="chatButton"><i class="fas fa-share"></i></button>
+            </div>
           </form>
           <div id="chatArea">
             {{!-- chat messages get pushed to here --}}
           </div>
-        </div>
-
+        </div>  
+        {{!-- end of chat box --}}
       </div>
 
       <div class="column is-one-third">

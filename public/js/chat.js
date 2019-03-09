@@ -16,20 +16,38 @@ var userId = localStorage.getItem("userId");
 
 
 // chat functions
+// function chat(){
+//   $("#chatButton").click(function(event){
+//       event.preventDefault();
+//     //   console.log("click");
+//       let chatText = $("#chatInput").val()
+//     //   console.log(chatText);
+//       if (chatText != ""){
+//         chatDB.push({
+//             user: playerName,
+//             userId: userId,
+//             event: 1,
+//             chatTextDB: chatText
+//           });
+//       }
+//       $("#chatInput").val("");
+//     })
+// };
+
 function chat(){
-  $("#chatButton").click(function(event){
+  $("#chatForm").submit(function(event){
       event.preventDefault();
-    //   console.log("click");
+      console.log("click");
       let chatText = $("#chatInput").val()
     //   console.log(chatText);
       if (chatText != ""){
         chatDB.push({
-            user: playerName,
-            userId: userId,
-            event: 1,
-            chatTextDB: chatText
-          });
-      }
+          user: playerName,
+          userId: userId,
+          event: 1,
+          chatTextDB: chatText
+        });
+      };
       $("#chatInput").val("");
     })
 };
