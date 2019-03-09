@@ -11,7 +11,9 @@ $(document).ready(function() {
       apiCall = "/api/user/name/";
       apiCall += userID;
       $.get(apiCall).then(function(response) {
-        userName = response.name;
+        let userName = response.name;
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userId", userID);
         console.log("Display Name: " + userName);
         var nameField = $(
           `<input class="input" type="text" placeholder="${userName}" id="nameInput"></input>`
