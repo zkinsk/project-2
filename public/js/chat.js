@@ -11,7 +11,7 @@ var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
 var myUserName = localStorage.getItem("userName");
-var userId = localStorage.getItem("userId");
+var myUserId = localStorage.getItem("userId");
 
 // when chat form is submitted, push chat text and user data to firebase db
 function chat(){
@@ -23,7 +23,7 @@ function chat(){
       if (chatText != ""){
         chatDB.push({
           user: myUserName,
-          userId: userId,
+          userId: myUserId,
           event: 1,
           chatTextDB: chatText
         });
@@ -39,7 +39,7 @@ function chatUpdate(){
         let userName = chat.val().user;
         let chatT = chat.val().chatTextDB;
         let currentId = chat.val().userId;
-        if (userName === myUserName){
+        if (currentId === myUserId){
             var text = $("<p>").text(chatT);
             var message = $("<div>").append(text);
             message.addClass("myChat");
@@ -57,7 +57,7 @@ function chatUpdate(){
 function buttonActions(){
   $("#chatArea").on("click", ".otherChat", function(){
     let userID = $(this).attr("data-user-id")
-    userReview(userId);
+    userReview(userID);
   })//end of chatArea Click
 }
 
@@ -72,7 +72,7 @@ function userReview(userID){
 }//end of user review
 
 function infoModal(response){
-  let ouput;
+  let output;
   if (response.length){
     console.log("defined")
     let theirUserName = response[0].User.name;
