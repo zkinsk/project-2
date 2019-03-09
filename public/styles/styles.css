@@ -99,6 +99,15 @@
 /* *****************************
 
 /* Day Page */
+.new-event {
+  color: #6f6f6f;
+}
+
+.new-event:focus,
+.new-event:hover {
+  color: #bfbfbf;
+}
+
 .show-on-map {
   margin-left: 1em;
 }
