@@ -6,7 +6,7 @@ var config = {
   storageBucket: "dog-day-chat.appspot.com",
   messagingSenderId: "302121490364"
 };
-let currentEvent = 2;
+let currentEvent = 1;
 firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
