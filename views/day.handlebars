@@ -13,8 +13,12 @@
               <button class="button is-small show-on-map" data-park-id="{{park.id}}">Show on map</button>
 
               <ul>
-                {{#each events as |event|}}
-                  <li><a href="/event/{{event.id}}">{{event.time}}</a></li>
+                {{#each times as |time|}}
+                  {{#if time.event}}
+                    <li><a href="/event/{{time.event.id}}">{{time.name}}</a></li>
+                  {{else}}
+                    <li><a class="new-event" href="/event">{{time.name}}</a></li>
+                  {{/if}}
                 {{/each}}
               </ul>
             </li>
