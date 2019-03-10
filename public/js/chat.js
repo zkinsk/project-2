@@ -10,9 +10,15 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
+<<<<<<< HEAD
 var myUserName = sessionStorage.getItem("userName");
 var myUserId = sessionStorage.getItem("userId");
 var eventObject = JSON.parse(sessionStorage.getItem('eventObj'));
+=======
+var myUserName = localStorage.getItem("userName");
+var myUserId = localStorage.getItem("userId");
+var eventObject = JSON.parse(localStorage.getItem('eventObj'));
+>>>>>>> 66e09a7c22ebbf9511cf22987292fa5af0ef3fc8
 console.log(eventObject);
 var currentEvent = `${eventObject.date}&${eventObject.time}&${eventObject.parkId}`;
 

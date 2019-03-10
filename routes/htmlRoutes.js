@@ -41,9 +41,14 @@ module.exports = function(app) {
       });
   });
 
+<<<<<<< HEAD
   app.get("/event/day/:date/:time/:park", isAuthenticated, (req, res) => {
     console.log(req.params);
     res.render("event", {
+=======
+  app.get("/event/:date/:time/:park?", isAuthenticated, (request, response) => {
+    response.render("event", {
+>>>>>>> 66e09a7c22ebbf9511cf22987292fa5af0ef3fc8
       title: "Event",
     });
   });
