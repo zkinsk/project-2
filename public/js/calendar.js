@@ -11,7 +11,6 @@ $(document).ready(function(){
         right: 'month'
       },
       dayClick: function(date) {
-        console.log(date.format());
         console.log('clicked ' + date.format());
         date = date.format();
         window.location.href = "/day/" + date;

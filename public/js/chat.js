@@ -6,13 +6,15 @@ var config = {
   storageBucket: "dog-day-chat.appspot.com",
   messagingSenderId: "302121490364"
 };
-let currentEvent = 1;
 firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
 var myUserName = localStorage.getItem("userName");
 var myUserId = localStorage.getItem("userId");
+var eventObject = JSON.parse(localStorage.getItem('eventObj'));
+console.log(eventObject);
+var currentEvent = `${eventObject.date}&${eventObject.time}&${eventObject.parkId}`;
 
 // when chat form is submitted, push chat text and user data to firebase db
 function chat(){
