@@ -10,9 +10,9 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
-var myUserName = localStorage.getItem("userName");
-var myUserId = localStorage.getItem("userId");
-var eventObject = JSON.parse(localStorage.getItem('eventObj'));
+var myUserName = sessionStorage.getItem("userName");
+var myUserId = sessionStorage.getItem("userId");
+var eventObject = JSON.parse(sessionStorage.getItem('eventObj'));
 console.log(eventObject);
 var currentEvent = `${eventObject.date}&${eventObject.time}&${eventObject.parkId}`;
 
@@ -62,7 +62,17 @@ function buttonActions(){
     let userID = $(this).attr("data-user-id")
     userReview(userID);
   })//end of chatArea Click
-}
+
+  $("#attendeeBtn").click(function(){
+    $.post("/api/event/attend", {
+      date: eventObject.date,
+      time: eventObject.time,
+      parkId: eventObject.parkId,
+      userId: myUserId
+    })//end of post
+    .then((response) => {})
+  })
+}//end of button Actions
 
 function userReview(userID){
     let apiCall = "/api/dog/";

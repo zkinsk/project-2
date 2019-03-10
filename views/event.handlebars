@@ -19,7 +19,6 @@
 <section class="section">
   <div class="container">
     <h1 class="title">Event</h1>
-    <button class="button" id="attendeeBtn">Attend Event</button>
     <div class="columns">
       <div class="column">
         <div id="chatBox">
@@ -35,17 +34,14 @@
             {{!-- chat messages get pushed to here --}}
           </div>
         </div>  
-        {{!-- end of chat box --}}
+        {{!-- ^^^ end of chat box ^^^--}}
       </div>
 
       <div class="column">
-        <h2 class="title is-4">Attendees</h2>
+        <h2 class="title is-4">Attendees <span><button class="button" id="attendeeBtn">Add Your Name</button></span></h2>
 
         <ul class="attendee-list">
-          <li><a class="attendee" >Alexa</a></li>
-          <li><a class="attendee" >Andrew</a></li>
-          <li><a class="attendee" >Jacob</a></li>
-          <li><a class="attendee" >Scott</a></li>
+          {{!-- list of attendess goes here --}}
         </ul>
       </div>
     </div>

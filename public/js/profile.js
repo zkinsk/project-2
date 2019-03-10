@@ -11,8 +11,8 @@ $(document).ready(function() {
       apiCall += userID;
       $.get(apiCall).then(function(response) {
         let userName = response.name;
-        localStorage.setItem("userName", userName);
-        localStorage.setItem("userId", userID);
+        sessionStorage.setItem("userName", userName);
+        sessionStorage.setItem("userId", userID);
         var nameField = $(
           `<input class="input" type="text" placeholder="${userName}" id="nameInput"></input>`
         );

@@ -41,8 +41,9 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/event/:date/:time/:park?", isAuthenticated, (request, response) => {
-    response.render("event", {
+  app.get("/event/day/:date/:time/:park", isAuthenticated, (req, res) => {
+    console.log(req.params);
+    res.render("event", {
       title: "Event",
     });
   });

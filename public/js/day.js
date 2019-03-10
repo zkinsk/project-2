@@ -60,15 +60,9 @@ function listItemClick(){
       parkId: parkId,
       date: date,
     }
-    localStorage.setItem('eventObj', JSON.stringify(eventObj));
-    document.location.href = "/event/day/" + date + ":" + time + ":" + parkId;
+    sessionStorage.setItem('eventObj', JSON.stringify(eventObj));
+    document.location.href = "/event/day/" + date + "/" + time + "/" + parkId;
     console.log(eventObj);
-    // $.post("/event/day", eventObj)
-    // .then(function(response){
-    // })
-    // .catch(function(err){
-    //   console.log(err)
-    // })
   })
 }
 
@@ -76,4 +70,3 @@ $(document).ready(function(){
   console.log(window.location.href);
   listItemClick();
 })
-
