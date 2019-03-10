@@ -48,3 +48,32 @@ function initMap() {
   addParksToMap(parks);
   setUpShowOnMapButtons();
 }
+
+function listItemClick(){
+  $("a").click(function(){
+    // console.log($(this).text());
+    let time = $(this).text();
+    let parkId = $(this).parent().parent().attr("park-id-data");
+    let date = (window.location.href).split("/day/").slice(-1).toString().replace(/[#]/g, "");
+    let eventObj = {
+      time: time,
+      parkId: parkId,
+      date: date,
+    }
+    localStorage.setItem('eventObj', JSON.stringify(eventObj));
+    document.location.href = "/event/day/" + date + ":" + time + ":" + parkId;
+    console.log(eventObj);
+    // $.post("/event/day", eventObj)
+    // .then(function(response){
+    // })
+    // .catch(function(err){
+    //   console.log(err)
+    // })
+  })
+}
+
+$(document).ready(function(){
+  console.log(window.location.href);
+  listItemClick();
+})
+
