@@ -43,5 +43,11 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "CASCADE"
     });
   };
+  User.associate = function(models) {
+    models.User.hasMany(models.EventDayTimePark, {
+      onDelete: "CASCADE"
+    });
+  };
+  
   return User;
 };

@@ -60,21 +60,9 @@ function listItemClick(){
       parkId: parkId,
       date: date,
     }
-<<<<<<< HEAD
     sessionStorage.setItem('eventObj', JSON.stringify(eventObj));
     document.location.href = "/event/day/" + date + "/" + time + "/" + parkId;
     console.log(eventObj);
-=======
-    localStorage.setItem('eventObj', JSON.stringify(eventObj));
-    document.location.href = "/event/day/" + date + ":" + time + ":" + parkId;
-    console.log(eventObj);
-    // $.post("/event/day", eventObj)
-    // .then(function(response){
-    // })
-    // .catch(function(err){
-    //   console.log(err)
-    // })
->>>>>>> 66e09a7c22ebbf9511cf22987292fa5af0ef3fc8
   })
 }
 
@@ -82,7 +70,3 @@ $(document).ready(function(){
   console.log(window.location.href);
   listItemClick();
 })
-<<<<<<< HEAD
-=======
-
->>>>>>> 66e09a7c22ebbf9511cf22987292fa5af0ef3fc8

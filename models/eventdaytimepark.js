@@ -12,10 +12,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
+    // userId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false
+    // }
   });
+
+  EventDayTimePark.associate = (models) => {
+    models.EventDayTimePark.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
+    // EventDayTimePark.associate = (models) => {
+  //   models.EventDayTimePark.hasMany(models.User, { foreignKey: {allowNull: false} });
+  // };
+
   return EventDayTimePark;
 };

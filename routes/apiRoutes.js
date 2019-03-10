@@ -95,12 +95,11 @@ module.exports = function(app) {
 
   app.post("/api/event/attend", (req, res) => {
     console.log (req.body);
-
     db.EventDayTimePark.create({
       date: req.body.date,
       time: req.body.time,
       parkId: req.body.parkId,
-      userId: req.body.userId
+      UserId: req.body.userId
     }).then(attendee => {
       console.log(attendee.dataValues);
     })

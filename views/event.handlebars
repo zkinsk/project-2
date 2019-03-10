@@ -41,6 +41,9 @@
         <h2 class="title is-4">Attendees <span><button class="button" id="attendeeBtn">Add Your Name</button></span></h2>
 
         <ul class="attendee-list">
+          {{#each attendee}}
+          <li data-id="{{this.id}}"><h4 class="subtitle is-4">{{this.name}}</h4></li>
+          {{/each}}
           {{!-- list of attendess goes here --}}
         </ul>
       </div>
