@@ -19,7 +19,6 @@
 <section class="section">
   <div class="container">
     <h1 class="title">Event</h1>
-    <button class="button" id="attendeeBtn">Attend Event</button>
     <div class="columns">
       <div class="column">
         <div id="chatBox">
@@ -35,21 +34,31 @@
             {{!-- chat messages get pushed to here --}}
           </div>
         </div>  
-        {{!-- end of chat box --}}
+        {{!-- ^^^ end of chat box ^^^--}}
       </div>
 
       <div class="column">
-        <h2 class="title is-4">Attendees</h2>
+        <h2 class="title is-4">Attendees <span id="buttonSwitch"></span></h2>
 
         <ul class="attendee-list">
-          <li><a class="attendee" >Alexa</a></li>
-          <li><a class="attendee" >Andrew</a></li>
-          <li><a class="attendee" >Jacob</a></li>
-          <li><a class="attendee" >Scott</a></li>
+          {{#each attendee}}
+          <li data-user-id="{{this.id}}"><h4 class="subtitle is-4">{{this.name}}</h4></li>
+          {{/each}}
+          {{!-- list of attendess goes here --}}
         </ul>
       </div>
     </div>
   </div>
 </section>
-<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+{{!-- <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script> --}}
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
 <script src="/js/chat.js"></script>
+  {{!-- checkUser(attending); --}}
+
+<script>
+  let attending = {{{attendeeJson}}};
+</script>
+
+
+

@@ -12,12 +12,14 @@
               <span class="park-name">{{park.name}}</span>
               <button class="button is-small show-on-map" data-park-id="{{park.id}}">Show on map</button>
 
-              <ul>
+              <ul park-id-data="{{park.id}}">
                 {{#each times as |time|}}
                   {{#if time.event}}
-                    <li><a href="/event/{{time.event.id}}">{{time.name}}</a></li>
+                    {{!-- <li><a href="/event/{{time.event.id}}">{{time.name}}</a></li> --}}
+                    <li><a href="#">{{time.name}}</a></li>
                   {{else}}
-                    <li><a class="new-event" href="/event">{{time.name}}</a></li>
+                    {{!-- <li><a class="new-event" href="/event">{{time.name}}</a></li> --}}
+                    <li><a class="new-event" href="#">{{time.name}}</a></li>
                   {{/if}}
                 {{/each}}
               </ul>
@@ -28,8 +30,9 @@
 
       <div class="column is-half">
         <h2 class="title is-4">Map</h2>
-
-        <div id="map" class="is-fullwidth"></div>
+        <div id="map" class="is-fullwidth">
+          {{!-- map goes here --}}
+        </div>
       </div>
     </div>
   </div>

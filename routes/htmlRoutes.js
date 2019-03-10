@@ -1,7 +1,6 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-var userID;
 
 module.exports = function(app) {
   app.get("/calendar", isAuthenticated, (request, response) => {
@@ -42,11 +41,33 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/event/:id?", isAuthenticated, (request, response) => {
-    response.render("event", {
-      title: "Event",
+  app.get("/event/day/:date/:time/:parkId", isAuthenticated, (req, res) => {
+    console.log(req.params);
+    db.EventDayTimePark.findAll({
+      where:{
+        date: req.params.date,
+        time: req.params.time,
+        parkId: req.params.parkId
+      },
+      include:{
+        model: db.User,
+        attributes:["name", "id"]
+      }
+    }).then((attendees)=>{
+      // console.log("html \n" ,result[0].User.dataValues)
+      let attendee=[];
+      attendees.forEach(user =>{
+        attendee.push(user.User.dataValues)
+      });
+      console.log(attendee);
+      res.render("event", {
+        title: "Event",
+        attendee: attendee,
+        attendeeJson: JSON.stringify(attendee),
+      });
     });
   });
+
 
   app.get("/user/profile", isAuthenticated, (request, response, next) => {
       response.render("profile", {
@@ -61,8 +82,6 @@ module.exports = function(app) {
       layout: "login"
     });
   });
-
-  // res.render('home', {layout: 'viewBLayout.hbs'});
 
   app.get("/seeds", (request, response) => {
     response.render("seeds", {title: "Seed page"})

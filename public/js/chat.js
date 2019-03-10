@@ -6,13 +6,15 @@ var config = {
   storageBucket: "dog-day-chat.appspot.com",
   messagingSenderId: "302121490364"
 };
-let currentEvent = 1;
 firebase.initializeApp(config);
 var database = firebase.database();
 var chatDB = database.ref("/event/chat");
 
-var myUserName = localStorage.getItem("userName");
-var myUserId = localStorage.getItem("userId");
+var myUserName = sessionStorage.getItem("userName");
+var myUserId = sessionStorage.getItem("userId");
+var eventObject = JSON.parse(sessionStorage.getItem('eventObj'));
+// console.log(eventObject);
+var currentEvent = `${eventObject.date}&${eventObject.time}&${eventObject.parkId}`;
 
 // when chat form is submitted, push chat text and user data to firebase db
 function chat(){
@@ -60,7 +62,52 @@ function buttonActions(){
     let userID = $(this).attr("data-user-id")
     userReview(userID);
   })//end of chatArea Click
-}
+
+  $(".attendee-list").on("click", "li", function(){
+    let userID = $(this).attr("data-user-id")
+    userReview(userID);
+  })//end of user list click
+
+  $("#buttonSwitch").on("click", "#attendeeBtn", function(){
+    console.log("User Id: " + myUserId);
+
+    $.post("/api/event/attend", {
+      date: eventObject.date,
+      time: eventObject.time,
+      parkId: eventObject.parkId,
+      userId: myUserId
+    })//end of post
+    .then((response) => {
+      console.log(response);
+      buttonSwap([{id: myUserId}]);
+      addRemoveUser();
+    })
+  })
+
+  $("#buttonSwitch").on("click", "#attendeeRemove", function(){
+    console.log("Remove User");
+    $.ajax({
+      method: "DELETE",
+      url:"/api/event/attend", 
+      data: {
+      date: eventObject.date,
+      time: eventObject.time,
+      parkId: eventObject.parkId,
+      userId: myUserId
+      }
+    })//end of delete
+    .then((response) => {
+      console.log(response);
+      console.log("deleted");
+      buttonSwap([{id: 0}])
+      addRemoveUser("remove");
+    })
+
+
+
+  });//end of attendeeRemove
+
+}//end of button Actions
 
 function userReview(userID){
     let apiCall = "/api/dog/";
@@ -101,14 +148,47 @@ function infoModal(response){
   $("#dogInfoModal").toggleClass("is-active");
 }//end of info modal
 
+function checkUser(userArr){
+  console.log(userArr);
+  let x = false
+  userArr.forEach(user =>{
+    if (user.id == myUserId){
+      x = true
+    }
+  })
+  console.log(x);
+  return x
+}
+
+function buttonSwap(attending){
+  let currentButton;
+  if (checkUser(attending)){
+    console.log("Your on the list")
+    currentButton = `<button class="button" id="attendeeRemove">Remove Your Name</button>`
+  }else{
+    console.log("youre not on the list");
+    currentButton = `<button class="button" id="attendeeBtn">Add Your Name</button>`
+  }
+  $("#buttonSwitch").html(currentButton)
+}
+
+function addRemoveUser (action){
+  action === "remove" ?  $(`ul [data-user-id = '${myUserId}']`).remove():
+  $(".attendee-list").append(`<li data-user-id="${myUserId}"><h4 class="subtitle is-4">${myUserName}</h4></li>`);
+};
+
 $(document).ready(function(){
   chat();
   chatUpdate();
   buttonActions();
+  buttonSwap(attending);
+
+
   $(".modal-background").click(function() {
     $(".modal-card-title, .modal-card-body").empty()
     $("#dogInfoModal").toggleClass("is-active");
   });
+
 
 })//end of doc.ready
 

@@ -59,6 +59,10 @@ module.exports = function(app) {
 
   // ^^^^^ dog api routes ^^^^
   // *************************
+  
+  
+  // *************************
+  //      Event API Routes
 
   app.get("/api/event/date", (request, response) => {
     const options = {
@@ -88,6 +92,38 @@ module.exports = function(app) {
       response.json(events);
     });
   }); // end of get event dates
+
+  app.post("/api/event/attend", (req, res) => {
+    console.log (req.body);
+    db.EventDayTimePark.create({
+      date: req.body.date,
+      time: req.body.time,
+      parkId: req.body.parkId,
+      UserId: req.body.userId
+    }).then(attendee => {
+      console.log(attendee.dataValues);
+      res.json(attendee)
+    })
+    //end of dbEventDayTimePark create
+  });
+
+  app.delete("/api/event/attend", (req, res) => {
+    console.log("reqbody: ",req.body);
+    db.EventDayTimePark.destroy({
+      where:{
+        date: req.body.date,
+        time: req.body.time,
+        parkId: req.body.parkId,
+        UserId: req.body.userId
+      }
+    }).then(destroyed => {
+      res.json(destroyed);
+      console.log(destroyed);
+    })
+  })//end of delete
+
+  // ^^^^^ event api routes ^^^^
+  // ***************************
 
   // **********************************
   // **** Login & user api routes *****
