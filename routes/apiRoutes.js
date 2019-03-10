@@ -93,6 +93,25 @@ module.exports = function(app) {
     });
   }); // end of get event dates
 
+  app.get("/api/event/active-events", (req, res)=>{
+    db.EventDayTimePark.findAll({
+      attributes: [["date", "start"]],
+      group: ['date'],
+    })
+    .then(response => {
+      res.json(response);
+    });
+  });//end of currentevents
+
+  // Project.findAll({
+  //   attributes: ['country'],
+  //   group: ['country']
+  // }).then(function(projects {
+  //   projects.map(project => project.country)
+  // });
+  
+
+
   app.post("/api/event/attend", (req, res) => {
     console.log (req.body);
     db.EventDayTimePark.create({
