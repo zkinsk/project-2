@@ -102,6 +102,7 @@ module.exports = function(app) {
       UserId: req.body.userId
     }).then(attendee => {
       console.log(attendee.dataValues);
+      res.json(attendee)
     })
     //end of dbEventDayTimePark create
   });
@@ -116,6 +117,7 @@ module.exports = function(app) {
         UserId: req.body.userId
       }
     }).then(destroyed => {
+      res.json(destroyed);
       console.log(destroyed);
     })
   })//end of delete

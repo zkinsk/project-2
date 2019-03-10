@@ -77,7 +77,11 @@ function buttonActions(){
       parkId: eventObject.parkId,
       userId: myUserId
     })//end of post
-    .then((response) => {})
+    .then((response) => {
+      console.log(response);
+      buttonSwap([{id: myUserId}]);
+      addRemoveUser();
+    })
   })
 
   $("#buttonSwitch").on("click", "#attendeeRemove", function(){
@@ -93,7 +97,10 @@ function buttonActions(){
       }
     })//end of delete
     .then((response) => {
+      console.log(response);
       console.log("deleted");
+      buttonSwap([{id: 0}])
+      addRemoveUser("remove");
     })
 
 
@@ -164,6 +171,11 @@ function buttonSwap(attending){
   }
   $("#buttonSwitch").html(currentButton)
 }
+
+function addRemoveUser (action){
+  action === "remove" ?  $(`ul [data-user-id = '${myUserId}']`).remove():
+  $(".attendee-list").append(`<li data-user-id="${myUserId}"><h4 class="subtitle is-4">${myUserName}</h4></li>`);
+};
 
 $(document).ready(function(){
   chat();
