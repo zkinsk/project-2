@@ -38,11 +38,11 @@
       </div>
 
       <div class="column">
-        <h2 class="title is-4">Attendees <span><button class="button" id="attendeeBtn">Add Your Name</button></span></h2>
+        <h2 class="title is-4">Attendees <span id="buttonSwitch"></span></h2>
 
         <ul class="attendee-list">
           {{#each attendee}}
-          <li data-id="{{this.id}}"><h4 class="subtitle is-4">{{this.name}}</h4></li>
+          <li data-user-id="{{this.id}}"><h4 class="subtitle is-4">{{this.name}}</h4></li>
           {{/each}}
           {{!-- list of attendess goes here --}}
         </ul>
@@ -54,7 +54,11 @@
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
 <script src="/js/chat.js"></script>
+  {{!-- checkUser(attending); --}}
 
+<script>
+  let attending = {{{attendeeJson}}};
+</script>
 
 
 

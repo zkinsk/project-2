@@ -70,6 +70,16 @@
 }
 
 /* ***************************** */
+/* ********event page ********** */
+
+  .attendee-list li {
+    cursor: pointer;
+  }
+
+
+
+
+/* ***************************** */
 /* ********event page modal***** */ 
   .dog-modal-content{
     padding-bottom: 20px;

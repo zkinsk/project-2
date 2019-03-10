@@ -62,7 +62,8 @@ module.exports = function(app) {
       console.log(attendee);
       res.render("event", {
         title: "Event",
-        attendee: attendee
+        attendee: attendee,
+        attendeeJson: JSON.stringify(attendee),
       });
     });
   });

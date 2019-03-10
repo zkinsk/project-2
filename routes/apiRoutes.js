@@ -106,6 +106,20 @@ module.exports = function(app) {
     //end of dbEventDayTimePark create
   });
 
+  app.delete("/api/event/attend", (req, res) => {
+    console.log("reqbody: ",req.body);
+    db.EventDayTimePark.destroy({
+      where:{
+        date: req.body.date,
+        time: req.body.time,
+        parkId: req.body.parkId,
+        UserId: req.body.userId
+      }
+    }).then(destroyed => {
+      console.log(destroyed);
+    })
+  })//end of delete
+
   // ^^^^^ event api routes ^^^^
   // ***************************
 
