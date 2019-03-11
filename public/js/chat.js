@@ -183,7 +183,7 @@ $(document).ready(function(){
   buttonActions();
   buttonSwap(attending);
 
-
+//click action for dismissing modal
   $(".modal-background").click(function() {
     $(".modal-card-title, .modal-card-body").empty()
     $("#dogInfoModal").toggleClass("is-active");
