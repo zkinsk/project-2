@@ -167,6 +167,10 @@ $("#nameBtn").click(function() {
 $("#picture-upload").submit((event) => {
   event.preventDefault();
 
+  if ($("#pick-file")[0].files.length === 0) {
+    return;
+  }
+
   // Prevent submission while uploading by canceling the upload and restarting.
   if (pictureUploadRequest) {
     pictureUploadRequest.abort();
@@ -179,7 +183,7 @@ $("#picture-upload").submit((event) => {
   pictureUploadRequest = $.ajax({
       url: "/api/upload",
       type: "POST",
-      data: new FormData($("#picture-upload")[0]),
+      data: new FormData(event.currentTarget),
       cache: false,
       contentType: false,
       processData: false,

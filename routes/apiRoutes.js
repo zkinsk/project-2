@@ -1,7 +1,13 @@
+var aws = require("aws-sdk");
 var db = require("../models");
 var passport = require("../config/passport");
+const multer = require("multer");
+const upload = multer({});
 
 const Op = db.sequelize.Op;
+const S3_BUCKET = process.env.S3_BUCKET;
+
+aws.config.region = "us-east-1";
 
 module.exports = function(app) {
   // *************************
@@ -211,13 +217,30 @@ module.exports = function(app) {
     
   });
 
-  app.post("/api/upload", (request, response) => {
-    console.log(request.headers["content-length"]);
+  app.post("/api/upload", upload.single("file"), (request, response) => {
+    const fileName = request.file.originalname;
 
-    const image = {
-      url: "https://haha.wow/",
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      ContentType: request.file.mimetype,
+      ACL: "public-read",
+      Body: request.file.buffer,
     };
-    response.json(image);
+
+    s3.putObject(s3Params, (error, data) => {
+      if (error) {
+        console.error(error);
+        return response.status(502).end();
+      }
+
+      const returnData = {
+        data: data,
+        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+      };
+      response.write(JSON.stringify(returnData));
+      response.end();
+    });
   });
 }; //end of module exports
-
