@@ -27,19 +27,6 @@ module.exports = function(app) {
     });
   }); //end of get all dogs by user id
 
-  // models.Orders.findAll({
-  //   where: {'orderStatus' : req.query.orderStatus},
-  //   limit: req.query.limitTo,
-  //   include: [models.Accounts],
-    
-  //   order: 'orderDateAdded DESC'
-  //   }).then( function (orders, error) {
-  //   if(error) {
-  //     return res.send(error);
-  //   }
-  //   console.log(orders);
-  //   });
-    
 
   app.post("/api/dog", (request, response) => {
     db.Dog.create(request.body).then(dog => {
@@ -93,7 +80,23 @@ module.exports = function(app) {
     });
   }); // end of get event dates
 
-  app.get("/api/event/active-events", (req, res)=>{
+  app.get("/api/event/current/:date", (req,res) => {
+    db.EventDayTimePark.findAll(
+      {
+        where: {
+          date: req.params.date
+        },
+        include: [{
+          model: db.User, 
+          required: true, 
+          attributes:["id"]
+        }]
+      }).then(response => {
+        res.json(response);
+      });
+  })//end of current events on this date
+
+  app.get("/api/event/active-events", (req, res) => {
     db.EventDayTimePark.findAll({
       attributes: [["date", "start"]],
       group: ['date'],
@@ -110,6 +113,15 @@ module.exports = function(app) {
   //   projects.map(project => project.country)
   // });
   
+  app.get("/api/event/user-events/:id", (req, res)=>{
+    db.EventDayTimePark.findAll({
+      attributes: [["date", "start"]],
+      group: ['date'],
+    })
+    .then(response => {
+      res.json(response);
+    });
+  });//end of currentevents
 
 
   app.post("/api/event/attend", (req, res) => {

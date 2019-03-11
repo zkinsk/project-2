@@ -14,13 +14,13 @@
 
               <ul park-id-data="{{park.id}}">
                 {{#each times as |time|}}
-                  {{#if time.event}}
+                  {{!-- {{#if time.event}} --}}
                     {{!-- <li><a href="/event/{{time.event.id}}">{{time.name}}</a></li> --}}
-                    <li><a href="#">{{time.name}}</a></li>
-                  {{else}}
+                    <li class="{{time.name}}"><a href="#">{{time.name}}</a></li>
+                  {{!-- {{else}} --}}
                     {{!-- <li><a class="new-event" href="/event">{{time.name}}</a></li> --}}
-                    <li><a class="new-event" href="#">{{time.name}}</a></li>
-                  {{/if}}
+                    {{!-- <li><a class="new-event" href="#">{{time.name}}</a></li> --}}
+                  {{!-- {{/if}} --}}
                 {{/each}}
               </ul>
             </li>
