@@ -8,14 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING, 
       allowNull: false
     },
-    parkId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    // userId: {
+    // parkId: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false
-    // }
+    // },
   });
 
   EventDayTimePark.associate = (models) => {
@@ -24,11 +20,17 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
+    models.EventDayTimePark.belongsTo(models.Park, {
+      foreignKey: "parkId",
+    });
   };
 
-    // EventDayTimePark.associate = (models) => {
-  //   models.EventDayTimePark.hasMany(models.User, { foreignKey: {allowNull: false} });
+  // EventDayTimePark.associate = (models) => {
+  //   models.EventDayTimePark.belongsTo(models.Park, {
+  //     foreignKey: "park_Id",
+  //   });
   // };
+
 
   return EventDayTimePark;
 };
