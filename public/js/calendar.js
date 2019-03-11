@@ -19,7 +19,7 @@ function getCurrentEvents(){
   $.get("/api/event/active-events", (response) => {
     console.log(response);
     response.forEach(obj => {
-      obj.title = "event";
+      obj.title = "Play Date!";
       // obj.allDay = true;
     })
     console.log(response);
