@@ -12,8 +12,30 @@ function calenderCall() {
       date = date.format();
       window.location.href = "/day/" + date;
     },
+    eventClick: function (calEvent, jsEvent, view) {
+      console.log('clicked ', calEvent);
+      console.log('clicked ', jsEvent);
+      console.log('clicked ', view);
+      // date = date.format();
+      // window.location.href = "/day/" + date;
+    },
+
+
   });
 }//end of calendar call
+
+
+// eventClick: function(calEvent, jsEvent, view) {
+
+//   alert('Event: ' + calEvent.title);
+//   alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//   alert('View: ' + view.name);
+
+//   // change the border color just for fun
+//   $(this).css('border-color', 'red');
+
+// }
+// }
 
 function getCurrentEvents(){
   $.get("/api/event/active-events", (response) => {

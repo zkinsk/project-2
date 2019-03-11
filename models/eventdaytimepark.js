@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     // parkId: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false
-    // },
   });
 
   EventDayTimePark.associate = (models) => {
@@ -24,13 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "parkId",
     });
   };
-
-  // EventDayTimePark.associate = (models) => {
-  //   models.EventDayTimePark.belongsTo(models.Park, {
-  //     foreignKey: "park_Id",
-  //   });
-  // };
-
 
   return EventDayTimePark;
 };
