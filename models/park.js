@@ -5,11 +5,5 @@ module.exports = (sequelize, DataTypes) => {
     lon: DataTypes.DECIMAL(10, 7),
   });
 
-  Park.associate = (models) => {
-    models.Park.hasMany(models.Event, {
-      onDelete: "CASCADE",
-    });
-  };
-
   return Park;
 };
