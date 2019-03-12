@@ -1,6 +1,6 @@
 var userID;
 var apiCall;
-let pictureUploadRequest = null;
+let uploadTarget = null;
 
 $(document).ready(function() {
   $.get("/api/user_data")
@@ -8,7 +8,7 @@ $(document).ready(function() {
       userID = data.user.id;
     })
     .then(function() {
-      apiCall = "/api/user/name/";
+      apiCall = "/api/user/";
       apiCall += userID;
       $.get(apiCall).then(function(response) {
         let userName = response.name;
@@ -84,9 +84,17 @@ $(document).ready(function() {
               "</p></div>"
           );
           // picture
+          let profileImage = "https://bulma.io/images/placeholders/128x128.png";
+          if (response[x].profileImage) {
+            profileImage = response[x].profileImage;
+          }
           var dogPic = $(
-            "<figure class='image is-128x128 is-inline-block'><img src='https://bulma.io/images/placeholders/128x128.png'/></figure>"
+            `<figure class="image is-128x128 is-inline-block">
+              <img src="${profileImage}">
+              <button class="button upload-button" data-upload-target-type="dog" data-upload-target-id="${response[x].id}">Change</button>
+            </figure>`
           );
+          
           var lineBreak = $("<hr>");
           // main dog "row"
           var dogLevel = $("<nav class='level dogLevel'></nav>");
@@ -118,11 +126,11 @@ $(document).ready(function() {
 });
 
 $("#addDogBtn").click(function() {
-  $(".modal").toggleClass("is-active");
+  $("#newDogModal").toggleClass("is-active");
 });
 
-$(".modal-close").click(function() {
-  $(".modal").toggleClass("is-active");
+$(".modal-close").click((event) => {
+  $(".modal").removeClass("is-active");
 });
 
 $("#submitDogBtn").click(function(event) {
@@ -196,6 +204,30 @@ $("#nameBtn").click(function() {
   });
 });
 
+$(document).on("click", ".upload-button", (event) => {
+  const button = $(event.currentTarget);
+
+  uploadTarget = {
+    type: button.data("upload-target-type"),
+    id: button.data("upload-target-id"),
+  };
+
+  $("#pick-file").val(null);
+  $("#pick-file-name").text("");
+  $("#upload-feedback").hide();
+
+  $("#profile-image-modal").toggleClass("is-active");
+});
+
+$("#pick-file").change((event) => {
+  const input = event.currentTarget;
+  if (input.files.length > 0) {
+    $("#pick-file-name").text(input.files[0].name);
+  } else {
+    $("#pick-file-name").text("");
+  }
+});
+
 $("#picture-upload").submit((event) => {
   event.preventDefault();
 
@@ -203,17 +235,22 @@ $("#picture-upload").submit((event) => {
     return;
   }
 
-  // Prevent submission while uploading by canceling the upload and restarting.
-  if (pictureUploadRequest) {
-    pictureUploadRequest.abort();
-    pictureUploadRequest = null;
-  }
-
   $("#upload-feedback").hide();
   $("#upload-progress").show();
 
-  pictureUploadRequest = $.ajax({
-      url: `/api/user/${userID}/profile-image`,
+  let apiUrl;
+  switch (uploadTarget.type) {
+    case "user":
+      apiUrl = `/api/user/${userID}/profile-image`;
+      break;
+
+    case "dog":
+      apiUrl = `/api/dog/${uploadTarget.id}/profile-image`;
+      break;
+  }
+
+  $.ajax({
+      url: apiUrl,
       type: "PATCH",
       data: new FormData(event.currentTarget),
       cache: false,
@@ -235,9 +272,7 @@ $("#picture-upload").submit((event) => {
       },
     })
     .then((responseJson) => {
-      const response = JSON.parse(responseJson);
-      $("#profile-image").attr("src", response.profileImage);
-      $("#upload-progress").hide();
+      location.reload();
     })
     .catch((error) => {
       console.error(error);

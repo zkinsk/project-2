@@ -132,8 +132,8 @@
 }
 
 /* Profile Page */
-.invalid-feedback {
-  color: #ff0000;
+
+#upload-feedback {
   display: none;
 }
 

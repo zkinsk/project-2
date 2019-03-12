@@ -235,14 +235,20 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/user/name/:id", (req, res) => {
-    db.User.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then(name => {
-      res.json(name);
-    });
+  app.get("/api/user/:id", (req, res) => {
+    db.User
+      .findOne({
+        attributes: [
+          "name",
+          "profileImage",
+        ],
+        where: {
+          id: req.params.id
+        },
+      })
+      .then(name => {
+        res.json(name);
+      });
   });
 
   app.patch("/api/user/:id/profile-image", upload.single("file"), (request, response) => {
