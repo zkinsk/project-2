@@ -1,4 +1,14 @@
+
+function newAccountButton(){
+  $("#createAccount").click(function() {
+    window.location.href = "/user/new";
+  });
+};
+
+
 $(document).ready(function() {
+  newAccountButton();
+
   // Getting references to our form and inputs
   var loginForm = $("#login");
   var emailInput = $("input#email-input");

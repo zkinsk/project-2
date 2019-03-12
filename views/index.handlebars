@@ -1,45 +1,38 @@
+<link rel="stylesheet" href="/styles/login.css" media="screen" title="no title" charset="utf-8">
+
 <div class="section">
   <!-- main container -->
   <div class="container">
     <!-- title/subtitle box -->
-    <div class="content">
+    <div class="content has-text-centered">
       <h1 class="title">Welcome to Dogs' Day Out</h1>
       <h2 class="subtitle">A dog play date scheduler.</h2>
     </div>
     <!-- login form box -->
-    <div class="container">
-      <form id="login">
-        <!-- user name field -->
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input
-              class="input"
-              id="email-input"
-              type="text"
-              placeholder="Your Email Here"
-            />
+      <div class="level">
+        <form id="login">
+          <!-- user name field -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" id="email-input" type="text" placeholder="Your Email Here" />
+            </div>
           </div>
-        </div>
-        <!-- password field -->
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input
-              class="input"
-              type="password"
-              placeholder="Your Password Here"
-            />
+          <!-- password field -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" placeholder="Your Password Here" />
+            </div>
           </div>
-        </div>
-        <!-- form submit button -->
-        <div class="control">
-          <button class="button" type="submit">Log In</button>
-        </div>
-      </form>
-      <a href="/user/new"><button class="button">Create Account</button></a>
-    </div>
-  </div>
+          <!-- form submit button -->
+          <div class="control">
+            <button class="button" type="submit">Log In</button>
+            <a href="#"><button class="button" id="createAccount">Create Account</button></a>
+          </div>
+        </form>
+      </div>
+  </div><!-- end container -->
 </div>
 
 <script src="/js/login.js"></script>

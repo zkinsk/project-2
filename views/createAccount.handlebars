@@ -1,11 +1,4 @@
-{{!< login}}
-<div class="section">
-  <!-- main container  -->
-  <div class="container">
-    <!-- title box -->
-    <div class="content">
-      <h1 class="title">New User Page</h1>
-    </div>
+<link rel="stylesheet" href="/styles/login.css" media="screen" title="no title" charset="utf-8">
     {{!-- modal --}}
     <div class="modal" id="passModal">
       <div class="modal-background"></div>
@@ -21,48 +14,57 @@
       <button class="modal-close is-large" aria-label="close"></button>
     </div>
     {{!-- end modal --}}
-    <!-- form area -->
-    <div class="columns">
-      <!-- owner form -->
-      <div class="column">
-        <form id="signup">
-          <!-- username field -->
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input id="email-input" class="input" type="email" placeholder="Your email" />
-            </div>
-          </div>
-          <!-- password field -->
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input id="password-input" class="input" type="password" placeholder="Your new password" />
-            </div>
-          </div>
-          <!-- re-enter password field -->
-          <div class="field">
-            <label class="label">Re-Enter Password</label>
-            <div class="control">
-              <input id="password-check" class="input" type="password" placeholder="Re-enter your new password"
-                onChange="checkPasswordMatch();" />
-            </div>
-            <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
-          </div>
-          <div class="field">
-            <label class="label">Location</label>
-            <div class="control">
-              <div class="select">
-                <select>
-                  <option>Richmond, VA</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="button">Submit</button>
-        </form>
+<div class="section">
+  <!-- main container  -->
+  <div class="container">
+    <!-- title box -->
+    <div class="content">
+      <div class="has-text-centered">
+      <h1 class="title">New User Page</h1>
       </div>
     </div>
+    <!-- form area -->
+      <!-- owner form -->
+        <div class="level">
+          <form id="signup">
+            <!-- username field -->
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input id="email-input" class="input" type="email" placeholder="Your email" />
+              </div>
+            </div>
+            <!-- password field -->
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input id="password-input" class="input" type="password" placeholder="Your new password" />
+              </div>
+            </div>
+            <!-- re-enter password field -->
+            <div class="field">
+              <label class="label">Re-Enter Password</label>
+              <div class="control">
+                <input id="password-check" class="input" type="password" placeholder="Re-enter your new password"
+                  onChange="checkPasswordMatch();" />
+              </div>
+              <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
+            </div>
+            <div class="field">
+              <label class="label">Location</label>
+              <div class="control has-text-centered">
+                <div class="select">
+                  <select>
+                    <option>Richmond, VA</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="has-text-centered">
+            <button type="submit" class="button">Submit</button>
+            </div>
+          </form>
+        </div>
   </div>
 </div>
 

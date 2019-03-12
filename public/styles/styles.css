@@ -1,3 +1,16 @@
+body, html {
+  background-color: orange;
+}
+
+
+/* list of elements for cursor: pointer */
+  .dropdown-item,
+  .dropdown-item p,
+  .attendee-list li  {
+    cursor: pointer;
+  }
+/* ^^^^^ list of elements for cursor: pointer */
+
 #nameInput::placeholder {
   color: red;
   opacity: 1; /* Firefox */
@@ -19,6 +32,7 @@
   #calendar {
     max-width: 900px;
     margin: 0 auto;
+    background-color: rgb(255, 208, 119);
   }
 
 /* ***************************** */
@@ -39,6 +53,7 @@
     color: #0000df;
   }
 
+  .dropdown-item p:hover,
   .attendee:focus,
   .attendee:hover {
     color: #7fafdf;
@@ -81,11 +96,6 @@
   #create-post {
     padding-top: 1em;
   }
-
-  .attendee-list li {
-    cursor: pointer;
-  }
-
 
 
 
