@@ -22,6 +22,7 @@ function getCurrentEvents(){
     })
     console.log(response);
     $('#calendar').fullCalendar({
+      // themeSystem: 'bootstrap4',
       events: response,
       selectable: false,
       header: {
