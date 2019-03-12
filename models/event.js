@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
-
-    models.Event.hasMany(models.Attendance, {
-      onDelete: "CASCADE",
-    });
   };
+
+  //   models.Event.hasMany(models.Attendance, {
+  //     onDelete: "CASCADE",
+  //   });
 
   return Event;
 };
