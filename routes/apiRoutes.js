@@ -11,22 +11,25 @@ module.exports = function(app) {
       where: {
         UserID: req.params.id
       },
-      include: [{
-        model: db.User, 
-        required: true, 
-        attributes:["name"]
-      }]
-    }).then( dogs => {
-      // console.log(dogs[0].User.dataValues.name);
-      // console.log(dogs);
-      res.json(dogs);
-    }) .catch(function(err) {
-      console.log(err);
-      res.json(err);
-      // res.status(422).json(err.errors[0].message);
-    });
+      include: [
+        {
+          model: db.User,
+          required: true,
+          attributes: ["name"]
+        }
+      ]
+    })
+      .then(dogs => {
+        // console.log(dogs[0].User.dataValues.name);
+        // console.log(dogs);
+        res.json(dogs);
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+        // res.status(422).json(err.errors[0].message);
+      });
   }); //end of get all dogs by user id
-
 
   app.post("/api/dog", (request, response) => {
     db.Dog.create(request.body).then(dog => {
@@ -46,8 +49,7 @@ module.exports = function(app) {
 
   // ^^^^^ dog api routes ^^^^
   // *************************
-  
-  
+
   // *************************
   //      Event API Routes
 
@@ -80,31 +82,31 @@ module.exports = function(app) {
     });
   }); // end of get event dates
 
-  app.get("/api/event/current/:date", (req,res) => {
-    db.EventDayTimePark.findAll(
-      {
-        where: {
-          date: req.params.date
-        },
-        include: [{
-          model: db.User, 
-          required: true, 
-          attributes:["id"]
-        }]
-      }).then(response => {
-        res.json(response);
-      });
-  })//end of current events on this date
+  app.get("/api/event/current/:date", (req, res) => {
+    db.EventDayTimePark.findAll({
+      where: {
+        date: req.params.date
+      },
+      include: [
+        {
+          model: db.User,
+          required: true,
+          attributes: ["id"]
+        }
+      ]
+    }).then(response => {
+      res.json(response);
+    });
+  }); //end of current events on this date
 
   app.get("/api/event/active-events", (req, res) => {
     db.EventDayTimePark.findAll({
       attributes: [["date", "start"]],
-      group: ['date'],
-    })
-    .then(response => {
+      group: ["date"]
+    }).then(response => {
       res.json(response);
     });
-  });//end of currentevents
+  }); //end of currentevents
 
   // Project.findAll({
   //   attributes: ['country'],
@@ -112,20 +114,34 @@ module.exports = function(app) {
   // }).then(function(projects {
   //   projects.map(project => project.country)
   // });
-  
-  app.get("/api/event/user-events/:id", (req, res)=>{
+
+  app.get("/api/user/user-events/:id", (req, res) => {
     db.EventDayTimePark.findAll({
-      attributes: [["date", "start"]],
-      group: ['date'],
-    })
-    .then(response => {
+      where: {
+        UserId: req.params.id
+      },
+      include: [
+        {
+          model: db.Park,
+          required: true,
+          attributes: ["name"]
+        }
+      ]
+    }).then(response => {
       res.json(response);
     });
-  });//end of currentevents
-
+  });
+  app.get("/api/event/user-events/:id", (req, res) => {
+    db.EventDayTimePark.findAll({
+      attributes: [["date", "start"]],
+      group: ["date"]
+    }).then(response => {
+      res.json(response);
+    });
+  }); //end of currentevents
 
   app.post("/api/event/attend", (req, res) => {
-    console.log (req.body);
+    console.log(req.body);
     db.EventDayTimePark.create({
       date: req.body.date,
       time: req.body.time,
@@ -133,15 +149,15 @@ module.exports = function(app) {
       UserId: req.body.userId
     }).then(attendee => {
       console.log(attendee.dataValues);
-      res.json(attendee)
-    })
+      res.json(attendee);
+    });
     //end of dbEventDayTimePark create
   });
 
   app.delete("/api/event/attend", (req, res) => {
-    console.log("reqbody: ",req.body);
+    console.log("reqbody: ", req.body);
     db.EventDayTimePark.destroy({
-      where:{
+      where: {
         date: req.body.date,
         time: req.body.time,
         parkId: req.body.parkId,
@@ -150,8 +166,8 @@ module.exports = function(app) {
     }).then(destroyed => {
       res.json(destroyed);
       console.log(destroyed);
-    })
-  })//end of delete
+    });
+  }); //end of delete
 
   // ^^^^^ event api routes ^^^^
   // ***************************
@@ -272,33 +288,29 @@ module.exports = function(app) {
   // **********************************
 
   app.get("/api/search/:input", function(req, res) {
-    console.log(req.params.input, "hit api")
+    console.log(req.params.input, "hit api");
     var searchInput = req.params.input;
     var data = {
-      dogs:[],
-      owners:[]
-    }
-      db.Owners.findAll({
+      dogs: [],
+      owners: []
+    };
+    db.Owners.findAll({
+      where: {
+        name: searchInput
+      }
+    }).then(owners => {
+      data.owners = owners;
+
+      db.Dogs.findAll({
         where: {
           name: searchInput
         }
-      })
-      .then((owners) => {
-        data.owners = owners;
+      }).then(dogs => {
+        data.dogs = dogs;
 
-        db.Dogs.findAll({
-          where: {
-            name: searchInput
-          }
-        })
-        .then((dogs) => {
-          data.dogs = dogs;
-
-          res.render(data);
-        });
+        res.render(data);
       });
-      console.log(data)    
-  });  
-
+    });
+    console.log(data);
+  });
 }; //end of module exports
-

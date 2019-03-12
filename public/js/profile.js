@@ -23,7 +23,7 @@ $(document).ready(function() {
       apiCall = "/api/dog/";
       apiCall += userID;
       $.get(apiCall).then(function(response) {
-        console.log(response);
+        console.log("dogs response: ", response);
         var x;
         // loops through results and creates HTML elements for each dog
         for (x in response) {
@@ -112,6 +112,27 @@ $(document).ready(function() {
           $("#dogContent").append(dogLevel);
         }
       });
+    })
+    .then(function() {
+      apiCall = "/api/user/user-events/";
+      apiCall += userID;
+
+      $.get(apiCall).then(function(response) {
+        var x;
+        for (x in response) {
+          console.log("events response: ", response);
+          var newUserEvent = $(
+            "<option>" +
+              response[x].Park.name +
+              " - " +
+              response[x].time +
+              " of " +
+              response[x].date +
+              "</option>"
+          );
+          $("#userEventsDropdown").append(newUserEvent);
+        }
+      });
     });
 });
 
@@ -154,7 +175,16 @@ $("#submitDogBtn").click(function(event) {
     UserId: userID
   };
 
-  if (newDog.name, newDog.gender, newDog.weight, newDog.bio, newDog.energy, newDog.patience, newDog.dominance, newDog.image) {
+  if (
+    (newDog.name,
+    newDog.gender,
+    newDog.weight,
+    newDog.bio,
+    newDog.energy,
+    newDog.patience,
+    newDog.dominance,
+    newDog.image)
+  ) {
     $.ajax("/api/dog", {
       type: "POST",
       data: newDog
