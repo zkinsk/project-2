@@ -181,8 +181,8 @@ $("#picture-upload").submit((event) => {
   $("#upload-progress").show();
 
   pictureUploadRequest = $.ajax({
-      url: "/api/upload",
-      type: "POST",
+      url: `/api/user/${userID}/profile-image`,
+      type: "PATCH",
       data: new FormData(event.currentTarget),
       cache: false,
       contentType: false,
@@ -202,8 +202,9 @@ $("#picture-upload").submit((event) => {
         return myXhr;
       },
     })
-    .then((response) => {
-      console.log(response);
+    .then((responseJson) => {
+      const response = JSON.parse(responseJson);
+      $("#profile-image").attr("src", response.profileImage);
       $("#upload-progress").hide();
     })
     .catch((error) => {

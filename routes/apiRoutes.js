@@ -1,7 +1,8 @@
 var aws = require("aws-sdk");
 var db = require("../models");
-var passport = require("../config/passport");
 const multer = require("multer");
+var passport = require("../config/passport");
+const path = require("path");
 const upload = multer({});
 
 const Op = db.sequelize.Op;
@@ -152,6 +153,56 @@ module.exports = function(app) {
     });
   });
 
+  app.patch("/api/user/:id/profile-image", upload.single("file"), (request, response) => {
+    const fileName = generateFileName(request.file.originalname);
+
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      ContentType: request.file.mimetype,
+      ACL: "public-read",
+      Body: request.file.buffer,
+    };
+
+    s3.putObject(s3Params, (error, data) => {
+      if (error) {
+        console.error(error);
+        return response.status(500).end();
+      }
+
+      const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
+
+      db.User
+        .update(
+          {
+            profileImage: url,
+          },
+          {
+            where: {
+              id: request.params.id,
+            },
+          }
+        )
+        .then((affectedRows) => {
+          if (affectedRows[0] !== 1) {
+            return response.status(500).end();
+          }
+
+          const returnData = {
+            profileImage: url,
+          };
+          
+          response.write(JSON.stringify(returnData));
+          response.end();
+        })
+        .catch((reason) => {
+          console.error(reason);
+          response.status(500).end();
+        });
+    });
+  });
+
   // ^^^ Login & user api routes ^^^^^
   // **********************************
 
@@ -216,31 +267,16 @@ module.exports = function(app) {
     //check to see why dogs is repeating
     
   });
-
-  app.post("/api/upload", upload.single("file"), (request, response) => {
-    const fileName = request.file.originalname;
-
-    const s3 = new aws.S3();
-    const s3Params = {
-      Bucket: S3_BUCKET,
-      Key: fileName,
-      ContentType: request.file.mimetype,
-      ACL: "public-read",
-      Body: request.file.buffer,
-    };
-
-    s3.putObject(s3Params, (error, data) => {
-      if (error) {
-        console.error(error);
-        return response.status(502).end();
-      }
-
-      const returnData = {
-        data: data,
-        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
-      };
-      response.write(JSON.stringify(returnData));
-      response.end();
-    });
-  });
 }; //end of module exports
+
+function generateFileName(originalName) {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+
+  let id = "";
+  for (let i = 0; i < 21; i++) {
+    const index = Math.floor(64 * Math.random());
+    id += alphabet[index];
+  }
+
+  return id + path.extname(originalName);
+}
