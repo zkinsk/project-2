@@ -1,7 +1,14 @@
+var aws = require("aws-sdk");
 var db = require("../models");
+const multer = require("multer");
 var passport = require("../config/passport");
+const path = require("path");
+const upload = multer({});
 
 const Op = db.sequelize.Op;
+const S3_BUCKET = process.env.S3_BUCKET;
+
+aws.config.region = "us-east-1";
 
 module.exports = function(app) {
   // *************************
@@ -46,6 +53,56 @@ module.exports = function(app) {
       response.json(dog);
     });
   }); //end of dog delete
+
+  app.patch("/api/dog/:id/profile-image", upload.single("file"), (request, response) => {
+    const fileName = generateFileName(request.file.originalname);
+
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      ContentType: request.file.mimetype,
+      ACL: "public-read",
+      Body: request.file.buffer,
+    };
+
+    s3.putObject(s3Params, (error, data) => {
+      if (error) {
+        console.error(error);
+        return response.status(500).end();
+      }
+
+      const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
+
+      db.Dog
+        .update(
+          {
+            profileImage: url,
+          },
+          {
+            where: {
+              id: request.params.id,
+            },
+          }
+        )
+        .then((affectedRows) => {
+          if (affectedRows[0] !== 1) {
+            return response.status(500).end();
+          }
+
+          const returnData = {
+            profileImage: url,
+          };
+          
+          response.write(returnData);
+          response.end();
+        })
+        .catch((reason) => {
+          console.error(reason);
+          response.status(500).end();
+        });
+    });
+  }); //end of update dog profile image
 
   // ^^^^^ dog api routes ^^^^
   // *************************
@@ -229,28 +286,70 @@ module.exports = function(app) {
     }
   }); //end of user_data
 
-  app.put("/api/user/name/:id", (req, res) => {
-    db.User.update(
-      {
-        name: req.body.name
-      },
-      {
+  app.get("/api/user/:id", (req, res) => {
+    db.User
+      .findOne({
+        attributes: [
+          "id",
+          "name",
+          "profileImage",
+        ],
         where: {
           id: req.params.id
-        }
-      }
-    ).then(name => {
-      res.json(name);
-    });
+        },
+      })
+      .then(name => {
+        res.json(name);
+      });
   });
 
-  app.get("/api/user/name/:id", (req, res) => {
-    db.User.findOne({
-      where: {
-        id: req.params.id
+  app.patch("/api/user/:id/profile-image", upload.single("file"), (request, response) => {
+    const fileName = generateFileName(request.file.originalname);
+
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      ContentType: request.file.mimetype,
+      ACL: "public-read",
+      Body: request.file.buffer,
+    };
+
+    s3.putObject(s3Params, (error, data) => {
+      if (error) {
+        console.error(error);
+        return response.status(500).end();
       }
-    }).then(name => {
-      res.json(name);
+
+      const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
+
+      db.User
+        .update(
+          {
+            profileImage: url,
+          },
+          {
+            where: {
+              id: request.params.id,
+            },
+          }
+        )
+        .then((affectedRows) => {
+          if (affectedRows[0] !== 1) {
+            return response.status(500).end();
+          }
+
+          const returnData = {
+            profileImage: url,
+          };
+          
+          response.write(JSON.stringify(returnData));
+          response.end();
+        })
+        .catch((reason) => {
+          console.error(reason);
+          response.status(500).end();
+        });
     });
   });
 
@@ -305,12 +404,26 @@ module.exports = function(app) {
         where: {
           name: searchInput
         }
-      }).then(dogs => {
+      })
+      .then((dogs) => {
         data.dogs = dogs;
 
         res.render(data);
       });
     });
+      
     console.log(data);
   });
 }; //end of module exports
+
+function generateFileName(originalName) {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+
+  let id = "";
+  for (let i = 0; i < 21; i++) {
+    const index = Math.floor(64 * Math.random());
+    id += alphabet[index];
+  }
+
+  return id + path.extname(originalName);
+}

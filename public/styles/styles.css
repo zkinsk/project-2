@@ -141,6 +141,16 @@ body, html {
   height: 400px;
 }
 
+/* Profile Page */
+
+#upload-feedback {
+  display: none;
+}
+
+#upload-progress {
+  display: none;
+}
+
 /* *************************
 *************************
 chat box css */
