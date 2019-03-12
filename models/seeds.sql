@@ -7,21 +7,11 @@ VALUES
     ("Northside Dog Park", 37.5977001, -77.4436564, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ("Phideaux Dog Park", 37.5198621, -77.483193, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ("Rockwood Park", 37.448200, -77.582310, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-INSERT INTO events (date, time, ParkId, createdAt, updatedAt)
-VALUES
-	("2019-03-09", "Afternoon", 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ("2019-03-09", "Afternoon", 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ("2019-03-09", "Evening", 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
     
-INSERT INTO users (email, password, name, createdAt, updatedAt)
+INSERT INTO users (email, password, name, profileImage, createdAt, updatedAt)
 VALUES
-	("dawso.andrew@gmail.com", "$2a$10$hUin0YPkLkKwpqoyw.rptum5iT.1iZE.qCOMzReeGfkzFOKJ6Uize", "Andrew", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+	("dawso.andrew@gmail.com", "$2a$10$hUin0YPkLkKwpqoyw.rptum5iT.1iZE.qCOMzReeGfkzFOKJ6Uize", "Andrew", "https://s3.amazonaws.com/dogs-day-out/3amNcNZotSaqYay5DXXsZ.jpg", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO dogs (name, gender, bio, weight, energy, patience, dominance, UserId, createdAt, updatedAt)
+INSERT INTO dogs (name, gender, bio, weight, energy, patience, dominance, profileImage, UserId, createdAt, updatedAt)
 VALUES
-	("Gumbo", "Male", "A Good Boy", 70, 3, 6, 2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-    
-INSERT INTO attendances (UserId, EventId, createdAt, updatedAt)
-VALUES
-	(1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+	("Gumbo", "Male", "A Good Boy", 70, 3, 6, 2, "https://s3.amazonaws.com/dogs-day-out/5QKB6V1J1x2mA4emOhwPI.jpg", 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
