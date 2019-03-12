@@ -286,25 +286,11 @@ module.exports = function(app) {
     }
   }); //end of user_data
 
-  app.put("/api/user/name/:id", (req, res) => {
-    db.User.update(
-      {
-        name: req.body.name
-      },
-      {
-        where: {
-          id: req.params.id
-        }
-      }
-    ).then(name => {
-      res.json(name);
-    });
-  });
-
   app.get("/api/user/:id", (req, res) => {
     db.User
       .findOne({
         attributes: [
+          "id",
           "name",
           "profileImage",
         ],
