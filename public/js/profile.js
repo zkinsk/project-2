@@ -2,10 +2,66 @@ var userID;
 var apiCall;
 let uploadTarget = null;
 
+function getUserEvents(userID){
+    apiCall = "/api/user/user-events/";
+    apiCall += userID;
+  console.log(apiCall);
+    $.get(apiCall).then(function(response) {
+      var x;
+      console.log("events response: ", response);
+      for (x in response) {
+        let parkId = ` data-park-id ="${response[x].parkId}" `;
+        let time = ` data-time = "${response[x].time}" `;
+        let date = ` data-date = "${response[x].date}" `;
+        let eventItem = `
+          <div class="dropdown-item" ${parkId} ${time} ${date}>
+          <p>${response[x].Park.name} - ${response[x].time} of ${response[x].date}</p>
+          </div>
+          <hr class="dropdown-divider">
+          `;
+        $("#userEventsDropdown").append(eventItem);
+      }
+    });
+}//end of get user events
+
+function clickEvents(){
+
+  // click on user event to load specific event page
+  $("#userEventsDropdown").on("click", ".dropdown-item", function(){
+    console.log("click");
+    let eventTime = $(this).attr("data-time");
+    let eventDate = $(this).attr("data-date");
+    let parkId = $(this).attr("data-park-id");
+    let url = `/event/day/${eventDate}/${eventTime}/${parkId}`;
+    console.log(url);
+    window.location.href = url;
+  })
+}//end of click events
+
+
+function bulmaDropdownListener() {
+  var dropdown = document.querySelector('.dropdown');
+  dropdown.addEventListener('click', function (event) {
+    event.stopPropagation();
+    dropdown.classList.toggle('is-active');
+  });
+};
+
+
 $(document).ready(function() {
+  //reload page if accessed via back navigation
+  if(performance.navigation.type == 2){
+    location.reload(true);
+  };
+ 
+  clickEvents();
+  bulmaDropdownListener();
+  
+
   $.get("/api/user_data")
     .then(function(data) {
       userID = data.user.id;
+      getUserEvents(userID);;
     })
     .then(function() {
       apiCall = "/api/user/";
@@ -28,7 +84,7 @@ $(document).ready(function() {
       apiCall = "/api/dog/";
       apiCall += userID;
       $.get(apiCall).then(function(response) {
-        console.log(response);
+        console.log("dogs response: ", response);
         var x;
         // loops through results and creates HTML elements for each dog
         for (x in response) {
@@ -125,7 +181,7 @@ $(document).ready(function() {
           $("#dogContent").append(dogLevel);
         }
       });
-    });
+    })
 });
 
 $("#addDogBtn").click(function() {
@@ -167,7 +223,16 @@ $("#submitDogBtn").click(function(event) {
     UserId: userID
   };
 
-  if (newDog.name, newDog.gender, newDog.weight, newDog.bio, newDog.energy, newDog.patience, newDog.dominance, newDog.image) {
+  if (
+    (newDog.name,
+    newDog.gender,
+    newDog.weight,
+    newDog.bio,
+    newDog.energy,
+    newDog.patience,
+    newDog.dominance,
+    newDog.image)
+  ) {
     $.ajax("/api/dog", {
       type: "POST",
       data: newDog

@@ -78,6 +78,7 @@ function getTodaysEvents(){
   })
 };//end of getTodaysEvents
 
+//updates classes of list of times based on whether or not there are active events for that day and whether the user is active on one of those days
 function updateClasses(data){
   data.forEach((event) => {
     let userId = event.User.id;
