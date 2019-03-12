@@ -303,6 +303,21 @@ module.exports = function(app) {
       });
   });
 
+  app.put("/api/user/name/:id", (req, res) => {
+    db.User.update(
+      {
+        name: req.body.name
+      },
+      {
+        where: {
+          id: req.params.id,
+        }
+      }
+    ).then(name => {
+      res.json(name);
+    });
+  });
+
   app.patch("/api/user/:id/profile-image", upload.single("file"), (request, response) => {
     const fileName = generateFileName(request.file.originalname);
 
