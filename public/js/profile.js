@@ -18,6 +18,7 @@ $(document).ready(function() {
           `<input class="input" type="text" placeholder="${userName}" id="nameInput"></input>`
         );
         $("#nameControl").prepend(nameField);
+        $("#profile-image").attr("src", response.profileImage);
       });
     })
     .then(function() {
