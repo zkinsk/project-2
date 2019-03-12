@@ -17,11 +17,23 @@ module.exports = function(app) {
     db.Dog.findAll({
       where: {
         UserID: req.params.id
-      }
-    }).then(dogs => {
+      },
+      include: [{
+        model: db.User, 
+        required: true, 
+        attributes:["name"]
+      }]
+    }).then( dogs => {
+      // console.log(dogs[0].User.dataValues.name);
+      // console.log(dogs);
       res.json(dogs);
+    }) .catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
     });
   }); //end of get all dogs by user id
+
 
   app.post("/api/dog", (request, response) => {
     db.Dog.create(request.body).then(dog => {
@@ -41,6 +53,10 @@ module.exports = function(app) {
 
   // ^^^^^ dog api routes ^^^^
   // *************************
+  
+  
+  // *************************
+  //      Event API Routes
 
   app.get("/api/event/date", (request, response) => {
     const options = {
@@ -70,6 +86,82 @@ module.exports = function(app) {
       response.json(events);
     });
   }); // end of get event dates
+
+  app.get("/api/event/current/:date", (req,res) => {
+    db.EventDayTimePark.findAll(
+      {
+        where: {
+          date: req.params.date
+        },
+        include: [{
+          model: db.User, 
+          required: true, 
+          attributes:["id"]
+        }]
+      }).then(response => {
+        res.json(response);
+      });
+  })//end of current events on this date
+
+  app.get("/api/event/active-events", (req, res) => {
+    db.EventDayTimePark.findAll({
+      attributes: [["date", "start"]],
+      group: ['date'],
+    })
+    .then(response => {
+      res.json(response);
+    });
+  });//end of currentevents
+
+  // Project.findAll({
+  //   attributes: ['country'],
+  //   group: ['country']
+  // }).then(function(projects {
+  //   projects.map(project => project.country)
+  // });
+  
+  app.get("/api/event/user-events/:id", (req, res)=>{
+    db.EventDayTimePark.findAll({
+      attributes: [["date", "start"]],
+      group: ['date'],
+    })
+    .then(response => {
+      res.json(response);
+    });
+  });//end of currentevents
+
+
+  app.post("/api/event/attend", (req, res) => {
+    console.log (req.body);
+    db.EventDayTimePark.create({
+      date: req.body.date,
+      time: req.body.time,
+      parkId: req.body.parkId,
+      UserId: req.body.userId
+    }).then(attendee => {
+      console.log(attendee.dataValues);
+      res.json(attendee)
+    })
+    //end of dbEventDayTimePark create
+  });
+
+  app.delete("/api/event/attend", (req, res) => {
+    console.log("reqbody: ",req.body);
+    db.EventDayTimePark.destroy({
+      where:{
+        date: req.body.date,
+        time: req.body.time,
+        parkId: req.body.parkId,
+        UserId: req.body.userId
+      }
+    }).then(destroyed => {
+      res.json(destroyed);
+      console.log(destroyed);
+    })
+  })//end of delete
+
+  // ^^^^^ event api routes ^^^^
+  // ***************************
 
   // **********************************
   // **** Login & user api routes *****
@@ -239,33 +331,31 @@ module.exports = function(app) {
   app.get("/api/search/:input", function(req, res) {
     console.log(req.params.input, "hit api")
     var searchInput = req.params.input;
-    var hbsObject = {
+    var data = {
       dogs:[],
       owners:[]
     }
-
-      db.Owner.findAll({
+      db.Owners.findAll({
         where: {
           name: searchInput
         }
       })
-      .then((owner) => {
-        hbsObject.owners = owner;
+      .then((owners) => {
+        data.owners = owners;
 
-        db.Dog.findAll({
+        db.Dogs.findAll({
           where: {
             name: searchInput
           }
         })
-        .then((dog) => {
-          hbsObject.dog = dog;
+        .then((dogs) => {
+          data.dogs = dogs;
 
-          res.render(hbsObject);
+          res.render(data);
         });
       });
       
-    //check to see why dogs is repeating
-    
+    console.log(data);
   });
 }; //end of module exports
 

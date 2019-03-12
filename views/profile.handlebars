@@ -3,10 +3,13 @@
     <div class="content">
       <h1 class="title">{{ title }}</h1>
     </div>
-    <nav class="level">
-      <div class="level-left">
-        <div class="content is-pulled-left">
-          <h2 class="subtitle">Your Info</h2>
+
+    <!-- start of owner section -->
+    <div class="content">
+      <h2 class="subtitle">Your Info</h2>
+      <nav class="level">
+        <!-- name columns -->
+        <div class="column is-half">
           <div class="field is-grouped">
             <div class="control" id="nameControl"></div>
             <button class="control button" id="nameBtn">
@@ -14,6 +17,20 @@
             </button>
           </div>
         </div>
+        <!-- pic column -->
+        <div class="column is-half has-text-centered">
+          <figure class="image is-128x128 is-inline-block">
+            <img src="https://bulma.io/images/placeholders/128x128.png" />
+          </figure>
+        </div>
+      </nav>
+
+      <!-- start of dog section -->
+      <hr />
+      <div class="content" id="dogContent">
+        <h2 class="subtitle" id="dogSubtitle">
+          Your Dog(s) <button class="button" id="addDogBtn">Add a dog</button>
+        </h2>
       </div>
       <div class="level-right">
         <figure class="image is-128x128">
@@ -39,7 +56,6 @@
         Your Dog(s) <button class="button" id="addDogBtn">Add a dog</button>
       </h2>
     </div>
-
   </div>
 </div>
 
@@ -51,13 +67,13 @@
       <div class="field">
         <label class="label">Dog's Name</label>
         <div class="control">
-          <input class="input" type="text" id="dogName" />
+          <input class="input" type="text" id="dogName" required/>
         </div>
       </div>
       <div class="field">
         <label class="label">Dog's Gender</label>
         <div class="control">
-          <select class="select" id="dogGender">
+          <select class="select" id="dogGender" required>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
@@ -65,7 +81,7 @@
       </div>
       <div class="field">
         <label class="label">Dog's Weight (in pounds)</label>
-        <input class="input" type="number" id="dogWeight" />
+        <input class="input" type="number" id="dogWeight" required/>
       </div>
       <div class="field">
         <label class="label">Dog's Bio</label>
@@ -79,7 +95,7 @@
       <div class="field">
         <label class="label">How energetic is your dog?</label>
         <div class="control">
-          <select class="select" id="dogEnergy">
+          <select class="select" id="dogEnergy" required>
             <option value="1">1 (Not at all)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -92,7 +108,7 @@
       <div class="field">
         <label class="label">How patient is your dog?</label>
         <div class="control">
-          <select class="select" id="dogPatience">
+          <select class="select" id="dogPatience" required>
             <option value="1">1 (Not at all)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -107,7 +123,7 @@
           >How dominant does your dog tend to be with other dogs?</label
         >
         <div class="control">
-          <select class="select" id="dogDominance">
+          <select class="select" id="dogDominance" required> 
             <option value="1">1 (Not at all)</option>
             <option value="2">2</option>
             <option value="3">3</option>

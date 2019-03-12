@@ -1,3 +1,4 @@
+{{!< login}}
 <div class="section">
   <!-- main container  -->
   <div class="container">
@@ -5,19 +6,21 @@
     <div class="content">
       <h1 class="title">New User Page</h1>
     </div>
-   <div class="modal" id="passModal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="modal-card">
-        <section class="modal-card-body">
-          <div class="content has-text-centered">
-            <h1>Passwords do not match</h1>
-          </div>
-        </section>
+    {{!-- modal --}}
+    <div class="modal" id="passModal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="modal-card">
+          <section class="modal-card-body">
+            <div class="content has-text-centered">
+              <h1>Passwords do not match</h1>
+            </div>
+          </section>
+        </div>
       </div>
+      <button class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
-  </div>
+    {{!-- end modal --}}
     <!-- form area -->
     <div class="columns">
       <!-- owner form -->
@@ -34,14 +37,15 @@
           <div class="field">
             <label class="label">Password</label>
             <div class="control">
-              <input id="password-input" class="input" type="password"  placeholder="Your new password"/>
+              <input id="password-input" class="input" type="password" placeholder="Your new password" />
             </div>
           </div>
           <!-- re-enter password field -->
           <div class="field">
             <label class="label">Re-Enter Password</label>
             <div class="control">
-              <input id="password-check" class="input"type="password" placeholder="Re-enter your new password" onChange="checkPasswordMatch();"/>
+              <input id="password-check" class="input" type="password" placeholder="Re-enter your new password"
+                onChange="checkPasswordMatch();" />
             </div>
             <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
           </div>

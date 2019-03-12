@@ -12,5 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
+  //   models.Event.hasMany(models.Attendance, {
+  //     onDelete: "CASCADE",
+  //   });
+
   return Event;
 };

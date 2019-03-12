@@ -1,7 +1,6 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-var userID;
 
 module.exports = function(app) {
   app.get("/calendar", isAuthenticated, (request, response) => {
@@ -11,21 +10,24 @@ module.exports = function(app) {
   });
 
   app.get("/day/:date", isAuthenticated, (request, response) => {
-    db.Event
+    db.Park
       .findAll({
-        where: {
-          date: request.params.date,
-        },
         include: [
-          {model: db.Park},
+          {
+            model: db.Event,
+            where: {
+              date: request.params.date,
+            },
+            required: false,
+          },
         ],
         order: [
-          [db.Event.associations.Park, "name", "ASC"],
+          ["name", "ASC"],
         ],
       })
-      .then((events) => {
-        if (events.length > 0) {
-          const parks = formatEventsForHandlebars(events);
+      .then((parks) => {
+        if (parks.length > 0) {
+          parks = formatParksForHandlebars(parks);
           const date = formatDate(request.params.date);
 
           response.render("day", {
@@ -39,11 +41,33 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/event/:id", isAuthenticated, (request, response) => {
-    response.render("event", {
-      title: "Event",
+  app.get("/event/day/:date/:time/:parkId", isAuthenticated, (req, res) => {
+    console.log(req.params);
+    db.EventDayTimePark.findAll({
+      where:{
+        date: req.params.date,
+        time: req.params.time,
+        parkId: req.params.parkId
+      },
+      include:{
+        model: db.User,
+        attributes:["name", "id"]
+      }
+    }).then((attendees)=>{
+      // console.log("html \n" ,result[0].User.dataValues)
+      let attendee=[];
+      attendees.forEach(user =>{
+        attendee.push(user.User.dataValues)
+      });
+      console.log(attendee);
+      res.render("event", {
+        title: "Event",
+        attendee: attendee,
+        attendeeJson: JSON.stringify(attendee),
+      });
     });
   });
+
 
   app.get("/user/profile", isAuthenticated, (request, response, next) => {
       response.render("profile", {
@@ -52,8 +76,10 @@ module.exports = function(app) {
   });
 
   app.get("/user/new", (request, response) => {
-    response.render("createAccount", {
-      title: "New User"
+    response.render("createAccount", 
+    {
+      title: "New User",
+      layout: "login"
     });
   });
 
@@ -62,8 +88,10 @@ module.exports = function(app) {
   })
 
   app.get("/", (request, response) => {
-    response.render("index", {
+    response.render("index", 
+    {
       title: "Dogs Day Out",
+      layout: "login"
     });
   });
 
@@ -81,40 +109,24 @@ module.exports = function(app) {
 
 // Day Page Utilities..........................................................
 
-/** Define an order for the time of day names, since alphabetical doesn't make sense. */
-function getTimeSortOrder(time) {
-  switch (time) {
-    case "Morning":   return 0;
-    case "Afternoon": return 1;
-    case "Evening":   return 2;
-    default:          return 0;
-  }
-}
+function formatParksForHandlebars(parks) {
+  for (let park of parks) {
+    park.times = [
+      {
+        name: "Morning",
+        event: park.Events.find(event => event.time === "Morning"),
+      },
+      {
+        name: "Afternoon",
+        event: park.Events.find(event => event.time === "Afternoon"),
+      },
+      {
+        name: "Evening",
+        event: park.Events.find(event => event.time === "Evening"),
+      },
+    ];
 
-function formatEventsForHandlebars(events) {
-  let parks = [];
-  let parkName = null;
-  let park = null;
-
-  for (const event of events) {
-    if (event.Park.name !== parkName) {
-      park = event.Park;
-      park.events = [];
-      parks.push(park);
-
-      parkName = park.name;
-    }
-
-    park.events.push({
-      id: event.id,
-      time: event.time,
-    });
-  }
-
-  for (const park of parks) {
-    park.events.sort((a, b) => {
-      return getTimeSortOrder(a.time) - getTimeSortOrder(b.time);
-    });
+    park.Events = null;
   }
 
   return parks;

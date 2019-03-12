@@ -1,74 +1,128 @@
+#nameInput::placeholder {
+  color: red;
+  opacity: 1; /* Firefox */
+}
+
+
 .list-group-item {
   line-height: 2.5;
 }
 
 /* Calendar Page */
-.active-day {
-  padding: 0 !important;
-}
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
 
-.active-day-link {
-  background-color: #6cfdc1;
-  color: #000000;
-  display: block;
-  padding: .5em .75em;
-  width: 100%;
-}
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-.active-day-link:focus,
-.active-day-link:hover {
-  background-color: #b4ffe6;
-}
+/* ***************************** */
+/* ******** day page ********** */
 
-/* Event Page */
-.attendee {
-  color: #0000df;
-}
+  .activeEvent{
+    background-color: yellow;
+  }
 
-.attendee:focus,
-.attendee:hover {
-  color: #7fafdf;
-}
+  .userEvent{
+    color: red;
+  }
 
-.chat {
-  border: .1em solid #000000;
-  padding: 1em;
-}
+/* ***************************** */
+/* ********event page ********** */
 
-.display-name {
-  color: #ffffff;
-}
+  .attendee {
+    color: #0000df;
+  }
 
-.display-name:focus,
-.display-name:hover {
-  color: #00009f;
-}
+  .attendee:focus,
+  .attendee:hover {
+    color: #7fafdf;
+  }
 
-.post {
-  background-color: #9999ff;
-  clear: both;
-  padding: .5em;
-  margin-top: .5em;
-}
+  .chat {
+    border: .1em solid #000000;
+    padding: 1em;
+  }
 
-.post:first-child {
-  margin-top: 0;
-}
+  .display-name {
+    color: #ffffff;
+  }
 
-.post-contents {
-  color: #000000;
-}
+  .display-name:focus,
+  .display-name:hover {
+    color: #00009f;
+  }
 
-.your-post {
-  background-color: #f3aeae;
-}
+  .post {
+    background-color: #9999ff;
+    clear: both;
+    padding: .5em;
+    margin-top: .5em;
+  }
+
+  .post:first-child {
+    margin-top: 0;
+  }
+
+  .post-contents {
+    color: #000000;
+  }
+
+  .your-post {
+    background-color: #f3aeae;
+  }
 
 
-#create-post {
-  padding-top: 1em;
-}
+  #create-post {
+    padding-top: 1em;
+  }
+
+  .attendee-list li {
+    cursor: pointer;
+  }
+
+
+
+
+/* ***************************** */
+/* ********event page modal***** */ 
+  .dog-modal-content{
+    padding-bottom: 20px;
+  }
+  .dog-modal-content h2{
+    font-size: 130%;
+  }
+  h2 + p{
+    padding-top: 5px;
+    /* color: red; */
+  }
+  .float-left {
+    float: left;
+  }
+
+  .clearfix:after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+/* ********event page modal***** */
+/* *****************************
 
 /* Day Page */
+.new-event {
+  color: #6f6f6f;
+}
+
+.new-event:focus,
+.new-event:hover {
+  color: #bfbfbf;
+}
+
 .show-on-map {
   margin-left: 1em;
 }
@@ -86,3 +140,70 @@
 #upload-progress {
   display: none;
 }
+
+/* *************************
+*************************
+chat box css */
+  #chatBox{
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    /* background-color: #e9ecef; */
+    background-color: hsl(206, 36%, 20%);
+    padding: 5px;
+    border: 5px solid #212528;
+    border-radius: 3px;
+    
+  }
+  #chatForm {
+    border-bottom: solid black 1px
+  }
+  #chatArea{
+    position: relative;
+    background-color: hsl(206, 36%, 20%);
+    overflow:auto;
+    height: 220px;
+    border-radius: 3px;
+  }
+  #chatArea p {
+    margin: 0;
+    cursor: pointer;
+  }
+  .myChat {
+    margin-left: auto;
+    text-align: right;
+    margin-top: 1px;
+    margin-right: 3px;
+    max-width: 80%;
+  }
+  .myChat p {
+    background-color: #8afe37;
+    padding: 0px 5px 0px 5px;
+    border: 1px transparent solid;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .chatName {
+  color: #dff3ff;
+  }
+
+  .otherChat {
+    margin-left: 3px;
+    margin-right: auto;
+    margin-top: 1px;
+    max-width: 80%;
+
+  }
+  .otherChat p {
+    background-color: #52b4ff;
+    padding:  0px 5px 0px 5px;
+    border: 1px transparent solid;
+    border-radius: 6px;
+    display: inline-block;
+
+  }
+
+/* *************************
+*************************
+chat box css */
+

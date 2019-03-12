@@ -1,55 +1,64 @@
+{{!-- dog info modal --}}
+<div class="modal" id="dogInfoModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal Title</p>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <footer class="modal-card-foot">
+      {{!-- <button class="button is-success">Save changes</button>
+      <button class="button">Cancel</button> --}}
+    </footer>
+  </div>
+</div>
+{{!-- end modal --}}
+
 <section class="section">
   <div class="container">
     <h1 class="title">Event</h1>
-
     <div class="columns">
-      <div class="column is-two-thirds">
-        <h2 class="title is-4">Chat</h2>
-
-        <div class="chat is-clearfix">
-          <div class="post is-pulled-left">
-            <a class="display-name" href="/user/1">Jacob</a>
-            <span class="post-contents">Yo</span>
-          </div>
-
-          <div class="post your-post is-pulled-right">
-            <span class="post-contents">Howdy</span>
-          </div>
-
-          <div class="post is-pulled-left">
-            <a class="display-name" href="/user/2">Alexa</a>
-            <span class="post-contents">Hey y'all!</span>
-          </div>
-
-          <div class="post is-pulled-left">
-            <a class="display-name" href="/user/3">Scott</a>
-            <span class="post-contents">Whattup</span>
-          </div>
-        </div>
-
-        <form id="create-post" novalidate>
-          <div class="field has-addons">
+      <div class="column">
+        <div id="chatBox">
+          <form class="field has-addons" id="chatForm">
             <div class="control is-expanded">
-              <input class="input" type="text" placeholder="Hello!" required>
+              <input class="input" id="chatInput" type="text" placeholder="Chat It Up!">
             </div>
-
             <div class="control">
-              <button class="button is-link">Submit</button>
+              <button class="button is-info" type="submit" id="chatButton"><i class="fas fa-share"></i></button>
             </div>
+          </form>
+          <div id="chatArea">
+            {{!-- chat messages get pushed to here --}}
           </div>
-        </form>
+        </div>  
+        {{!-- ^^^ end of chat box ^^^--}}
       </div>
 
-      <div class="column is-one-third">
-        <h2 class="title is-4">Attendees</h2>
+      <div class="column">
+        <h2 class="title is-4">Attendees <span id="buttonSwitch"></span></h2>
 
         <ul class="attendee-list">
-          <li><a class="attendee" href="user/2">Alexa</a></li>
-          <li><a class="attendee" href="user/4">Andrew</a></li>
-          <li><a class="attendee" href="user/1">Jacob</a></li>
-          <li><a class="attendee" href="user/3">Scott</a></li>
+          {{#each attendee}}
+          <li data-user-id="{{this.id}}"><h4 class="subtitle is-4">{{this.name}}</h4></li>
+          {{/each}}
+          {{!-- list of attendess goes here --}}
         </ul>
       </div>
     </div>
   </div>
 </section>
+{{!-- <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script> --}}
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
+<script src="/js/chat.js"></script>
+  {{!-- checkUser(attending); --}}
+
+<script>
+  let attending = {{{attendeeJson}}};
+</script>
+
+
+

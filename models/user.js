@@ -48,7 +48,11 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     models.User.hasMany(models.Dog, {
       onDelete: "CASCADE"
+    }),
+    models.User.hasMany(models.EventDayTimePark, {
+      onDelete: "CASCADE"
     });
   };
+  
   return User;
 };

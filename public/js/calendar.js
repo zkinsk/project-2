@@ -1,40 +1,60 @@
 
 
-$(document).ready(function(){
-  var now = moment().format();
-  console.log(now);
-  // var calendar = $('#calendar').fullCalendar('getCalendar');
-  $(function() {
+// eventClick: function(calEvent, jsEvent, view) {
 
+//   alert('Event: ' + calEvent.title);
+//   alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//   alert('View: ' + view.name);
+
+//   // change the border color just for fun
+//   $(this).css('border-color', 'red');
+
+// }
+// }
+
+function getCurrentEvents(){
+  $.get("/api/event/active-events", (response) => {
+    console.log(response);
+    response.forEach(obj => {
+      obj.title = "Active Play Date!";
+      // obj.rendering = "background";
+      // obj.color = '#ff9f89';
+    })
+    console.log(response);
     $('#calendar').fullCalendar({
-      selectable: true,
+      events: response,
+      selectable: false,
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        // right: 'month'
       },
-      dayClick: function(date) {
-        alert('clicked ' + date.format());
+      dayClick: function (date) {
+        console.log('clicked ' + date.format());
+        date = date.format();
+        window.location.href = "/day/" + date;
       },
-      
+      eventClick: function (calEvent, jsEvent, view) {
+        // console.log('clicked ', calEvent);
+        console.log(calEvent.start._i);
+        let date = calEvent.start._i;
+
+        // date = date.format();
+        window.location.href = "/day/" + date;
+      }
     });
-  
-  });
+    
+  })
+}//end of getCurrentEvents
+
+function calendarDates(){
+
+};
+
+
+$(document).ready(function(){
+  var now = moment().format();
+  console.log(now);
+  // calenderCall();
+  getCurrentEvents();
 });
-
-// $('#calendar').fullCalendar({
-//   dayClick: function(date, jsEvent, view) {
-
-//     alert('Clicked on: ' + date.format());
-
-//     alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-//     alert('Current view: ' + view.name);
-
-//     // change the day's background color just for fun
-//     $(this).css('background-color', 'red');
-
-//   }
-// });
-
-  
