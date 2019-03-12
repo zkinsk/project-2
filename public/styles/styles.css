@@ -1,3 +1,12 @@
+
+/* list of elements for cursor: pointer */
+  .dropdown-item,
+  .dropdown-item p,
+  .attendee-list li  {
+    cursor: pointer;
+  }
+/* ^^^^^ list of elements for cursor: pointer */
+
 #nameInput::placeholder {
   color: red;
   opacity: 1; /* Firefox */
@@ -81,11 +90,6 @@
   #create-post {
     padding-top: 1em;
   }
-
-  .attendee-list li {
-    cursor: pointer;
-  }
-
 
 
 
