@@ -292,25 +292,26 @@ module.exports = function(app) {
     var searchInput = req.params.input;
     var data = {
       dogs: [],
-      owners: []
+      users: []
     };
-    db.Owners.findAll({
+    db.User.findAll({
       where: {
         name: searchInput
       }
-    }).then(owners => {
-      data.owners = owners;
+    }).then(users => {
+      data.users = users;
 
-      db.Dogs.findAll({
+      db.Dog.findAll({
         where: {
           name: searchInput
         }
       }).then(dogs => {
         data.dogs = dogs;
 
-        res.render(data);
+        res.json(data);
       });
     });
     console.log(data);
   });
-}; //end of module exports
+
+};//end of module exports
