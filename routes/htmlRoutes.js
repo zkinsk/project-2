@@ -114,14 +114,17 @@ function formatParksForHandlebars(parks) {
     park.times = [
       {
         name: "Morning",
+        range: "(7am - 12pm)",
         event: park.Events.find(event => event.time === "Morning"),
       },
       {
         name: "Afternoon",
+        range: "(12pm - 6pm)",
         event: park.Events.find(event => event.time === "Afternoon"),
       },
       {
         name: "Evening",
+        range: "(6pm - 10pm)",
         event: park.Events.find(event => event.time === "Evening"),
       },
     ];
