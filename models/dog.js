@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     energy: DataTypes.INTEGER,
     patience: DataTypes.INTEGER,
     dominance: DataTypes.INTEGER,
+    profileImage: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: true,
+      },
+    },
   });
 
   Dog.associate = (models) => {
