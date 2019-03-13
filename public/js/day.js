@@ -55,7 +55,7 @@ function initMap() {
 function listItemClick(){
   $("a").click(function(){
     // console.log($(this).text());
-    let time = $(this).text();
+    let time = $(this).data("time-name");
     let parkId = $(this).parent().parent().attr("park-id-data");
     let eventObj = {
       time: time,
@@ -87,7 +87,7 @@ function updateClasses(data){
     if (userId == myUserId){
       $(`[park-id-data = ${parkId}] .${time} a`).addClass("userEvent")
     };
-    $(`[park-id-data = ${parkId}] .${time}`).addClass("activeEvent")
+    $(`[park-id-data = ${parkId}] .${time} a`).addClass("activeEvent")
   })//end of forEach
 }//end of updateClasses
 
