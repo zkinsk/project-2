@@ -29,6 +29,18 @@ html {
   text-shadow: 0 0 2px black;
 }
 
+.modal-card-body{
+  background-image: url("../images/long-dog.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.modal-card-head,
+.modal-card-foot {
+  background-color: orange;
+}
+
 
 
 
