@@ -49,6 +49,10 @@ function bulmaListeners() {
   $("#dogAddModalBackground").click(function() {
     $("#newDogModal").toggleClass("is-active");
   });
+
+  $("#profileImageModalBackground").click(function() {
+    $("#profile-image-modal").toggleClass("is-active");
+  });
 };//end of bulma listener
 
 
