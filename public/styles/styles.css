@@ -38,8 +38,9 @@ body, html {
 /* ***************************** */
 /* ******** day page ********** */
 
-.activeEvent{
-  background-color: yellow !important;
+.day-title {
+  color: #0f0f0f;
+  font-family: "Carrois Gothic", sans-serif;
 }
 
 .park-name {
@@ -53,13 +54,27 @@ body, html {
 }
 
 .time-link {
-  background-color: #ffffff;
+  background-color: #efefef;
   border-radius: 2em;
   color: #4a4a4a;
   display: inline-block;
   padding: .5em;
   text-align: center;
   width: 15em;
+}
+
+.time-link:focus,
+.time-link:hover {
+  background-color: #cfcfcf;
+}
+
+.activeEvent {
+  background-color: #ffff00;
+}
+
+.activeEvent:focus,
+.activeEvent:hover {
+  background-color: #d3d032;
 }
 
 .time-list {
@@ -72,8 +87,8 @@ body, html {
   font-weight: bold;
 }
 
-.userEvent{
-  color: red;
+.userEvent {
+  color: #ff0000;
 }
 
 #map {
@@ -162,6 +177,14 @@ body, html {
 /* *****************************
 
 /* Profile Page */
+
+.level-title {
+  margin-bottom: 0 !important;
+}
+
+.profile-dog-card {
+  margin-top: 2em;
+}
 
 #upload-feedback {
   display: none;

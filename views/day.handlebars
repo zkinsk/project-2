@@ -1,37 +1,47 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">{{{title}}}</h1>
+    <h1 class="title day-title">{{{title}}}</h1>
 
-    <div class="columns">
-      <div class="column is-half content">
-        <h2 class="title is-4">Parks</h2>
+    <div class="columns is-3">
+      <div class="column content">
+        <div class="card">
+          <div class="card-content">
+            <h2 class="title is-4">Parks</h2>
 
-        <ul class="parks" id="park-list">
-          {{#each parks as |park|}}
-            <li>
-              <span class="park-name">{{park.name}}</span>
-              <button class="button show-on-map" aria-label="Show on map" data-park-id="{{park.id}}">
-                <i class="fas fa-map-marker-alt"></i>
-              </button>
+            <ul class="parks" id="park-list">
+              {{#each parks as |park|}}
+                <li>
+                  <span class="park-name">{{park.name}}</span>
 
-              <ul class="time-list" park-id-data="{{park.id}}">
-                {{#each times as |time|}}
-                  <li class="time {{time.name}}">
-                    <a class="time-link" href="#" data-time-name="{{time.name}}">
-                      <span class="time-name">{{time.name}}</span> <span class="time-range">{{time.range}}</span>
-                    </a>
-                  </li>
-                {{/each}}
-              </ul>
-            </li>
-          {{/each}}
-        </ul>
+                  <button class="button show-on-map" aria-label="Show on map" data-park-id="{{park.id}}">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </button>
+
+                  <ul class="time-list" park-id-data="{{park.id}}">
+                    {{#each times as |time|}}
+                      <li class="time {{time.name}}">
+                        <a class="time-link" href="#" data-time-name="{{time.name}}">
+                          <span class="time-name">{{time.name}}</span>
+                          <span class="time-range">{{time.range}}</span>
+                        </a>
+                      </li>
+                    {{/each}}
+                  </ul>
+                </li>
+              {{/each}}
+            </ul>  
+          </div>
+        </div>
       </div>
 
-      <div class="column is-half">
-        <h2 class="title is-4">Park Locations</h2>
-        <div id="map" class="is-fullwidth">
-          {{!-- map goes here --}}
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <h2 class="title is-4">Park Locations</h2>
+            <div id="map" class="is-fullwidth">
+              {{!-- map goes here --}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
