@@ -87,7 +87,7 @@ function updateClasses(data){
     if (userId == myUserId){
       $(`[park-id-data = ${parkId}] .${time} a`).addClass("userEvent")
     };
-    $(`[park-id-data = ${parkId}] .${time}`).addClass("activeEvent")
+    $(`[park-id-data = ${parkId}] .${time} a`).addClass("activeEvent")
   })//end of forEach
 }//end of updateClasses
 

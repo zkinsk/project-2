@@ -38,13 +38,51 @@ body, html {
 /* ***************************** */
 /* ******** day page ********** */
 
-  .activeEvent{
-    background-color: yellow;
-  }
+.activeEvent{
+  background-color: yellow !important;
+}
 
-  .userEvent{
-    color: red;
-  }
+.park-name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.show-on-map {
+  background: transparent;
+  border: none;
+}
+
+.time-link {
+  background-color: #ffffff;
+  border-radius: 2em;
+  color: #4a4a4a;
+  display: inline-block;
+  padding: .5em;
+  text-align: center;
+  width: 15em;
+}
+
+.time-list {
+  list-style-type: none !important;
+  margin-left: 0 !important;
+  margin-bottom: 2em;
+}
+
+.time-name {
+  font-weight: bold;
+}
+
+.userEvent{
+  color: red;
+}
+
+#map {
+  height: 400px;
+}
+
+#park-list {
+  list-style-type: none;
+}
 
 /* ***************************** */
 /* ********event page ********** */
@@ -122,24 +160,6 @@ body, html {
   }
 /* ********event page modal***** */
 /* *****************************
-
-/* Day Page */
-.new-event {
-  color: #6f6f6f;
-}
-
-.new-event:focus,
-.new-event:hover {
-  color: #bfbfbf;
-}
-
-.show-on-map {
-  margin-left: 1em;
-}
-
-#map {
-  height: 400px;
-}
 
 /* Profile Page */
 

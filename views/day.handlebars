@@ -6,21 +6,17 @@
       <div class="column is-half content">
         <h2 class="title is-4">Parks</h2>
 
-        <ul id="park-list">
+        <ul class="parks" id="park-list">
           {{#each parks as |park|}}
             <li>
               <span class="park-name">{{park.name}}</span>
-              <button class="button is-small show-on-map" data-park-id="{{park.id}}">Show on map</button>
+              <button class="button show-on-map" aria-label="Show on map" data-park-id="{{park.id}}">
+                <i class="fas fa-map-marker-alt"></i>
+              </button>
 
-              <ul park-id-data="{{park.id}}">
+              <ul class="time-list" park-id-data="{{park.id}}">
                 {{#each times as |time|}}
-                  {{!-- {{#if time.event}} --}}
-                    {{!-- <li><a href="/event/{{time.event.id}}">{{time.name}}</a></li> --}}
-                    <li class="{{time.name}}"><a href="#">{{time.name}}</a></li>
-                  {{!-- {{else}} --}}
-                    {{!-- <li><a class="new-event" href="/event">{{time.name}}</a></li> --}}
-                    {{!-- <li><a class="new-event" href="#">{{time.name}}</a></li> --}}
-                  {{!-- {{/if}} --}}
+                  <li class="time {{time.name}}"><a class="time-link" href="#"><span class="time-name">{{time.name}}</span> <span class="time-range">{{time.range}}</span></a></li>
                 {{/each}}
               </ul>
             </li>
@@ -29,7 +25,7 @@
       </div>
 
       <div class="column is-half">
-        <h2 class="title is-4">Map</h2>
+        <h2 class="title is-4">Park Locations</h2>
         <div id="map" class="is-fullwidth">
           {{!-- map goes here --}}
         </div>
