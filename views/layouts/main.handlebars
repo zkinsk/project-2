@@ -1,59 +1,129 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{{title}}}</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fullcalendar.io/releases/fullcalendar/3.10.0/fullcalendar.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/styles/styles.css"
+      media="screen"
+      title="no title"
+      charset="utf-8"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{{title}}}</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-  <script src= 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
-  <link rel= "stylesheet" href= "https://fullcalendar.io/releases/fullcalendar/3.10.0/fullcalendar.min.css"/>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-  <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
-</head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img
+            src="https://bulma.io/images/bulma-logo.png"
+            width="112"
+            height="28"
+          />
+        </a>
 
-<body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-      </a>
-  
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-  
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/user/profile">
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/user/profile">
             My Profile
-        </a>
-        <a class="navbar-item" href="/calendar">
-          Calendar
-        </a>
-        <a class="navbar-item" href="/search">
-          Search
-        </a>
-      </div>  
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-danger" href="/logout">
-              Logout
-            </a>
+          </a>
+          <a class="navbar-item" href="/calendar">
+            Calendar
+          </a>
+          <a class="navbar-item" id="searchbutton">
+            Search
+          </a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-danger" href="/logout">
+                Logout
+              </a>
+            </div>
           </div>
         </div>
       </div>
+    </nav>
+
+    {{!-- start of modal --}}
+    <div class="modal" id="searchModal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="modal-card">
+          <header class="modal-card-head">
+            {{!-- empty header for looks --}}
+          </header>
+          <section class="modal-card-body">
+            <div class="content">
+              <form>
+                <div class="field is-grouped">
+                  <p>
+                    <input
+                      id="searchinput"
+                      name="search"
+                      class="input"
+                      type="text"
+                      placeholder="Search users, dogs, locations..."
+                    />
+                  </p>
+                  <p class="control">
+                    <a id="searchbuttonmodal" type="submit" class="button is-info">
+                      Find a meetup!
+                    </a>
+                  </p>
+                </div>
+              </form>
+            </div>
+            <div class="content" id="dogResults"></div>
+            <div class="content" id="userResults"></div>
+          </section>
+          <footer class="modal-card-foot">
+            {{!-- empty modal footer for looks --}}
+          </footer>
+        </div>
+      </div>
     </div>
-  </nav>
+    {{!-- start of modal --}}
 
-  {{{body}}}
-  <script src="/js/main.js"></script>
-</body>
-
+    {{{body}}}
+    <script src="/js/main.js"></script>
+    <script src="/js/search.js"></script>
+  </body>
 </html>
