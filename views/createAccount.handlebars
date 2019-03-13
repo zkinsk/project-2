@@ -26,54 +26,54 @@
     <!-- title box -->
     <div class="content wow fadeInUp">
       <div class="has-text-centered">
-      <h1 class="title is-2">Please Create an Account With Us!</h1>
+        <h1 class="title is-2">Please Create an Account With Us!</h1>
       </div>
     </div>
     <!-- form area -->
-      <!-- owner form -->
-        <div class="level">
-          <div class="loginBox has-text-centered wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-          <form id="signup">
-            <!-- username field -->
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
-                <input id="email-input" class="input" type="email" placeholder="Your email" />
+    <!-- owner form -->
+    <div class="level">
+      <div class="loginBox has-text-centered wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+        <form id="signup">
+          <!-- username field -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input id="email-input" class="input" type="email" placeholder="Your email" />
+            </div>
+          </div>
+          <!-- password field -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input id="password-input" class="input" type="password" placeholder="Your new password" />
+            </div>
+          </div>
+          <!-- re-enter password field -->
+          <div class="field">
+            <label class="label">Re-Enter Password</label>
+            <div class="control">
+              <input id="password-check" class="input" type="password" placeholder="Re-enter your new password"
+                onChange="checkPasswordMatch();" />
+            </div>
+            <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
+          </div>
+          <div class="field">
+            <label class="label">Location</label>
+            <div class="control has-text-centered">
+              <div class="select">
+                <select>
+                  <option>Richmond, VA</option>
+                </select>
               </div>
             </div>
-            <!-- password field -->
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input id="password-input" class="input" type="password" placeholder="Your new password" />
-              </div>
-            </div>
-            <!-- re-enter password field -->
-            <div class="field">
-              <label class="label">Re-Enter Password</label>
-              <div class="control">
-                <input id="password-check" class="input" type="password" placeholder="Re-enter your new password"
-                  onChange="checkPasswordMatch();" />
-              </div>
-              <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
-            </div>
-            <div class="field">
-              <label class="label">Location</label>
-              <div class="control has-text-centered">
-                <div class="select">
-                  <select>
-                    <option>Richmond, VA</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="has-text-centered">
+          </div>
+          <div class="has-text-centered">
             <button type="submit" class="button is-success is-rounded">Submit</button>
             <a href="/" class="button is-rounded">Back to Login</a>
-            </div>
-          </form>
           </div>
-        </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 

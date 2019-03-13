@@ -96,15 +96,16 @@ $(document).ready(function() {
         var x;
         // loops through results and creates HTML elements for each dog
         for (x in response) {
+          var dogNameLevel = $(`<div class="level content">`);
           // name
           var dogName = $(
-            "<div class='content'><p class='is-pulled-left'><strong>" +
+            "<div class='level-left'><strong class='level-item'>" +
               response[x].name +
-              "</strong></p>"
+              "</strong>"
           );
           // delete button
           var dogDelete = $(
-            "<button class='button is-danger is-small is-outlined' id='dogDeleteBtn' data-id=" +
+            "<button class='button is-danger is-small is-outlined level-item' id='dogDeleteBtn' data-id=" +
               response[x].id +
               ">Delete</button>"
           );
@@ -156,25 +157,25 @@ $(document).ready(function() {
             profileImage = response[x].profileImage;
           }
           var dogPic = $(
-            `<figure class="image is-128x128 is-inline-block">
+            `<figure class="image is-128x128">
               <img src="${profileImage}">
-              <button class="button upload-button" data-upload-target-type="dog" data-upload-target-id="${response[x].id}">Change</button>
-            </figure>`
+            </figure>
+            <button class="button upload-button" data-upload-target-type="dog" data-upload-target-id="${response[x].id}">Update</button>`
           );
           
           var lineBreak = $("<hr>");
           // main dog "row"
-          var dogLevel = $("<nav class='level dogLevel'></nav>");
+          var dogLevel = $("<div class='columns dogLevel'></div>");
           // left column
-          var dogInfoColumn = $(
-            "<div class='column is-half dogInfoColumn'></div>"
+          var dogPicColumn = $(
+            "<div class='column is-narrow dogPicColumn has-text-centered'></div>"
           );
           // right column
-          var dogPicColumn = $(
-            "<div class='column is-half has-text-centered dogPicColumn'></div>"
+          var dogInfoColumn = $(
+            "<div class='column dogInfoColumn'></div>"
           );
           $(dogInfoColumn).prepend(
-            dogName,
+            dogNameLevel,
             dogBio,
             dogGender,
             dogWeight,
@@ -182,9 +183,10 @@ $(document).ready(function() {
             dogPatience,
             dogDominance
           );
-          $(dogName).append(dogDelete);
+          dogName.append(dogDelete);
+          dogNameLevel.append(dogName);
           $(dogPicColumn).prepend(dogPic);
-          $(dogLevel).prepend(dogInfoColumn, dogPicColumn);
+          $(dogLevel).prepend(dogPicColumn, dogInfoColumn);
           $(dogLevel).append(lineBreak);
           $("#dogContent").append(dogLevel);
         }
