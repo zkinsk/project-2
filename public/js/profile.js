@@ -217,9 +217,6 @@ $("#submitDogBtn").click(function(event) {
     dominance: $("#dogDominance")
       .val()
       .trim(),
-    image: $("#dogImg")
-      .val()
-      .trim(),
     UserId: userID
   };
 

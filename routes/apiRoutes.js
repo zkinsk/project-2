@@ -54,55 +54,58 @@ module.exports = function(app) {
     });
   }); //end of dog delete
 
-  app.patch("/api/dog/:id/profile-image", upload.single("file"), (request, response) => {
-    const fileName = generateFileName(request.file.originalname);
+  app.patch(
+    "/api/dog/:id/profile-image",
+    upload.single("file"),
+    (request, response) => {
+      const fileName = generateFileName(request.file.originalname);
 
-    const s3 = new aws.S3();
-    const s3Params = {
-      Bucket: S3_BUCKET,
-      Key: fileName,
-      ContentType: request.file.mimetype,
-      ACL: "public-read",
-      Body: request.file.buffer,
-    };
+      const s3 = new aws.S3();
+      const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: fileName,
+        ContentType: request.file.mimetype,
+        ACL: "public-read",
+        Body: request.file.buffer
+      };
 
-    s3.putObject(s3Params, (error, data) => {
-      if (error) {
-        console.error(error);
-        return response.status(500).end();
-      }
+      s3.putObject(s3Params, (error, data) => {
+        if (error) {
+          console.error(error);
+          return response.status(500).end();
+        }
 
-      const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
+        const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
 
-      db.Dog
-        .update(
+        db.Dog.update(
           {
-            profileImage: url,
+            profileImage: url
           },
           {
             where: {
-              id: request.params.id,
-            },
+              id: request.params.id
+            }
           }
         )
-        .then((affectedRows) => {
-          if (affectedRows[0] !== 1) {
-            return response.status(500).end();
-          }
+          .then(affectedRows => {
+            if (affectedRows[0] !== 1) {
+              return response.status(500).end();
+            }
 
-          const returnData = {
-            profileImage: url,
-          };
-          
-          response.write(returnData);
-          response.end();
-        })
-        .catch((reason) => {
-          console.error(reason);
-          response.status(500).end();
-        });
-    });
-  }); //end of update dog profile image
+            const returnData = {
+              profileImage: url
+            };
+
+            response.write(returnData);
+            response.end();
+          })
+          .catch(reason => {
+            console.error(reason);
+            response.status(500).end();
+          });
+      });
+    }
+  ); //end of update dog profile image
 
   // ^^^^^ dog api routes ^^^^
   // *************************
@@ -287,20 +290,14 @@ module.exports = function(app) {
   }); //end of user_data
 
   app.get("/api/user/:id", (req, res) => {
-    db.User
-      .findOne({
-        attributes: [
-          "id",
-          "name",
-          "profileImage",
-        ],
-        where: {
-          id: req.params.id
-        },
-      })
-      .then(name => {
-        res.json(name);
-      });
+    db.User.findOne({
+      attributes: ["id", "name", "profileImage"],
+      where: {
+        id: req.params.id
+      }
+    }).then(name => {
+      res.json(name);
+    });
   });
 
   app.put("/api/user/name/:id", (req, res) => {
@@ -310,7 +307,7 @@ module.exports = function(app) {
       },
       {
         where: {
-          id: req.params.id,
+          id: req.params.id
         }
       }
     ).then(name => {
@@ -318,55 +315,58 @@ module.exports = function(app) {
     });
   });
 
-  app.patch("/api/user/:id/profile-image", upload.single("file"), (request, response) => {
-    const fileName = generateFileName(request.file.originalname);
+  app.patch(
+    "/api/user/:id/profile-image",
+    upload.single("file"),
+    (request, response) => {
+      const fileName = generateFileName(request.file.originalname);
 
-    const s3 = new aws.S3();
-    const s3Params = {
-      Bucket: S3_BUCKET,
-      Key: fileName,
-      ContentType: request.file.mimetype,
-      ACL: "public-read",
-      Body: request.file.buffer,
-    };
+      const s3 = new aws.S3();
+      const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: fileName,
+        ContentType: request.file.mimetype,
+        ACL: "public-read",
+        Body: request.file.buffer
+      };
 
-    s3.putObject(s3Params, (error, data) => {
-      if (error) {
-        console.error(error);
-        return response.status(500).end();
-      }
+      s3.putObject(s3Params, (error, data) => {
+        if (error) {
+          console.error(error);
+          return response.status(500).end();
+        }
 
-      const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
+        const url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
 
-      db.User
-        .update(
+        db.User.update(
           {
-            profileImage: url,
+            profileImage: url
           },
           {
             where: {
-              id: request.params.id,
-            },
+              id: request.params.id
+            }
           }
         )
-        .then((affectedRows) => {
-          if (affectedRows[0] !== 1) {
-            return response.status(500).end();
-          }
+          .then(affectedRows => {
+            if (affectedRows[0] !== 1) {
+              return response.status(500).end();
+            }
 
-          const returnData = {
-            profileImage: url,
-          };
-          
-          response.write(JSON.stringify(returnData));
-          response.end();
-        })
-        .catch((reason) => {
-          console.error(reason);
-          response.status(500).end();
-        });
-    });
-  });
+            const returnData = {
+              profileImage: url
+            };
+
+            response.write(JSON.stringify(returnData));
+            response.end();
+          })
+          .catch(reason => {
+            console.error(reason);
+            response.status(500).end();
+          });
+      });
+    }
+  );
 
   // ^^^ Login & user api routes ^^^^^
   // **********************************
@@ -411,28 +411,51 @@ module.exports = function(app) {
     db.User.findAll({
       where: {
         name: searchInput
-      }
+      },
+      attributes: ["id", "name"],
+      include: [
+        {
+          model: db.Dog,
+          attributes: [
+            "name",
+            "gender",
+            "bio",
+            "weight",
+            "energy",
+            "patience",
+            "dominance",
+            "profileImage"
+          ]
+        }
+      ]
     }).then(users => {
       data.users = users;
 
       db.Dog.findAll({
         where: {
           name: searchInput
-        }
-      })
-      .then((dogs) => {
+        },
+        include: [
+          {
+            model: db.User,
+            required: true,
+            attributes: ["name"]
+          }
+        ]
+      }).then(dogs => {
         data.dogs = dogs;
 
         res.json(data);
       });
     });
-      
+
     console.log(data);
   });
 }; //end of module exports
 
 function generateFileName(originalName) {
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+  const alphabet =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
   let id = "";
   for (let i = 0; i < 21; i++) {
