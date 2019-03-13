@@ -2,6 +2,10 @@ html {
   background-color: orange;
 }
 
+.navbar-item img {
+  max-height: 5rem;
+}
+
 
 /* list of elements for cursor: pointer */
   .dropdown-item,
