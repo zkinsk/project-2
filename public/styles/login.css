@@ -4,9 +4,7 @@ form {
 
 
 html {
-  /* background-color: red; */
-  /* background-image:  url("../images/dog-jump-leaves.jpeg"); */
-  background-image:  url("../images/dogs-running-friends-cropped-resized.jpg");
+  background-image:  url("../images/dogs-running-friends-cropped-resized-2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -30,7 +28,7 @@ html {
 }
 
 .modal-card-body{
-  background-image: url("../images/long-dog-crop.jpg");
+  background-image: url("../images/long-dog-crop-2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
