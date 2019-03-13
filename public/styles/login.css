@@ -2,12 +2,9 @@ form {
   margin: auto;
 }
 
-body {
-  background-color: transparent;
-}
 
 html {
-  /* background-color: orange; */
+  /* background-color: red; */
   background-image:  url("../images/dog-jump-leaves.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
