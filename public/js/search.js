@@ -44,7 +44,7 @@ $("#searchbuttonmodal").on("click", function(event) {
             dogResultOwner
           );
         }
-      }
+      }      
       if (data.users.length != 0) {
         for (x in data.users) {
           var userResultName = $("<hr><p>Name: " + data.users[x].name + "</p>");
@@ -84,6 +84,20 @@ $("#searchbuttonmodal").on("click", function(event) {
             );
           }
         }
+      }
+      //Display message if no dogs were found.
+      var noDogs = $(
+        "<h4 class='subtitle'>Dogs found: " + data.dogs.length + "</h4>"
+      );
+      if (data.dogs.length === 0) {
+        $("#dogResults").append(noDogs)
+      }
+      // Display message if no users were found.
+      var noUsers = $(
+        "<h4 class='subtitle'>Users found: " + data.dogs.length + "</h4>"
+      );
+      if (data.users.length === 0) {
+        $("#userResults").append(noUsers)
       }
     });
   }
