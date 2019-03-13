@@ -13,7 +13,7 @@ var chatDB = database.ref("/event/chat");
 var myUserName = sessionStorage.getItem("userName");
 var myUserId = sessionStorage.getItem("userId");
 var eventObject = JSON.parse(sessionStorage.getItem('eventObj'));
-// console.log(eventObject);
+console.log(eventObject);
 var currentEvent = `${eventObject.date}&${eventObject.time}&${eventObject.parkId}`;
 
 // when chat form is submitted, push chat text and user data to firebase db

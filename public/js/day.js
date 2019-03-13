@@ -55,7 +55,7 @@ function initMap() {
 function listItemClick(){
   $("a").click(function(){
     // console.log($(this).text());
-    let time = $(this).text();
+    let time = $(this).data("time-name");
     let parkId = $(this).parent().parent().attr("park-id-data");
     let eventObj = {
       time: time,
