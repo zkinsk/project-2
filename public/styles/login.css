@@ -1,7 +1,46 @@
 form {
   margin: auto;
 }
-body, html {
+
+
+html {
+  /* background-color: red; */
+  /* background-image:  url("../images/dog-jump-leaves.jpeg"); */
+  background-image:  url("../images/dogs-running-friends-cropped-resized.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 100%;
+}
+
+.loginBox {
+  max-width: 300px;
+  margin: auto;
+  background-color: rgba(255, 201, 101, 0.331);
+  padding: 20px;
+  border: transparent solid 2px;
+  border-radius: 10px;
+
+}
+
+.title, .subtitle {
+  font-family: 'Acme', sans-serif;
+  color: orange !important;
+  text-shadow: 0 0 2px black;
+}
+
+.modal-card-body{
+  background-image: url("../images/long-dog.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.modal-card-head,
+.modal-card-foot {
   background-color: orange;
 }
+
+
+
 
