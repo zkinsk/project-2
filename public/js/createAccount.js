@@ -80,7 +80,7 @@ function checkPasswordMatch() {
 }
 
 function modalAlert(text){
-  $(".modal h1").text(text);
+  $(".modal h1").html(text + "<br> Please Try Again!");
   $(".modal").toggleClass("is-active");
 }
 
