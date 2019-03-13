@@ -30,29 +30,31 @@
       <h2 class="subtitle">A dog play date scheduler.</h2>
     </div>
     <!-- login form box -->
-      <div class="level">
-        <form id="login">
-          <!-- user name field -->
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" id="email-input" type="text" placeholder="Your Email Here" />
+      {{!-- <div class="level"> --}}
+        <div class="loginBox has-text-centered">
+          <form id="login">
+            <!-- user name field -->
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" id="email-input" type="text" placeholder="Your Email Here" />
+              </div>
             </div>
-          </div>
-          <!-- password field -->
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input class="input" type="password" placeholder="Your Password Here" />
+            <!-- password field -->
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" placeholder="Your Password Here" />
+              </div>
             </div>
-          </div>
-          <!-- form submit button -->
-          <div class="control">
-            <button class="button" type="submit">Log In</button>
-            <a href="#" class="button" id="createAccount">Create Account</a>
-          </div>
-        </form>
-      </div>
+            <!-- form submit button -->
+            <div>
+              <button class="button is-rounded is-success" type="submit">Log In</button>
+              <a href="#" class="button is-rounded" id="createAccount">Create Account</a>
+            </div>
+          </form>
+        </div>
+      {{!-- </div> --}}
   </div><!-- end container -->
 </div>
 

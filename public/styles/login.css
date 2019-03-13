@@ -1,7 +1,26 @@
 form {
   margin: auto;
 }
-body, html {
-  background-color: orange;
+
+body {
+  background-color: transparent;
+}
+
+html {
+  /* background-color: orange; */
+  background-image:  url("../images/dog-jump-leaves.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+}
+
+.loginBox {
+  max-width: 300px;
+  margin: auto;
+  background-color: rgba(255, 201, 101, 0.331);
+  padding: 20px;
+  border: transparent solid 2px;
+  border-radius: 10px;
+
 }
 
