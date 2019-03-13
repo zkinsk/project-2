@@ -16,7 +16,11 @@
 
               <ul class="time-list" park-id-data="{{park.id}}">
                 {{#each times as |time|}}
-                  <li class="time {{time.name}}"><a class="time-link" href="#"><span class="time-name">{{time.name}}</span> <span class="time-range">{{time.range}}</span></a></li>
+                  <li class="time {{time.name}}">
+                    <a class="time-link" href="#" data-time-name="{{time.name}}">
+                      <span class="time-name">{{time.name}}</span> <span class="time-range">{{time.range}}</span>
+                    </a>
+                  </li>
                 {{/each}}
               </ul>
             </li>
