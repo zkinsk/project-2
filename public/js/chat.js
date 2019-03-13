@@ -69,7 +69,7 @@ function buttonActions(){
   })//end of user list click
 
   $("#buttonSwitch").on("click", "#attendeeBtn", function(){
-    console.log("User Id: " + myUserId);
+    // console.log("User Id: " + myUserId);
 
     $.post("/api/event/attend", {
       date: eventObject.date,
@@ -78,7 +78,7 @@ function buttonActions(){
       userId: myUserId
     })//end of post
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       buttonSwap([{id: myUserId}]);
       addRemoveUser();
     })
@@ -97,8 +97,8 @@ function buttonActions(){
       }
     })//end of delete
     .then((response) => {
-      console.log(response);
-      console.log("deleted");
+      // console.log(response);
+      // console.log("deleted");
       buttonSwap([{id: 0}])
       addRemoveUser("remove");
     })
@@ -113,7 +113,7 @@ function userReview(userID){
     let apiCall = "/api/dog/";
     apiCall += userID;
     $.get(apiCall).then(function(response) {
-      console.log(response);
+      // console.log(response);
       infoModal(response)
     });
 
@@ -166,7 +166,7 @@ function infoModal(response){
 }//end of info modal
 
 function checkUser(userArr){
-  console.log(userArr);
+  // console.log(userArr);
   let x = false
   userArr.forEach(user =>{
     if (user.id == myUserId){
@@ -180,10 +180,10 @@ function checkUser(userArr){
 function buttonSwap(attending){
   let currentButton;
   if (checkUser(attending)){
-    console.log("Your on the list")
+    // console.log("Your on the list")
     currentButton = `<button class="button" id="attendeeRemove">Remove Your Name</button>`
   }else{
-    console.log("youre not on the list");
+    // console.log("youre not on the list");
     currentButton = `<button class="button" id="attendeeBtn">Add Your Name</button>`
   }
   $("#buttonSwitch").html(currentButton)
@@ -199,6 +199,7 @@ $(document).ready(function(){
   chatUpdate();
   buttonActions();
   buttonSwap(attending);
+  console.log(attending);
 
 //click action for dismissing modal
   $("#dogInfoModalBackground").click(function() {

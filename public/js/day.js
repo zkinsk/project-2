@@ -5,6 +5,7 @@ let map;
 let markers = new Map(); // Don't get confused! This is a *hash map* and not a google map.
 
 const currentDate = (window.location.href).split("/day/").slice(-1).toString().replace(/[#]/g, "");
+console.log(currentDate);
 const myUserId = parseInt(sessionStorage.getItem("userId"));
 
 function addParksToMap(parks) {
@@ -54,17 +55,19 @@ function initMap() {
 
 function listItemClick(){
   $("a").click(function(){
-    // console.log($(this).text());
+    let thisParentParent = $(this).parent().parent();
     let time = $(this).data("time-name");
-    let parkId = $(this).parent().parent().attr("park-id-data");
+    let parkId = thisParentParent.data("park-id");
+    let parkName = thisParentParent.data("park-name");
     let eventObj = {
       time: time,
       parkId: parkId,
       date: currentDate,
+      parkName: parkName
     };
     sessionStorage.setItem('eventObj', JSON.stringify(eventObj));
     document.location.href = "/event/day/" + currentDate + "/" + time + "/" + parkId;
-    console.log(eventObj);
+    // console.log(eventObj);
   })
 }//end of list item click
 
@@ -73,7 +76,7 @@ function getTodaysEvents(){
   route += currentDate;
   $.get(route).then(data => {
     console.log("Todays Events");
-    // console.log(response);
+    console.log(data);
     updateClasses(data);
   })
 };//end of getTodaysEvents
@@ -84,15 +87,16 @@ function updateClasses(data){
     let userId = event.User.id;
     let parkId = event.parkId;
     let time = event.time
+
     if (userId == myUserId){
-      $(`[park-id-data = ${parkId}] .${time} a`).addClass("userEvent")
+      $(`[data-park-id = ${parkId}] .${time} a`).addClass("userEvent")
     };
-    $(`[park-id-data = ${parkId}] .${time} a`).addClass("activeEvent")
+    $(`[data-park-id = ${parkId}] .${time} a`).addClass("activeEvent")
   })//end of forEach
 }//end of updateClasses
 
 $(document).ready(function(){
-  console.log(window.location.href);
+  // console.log(window.location.href);
   listItemClick();
   getTodaysEvents();
 })

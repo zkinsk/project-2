@@ -14,13 +14,13 @@
 
 function getCurrentEvents(){
   $.get("/api/event/active-events", (response) => {
-    console.log(response);
+    // console.log(response);
     response.forEach(obj => {
       obj.title = "Active Play Date!";
       // obj.rendering = "background";
       // obj.color = '#ff9f89';
     })
-    console.log(response);
+    // console.log(response);
     $('#calendar').fullCalendar({
       // themeSystem: 'bootstrap4',
       events: response,
