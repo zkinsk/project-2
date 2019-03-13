@@ -122,27 +122,44 @@ function userReview(userID){
 function infoModal(response){
   let output;
   if (response.length){
-    console.log("defined")
     let theirUserName = response[0].User.name;
-    $(".modal-card-title").text(theirUserName + " and their dog:")
+    let pluralisedDog = "dog";
+    if (response.length > 1) {
+      pluralisedDog = "dogs";
+    }
+    $(".modal-card-title").text(`${theirUserName} and their ${pluralisedDog}`);
     response.forEach(dog => {
+      let profileImage = "https://bulma.io/images/placeholders/128x128.png";
+      if (dog.profileImage) {
+        profileImage = dog.profileImage;
+      }
+
       let dogDiv = /*html*/`
-      <div class="dog-modal-content">
-        <div class="clearfix">
-        <h2 class="float-left">${dog.name}: &nbsp </h2><p> ${dog.bio}</p>
+      <div class="columns dog-modal-content">
+        <div class="column is-narrow">
+          <figure class="image is-128x128">
+            <img src="${profileImage}" alt="">
+          </figure>
         </div>
-        <p>Gender: ${dog.gender}</p>
-        <p>Energy Level: ${dog.energy}</p>
-        <p>Patience Level: ${dog.patience}</p>
-        <p>Dominance Level: ${dog.dominance}</p>
+        
+        <div class="column">
+          <h2>${dog.name}</h2>
+          <p>${dog.bio}</p>
+          <p>Gender: ${dog.gender}</p>
+        </div>
+
+        <div class="column">
+          <p>Energy Level: ${dog.energy}</p>
+          <p>Patience Level: ${dog.patience}</p>
+          <p>Dominance Level: ${dog.dominance}</p>
+        </div>
       </div>
       `
       $(".modal-card-body").append(dogDiv);
     })
   }else{
-    console.log("not defined");
-    output = "They have no Pets!"
-    $(".modal-card-title").text(output)
+    output = "They have no Pets!";
+    $(".modal-card-title").text(output);
     $(".modal-card-body").text("Try another User!");
   };
   $("#dogInfoModal").toggleClass("is-active");
@@ -185,7 +202,7 @@ $(document).ready(function(){
 
 //click action for dismissing modal
   $(".modal-background").click(function() {
-    $(".modal-card-title, .modal-card-body").empty()
+    $(".modal-card-title, .modal-card-body").empty();
     $("#dogInfoModal").toggleClass("is-active");
   });
 

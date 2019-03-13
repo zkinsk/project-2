@@ -230,8 +230,7 @@ $("#submitDogBtn").click(function(event) {
     newDog.bio,
     newDog.energy,
     newDog.patience,
-    newDog.dominance,
-    newDog.image)
+    newDog.dominance)
   ) {
     $.ajax("/api/dog", {
       type: "POST",
