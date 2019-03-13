@@ -5,8 +5,20 @@ function newAccountButton(){
   });
 };
 
+function somethingWentWrong(){
+  $("#wentWrongModal").toggleClass("is-active");
+}
+
+function modalCloseListener(){
+  //click action for dismissing modal
+  $(".modal-background").click(function() {
+    $("#wentWrongModal").toggleClass("is-active");
+  });
+};
+
 
 $(document).ready(function() {
+  modalCloseListener()
   newAccountButton();
 
   // Getting references to our form and inputs
@@ -39,8 +51,12 @@ $(document).ready(function() {
       password: password
     }).then(function(data) {
       window.location.replace(data);
+      console.log(data);
       // If there's an error, log the error
     }).catch(function(err) {
+      if (err){
+        somethingWentWrong();
+      }
       console.log(err);
     });
   }
