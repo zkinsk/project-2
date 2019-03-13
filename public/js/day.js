@@ -53,7 +53,7 @@ function initMap() {
 }
 
 function listItemClick(){
-  $("a").click(function(){
+  $(".time-link").click(function(){
     // console.log($(this).text());
     let time = $(this).data("time-name");
     let parkId = $(this).parent().parent().attr("park-id-data");
@@ -84,10 +84,10 @@ function updateClasses(data){
     let userId = event.User.id;
     let parkId = event.parkId;
     let time = event.time
-    if (userId == myUserId){
-      $(`[park-id-data = ${parkId}] .${time} a`).addClass("userEvent")
-    };
-    $(`[park-id-data = ${parkId}] .${time} a`).addClass("activeEvent")
+    if (userId == myUserId) {
+      $(`[park-id-data = ${parkId}] .${time} a`).addClass("userEvent");
+    }
+    $(`[park-id-data = ${parkId}] .${time} a`).addClass("activeEvent");
   })//end of forEach
 }//end of updateClasses
 
