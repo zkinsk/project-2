@@ -39,13 +39,21 @@ function clickEvents(){
 }//end of click events
 
 
-function bulmaDropdownListener() {
+function bulmaListeners() {
   var dropdown = document.querySelector('.dropdown');
   dropdown.addEventListener('click', function (event) {
     event.stopPropagation();
     dropdown.classList.toggle('is-active');
   });
-};
+
+  $("#dogAddModalBackground").click(function() {
+    $("#newDogModal").toggleClass("is-active");
+  });
+
+  $("#profileImageModalBackground").click(function() {
+    $("#profile-image-modal").toggleClass("is-active");
+  });
+};//end of bulma listener
 
 
 $(document).ready(function() {
@@ -55,7 +63,7 @@ $(document).ready(function() {
   };
  
   clickEvents();
-  bulmaDropdownListener();
+  bulmaListeners();
   
 
   $.get("/api/user_data")

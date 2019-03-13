@@ -127,7 +127,7 @@ function infoModal(response){
     if (response.length > 1) {
       pluralisedDog = "dogs";
     }
-    $(".modal-card-title").text(`${theirUserName} and their ${pluralisedDog}`);
+    $("#dogInfoModalTitle").text(`${theirUserName} and their ${pluralisedDog}`);
     response.forEach(dog => {
       let profileImage = "https://bulma.io/images/placeholders/128x128.png";
       if (dog.profileImage) {
@@ -155,12 +155,12 @@ function infoModal(response){
         </div>
       </div>
       `
-      $(".modal-card-body").append(dogDiv);
+      $("#dogInfoModalBody").append(dogDiv);
     })
   }else{
     output = "They have no Pets!";
-    $(".modal-card-title").text(output);
-    $(".modal-card-body").text("Try another User!");
+    $("#dogInfoModalTitle").text(output);
+    $("#dogInfoModalBody").text("Try another User!");
   };
   $("#dogInfoModal").toggleClass("is-active");
 }//end of info modal
@@ -201,8 +201,8 @@ $(document).ready(function(){
   buttonSwap(attending);
 
 //click action for dismissing modal
-  $(".modal-background").click(function() {
-    $(".modal-card-title, .modal-card-body").empty();
+  $("#dogInfoModalBackground").click(function() {
+    $("#dogInfoModalBody, #dogInfoModalTitle").empty();
     $("#dogInfoModal").toggleClass("is-active");
   });
 

@@ -93,7 +93,7 @@ $("#searchbutton").click(function() {
   $("#searchModal").toggleClass("is-active");
 });
 
-$(".modal-background").click(function() {
+$("#searchModalBackground").click(function() {
   $("#dogResults, #userResults").empty();
   $("#searchModal").toggleClass("is-active");
 });
