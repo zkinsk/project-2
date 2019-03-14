@@ -30,10 +30,15 @@ html {
   }
 
   #calendar {
-    max-width: 900px;
+    background-color: #ffffff;
     margin: 0 auto;
-    background-color: rgb(255, 208, 119);
+    max-width: 900px;
+    padding: 2em;
   }
+
+.fc-content {
+  padding: .5em;
+}
 
 /* ***************************** */
 /* ******** day page ********** */
@@ -184,6 +189,10 @@ html {
 
 .profile-dog-card {
   margin-top: 2em;
+}
+
+.profile-title {
+  font-family: "Carrois Gothic", sans-serif;
 }
 
 #upload-feedback {
