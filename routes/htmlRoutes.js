@@ -43,9 +43,10 @@ module.exports = function(app) {
 
   app.get("/event/day/:date/:time/:parkId", isAuthenticated, (req, res) => {
     console.log(req.params);
+    let date = req.params.date
     db.EventDayTimePark.findAll({
       where:{
-        date: req.params.date,
+        date: date,
         time: req.params.time,
         parkId: req.params.parkId
       },
@@ -56,13 +57,17 @@ module.exports = function(app) {
     }).then((attendees)=>{
       // console.log("html \n" ,result[0].User.dataValues)
       let attendee=[];
+      let formatedDate = formatDate(date);
+      // console.log(formatedDate);
       attendees.forEach(user =>{
         attendee.push(user.User.dataValues)
       });
       console.log(attendee);
+      console.log(formatedDate);
       res.render("event", {
         title: "Event",
         attendee: attendee,
+        formatedDateJson: JSON.stringify(formatedDate),
         attendeeJson: JSON.stringify(attendee),
       });
     });
