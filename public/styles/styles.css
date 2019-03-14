@@ -216,12 +216,32 @@ html {
 
 /* Profile Page */
 
-.dog-meter {
-  margin-left: 1em;
+.center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.level-title {
-  margin-bottom: 0 !important;
+.dog-meter {
+  margin-left: 1em;
+  white-space: nowrap;
+}
+
+.dog-title-item {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.dog-title-item:last-child {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.dog-title-level {
+  align-items: start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .profile-dog-card {
@@ -248,6 +268,10 @@ html {
   padding: 0;
   text-align: center;
   width: 1.5em;
+}
+
+.wrap-level {
+  flex-wrap: wrap;
 }
 
 #upload-feedback {
