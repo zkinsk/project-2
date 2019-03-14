@@ -34,10 +34,15 @@ html {
   }
 
   #calendar {
-    max-width: 900px;
+    background-color: #ffffff;
     margin: 0 auto;
-    background-color: rgb(255, 208, 119);
+    max-width: 900px;
+    padding: 2em;
   }
+
+.fc-content {
+  padding: .5em;
+}
 
 /* ***************************** */
 /* ******** day page ********** */
@@ -182,12 +187,38 @@ html {
 
 /* Profile Page */
 
+.dog-meter {
+  margin-left: 1em;
+}
+
 .level-title {
   margin-bottom: 0 !important;
 }
 
 .profile-dog-card {
   margin-top: 2em;
+}
+
+.profile-title {
+  font-family: "Carrois Gothic", sans-serif;
+}
+
+.meter-block {
+  border-bottom: .1em solid #dfdfdf;
+  border-left: .1em solid #dfdfdf;
+  border-top: .1em solid #dfdfdf;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
+}
+
+.meter-block:last-child {
+  border: .1em solid #dfdfdf;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
 }
 
 #upload-feedback {
