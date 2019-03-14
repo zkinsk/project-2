@@ -88,18 +88,11 @@ function updateClasses(data){
     let userId = event.User.id;
     let parkId = event.parkId;
     let time = event.time
-<<<<<<< HEAD
 
     if (userId == myUserId){
       $(`[data-park-id = ${parkId}] .${time} a`).addClass("userEvent")
     };
     $(`[data-park-id = ${parkId}] .${time} a`).addClass("activeEvent")
-=======
-    if (userId == myUserId) {
-      $(`[park-id-data = ${parkId}] .${time} a`).addClass("userEvent");
-    }
-    $(`[park-id-data = ${parkId}] .${time} a`).addClass("activeEvent");
->>>>>>> master
   })//end of forEach
 }//end of updateClasses
 
@@ -107,4 +100,9 @@ $(document).ready(function(){
   // console.log(window.location.href);
   listItemClick();
   getTodaysEvents();
+
+  // checks to see if the user had entered the page using the back button - if so it refreshes the page to keep active events updated
+  if(performance.navigation.type == 2){
+    location.reload(true);
+ }
 })

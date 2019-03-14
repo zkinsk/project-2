@@ -54,8 +54,11 @@ function calendarDates(){
 
 
 $(document).ready(function(){
+  if(performance.navigation.type == 2){
+    location.reload(true);
+ }
   var now = moment().format();
-  console.log(now);
+  // console.log(now);
   // calenderCall();
   getCurrentEvents();
 });
