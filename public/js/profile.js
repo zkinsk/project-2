@@ -55,6 +55,20 @@ function bulmaListeners() {
   });
 };//end of bulma listener
 
+function makeMeterElement(faIconName, stat) {
+  let result = "";
+
+  for (let i = 0; i < 6; i++) {
+    if (i < stat) {
+      result += `<span class="meter-block"><i class="fas ${faIconName}"></i></span>`;
+    } else {
+      result += `<span class="meter-block">-</span>`;
+    }
+  }
+
+  return $(`<span class="dog-meter">${result}</span>`);
+}
+
 
 $(document).ready(function() {
   //reload page if accessed via back navigation
@@ -128,29 +142,17 @@ $(document).ready(function() {
               " lb.</p>"
           );
           // energy
-          var dogEnergy = $(
-            "<p>" +
-              response[x].name +
-              "'s Energy Level: " +
-              response[x].energy +
-              "</p>"
-          );
+          let dogEnergy = $(`<p>Energy Level</p>`);
+          const energyMeter = makeMeterElement("fa-bolt", response[x].energy);
+          dogEnergy.append(energyMeter);
           // patience
-          var dogPatience = $(
-            "<p>" +
-              response[x].name +
-              "'s Patience Level: " +
-              response[x].patience +
-              "</p>"
-          );
+          let dogPatience = $(`<p>Patience Level</p>`);
+          const patienceMeter = makeMeterElement("fa-paw", response[x].patience);
+          dogPatience.append(patienceMeter);
           // dominance
-          var dogDominance = $(
-            "<p>" +
-              response[x].name +
-              "'s Dominance Level: " +
-              response[x].dominance +
-              "</p></div>"
-          );
+          let dogDominance = $(`<p>Dominance Level</p>`);
+          const dominanceMeter = makeMeterElement("fa-bone", response[x].dominance);
+          dogDominance.append(dominanceMeter);
           // picture
           let profileImage = "https://bulma.io/images/placeholders/128x128.png";
           if (response[x].profileImage) {
