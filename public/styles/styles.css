@@ -124,7 +124,7 @@ html {
     padding: 1em;
     height: 300px;
     width: 100%;
-    overflow-x: auto;
+    overflow: auto;
   }
 
   #attendeesBox h2 {
