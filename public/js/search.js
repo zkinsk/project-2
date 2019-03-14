@@ -164,7 +164,7 @@ $("#searchbutton").click(function() {
   $("#searchModal").toggleClass("is-active");
 });
 
-$("#searchModalBackground").click(function() {
+$("#search-modal-background").click(function() {
   $("#dogResults, #userResults").empty();
   $("#searchModal").toggleClass("is-active");
 });
