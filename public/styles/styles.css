@@ -183,6 +183,10 @@ html {
 
 /* Profile Page */
 
+.dog-meter {
+  margin-left: 1em;
+}
+
 .level-title {
   margin-bottom: 0 !important;
 }
@@ -193,6 +197,24 @@ html {
 
 .profile-title {
   font-family: "Carrois Gothic", sans-serif;
+}
+
+.meter-block {
+  border-bottom: .1em solid #dfdfdf;
+  border-left: .1em solid #dfdfdf;
+  border-top: .1em solid #dfdfdf;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
+}
+
+.meter-block:last-child {
+  border: .1em solid #dfdfdf;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
 }
 
 #upload-feedback {
