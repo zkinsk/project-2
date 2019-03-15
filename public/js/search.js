@@ -12,7 +12,10 @@ function makeMeterElement(faIconName, stat) {
   return $(`<span class="dog-meter">${result}</span>`);
 }
 $("#searchbuttonmodal").on("click", function(event) {
-  $("#dogContainer, #userContainer").empty();
+  $("#dogContainer").remove();
+  $("#userContainer").remove();
+  $("#noUsers").remove();
+  $("#noDogs").remove();
   console.log("clicked");
   var input = $("#searchinput").val();
   if (input === "") {
@@ -147,6 +150,7 @@ $("#searchbuttonmodal").on("click", function(event) {
               "fa-bone",
               data.users[x].Dogs[y].dominance
             );
+            userDogResultDominance.append(dominanceMeter);
             let profileImage =
               "https://bulma.io/images/placeholders/128x128.png";
             if (data.users[x].Dogs[y].profileImage) {
@@ -157,8 +161,6 @@ $("#searchbuttonmodal").on("click", function(event) {
               <img src="${profileImage}">
             </figure>`
             );
-            userDogResultDominance.append(dominanceMeter);
-            $(userContainer).prepend(userCount);
             $(userCount).after(userResultName, userResultDogs);
             $(userLeftColumn).append(userDogResultPic);
             $(userMiddleColumn).append(
@@ -178,6 +180,7 @@ $("#searchbuttonmodal").on("click", function(event) {
               userRightColumn
             );
             $(userContainer).append(userColumns);
+            $(userContainer).prepend(userCount);
           }
         }
         $("#searchModalBody").append(userContainer);
