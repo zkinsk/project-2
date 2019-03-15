@@ -13,16 +13,14 @@ var chatDB = database.ref("/event/chat");
 var myUserName = sessionStorage.getItem("userName");
 var myUserId = sessionStorage.getItem("userId");
 var eventObject = JSON.parse(sessionStorage.getItem('eventObj'));
-console.log(eventObject);
+// console.log(eventObject);
 var currentEvent = `${eventObject.date}&${eventObject.time}&${eventObject.parkId}`;
 
 // when chat form is submitted, push chat text and user data to firebase db
 function chat(){
   $("#chatForm").submit(function(event){
       event.preventDefault();
-      console.log("click");
       let chatText = $("#chatInput").val()
-    //   console.log(chatText);
       if (chatText != ""){
         chatDB.push({
           user: myUserName,
@@ -38,7 +36,6 @@ function chat(){
 // update chat box with chat text as it is send to the database
 function chatUpdate(){
     chatDB.orderByChild("event").equalTo(currentEvent).on("child_added", function(chat){
-        // console.log(chat)
         let userName = chat.val().user;
         let chatT = chat.val().chatTextDB;
         let currentId = chat.val().userId;
@@ -69,8 +66,6 @@ function buttonActions(){
   })//end of user list click
 
   $("#buttonSwitch").on("click", "#attendeeBtn", function(){
-    console.log("User Id: " + myUserId);
-
     $.post("/api/event/attend", {
       date: eventObject.date,
       time: eventObject.time,
@@ -78,14 +73,12 @@ function buttonActions(){
       userId: myUserId
     })//end of post
     .then((response) => {
-      console.log(response);
       buttonSwap([{id: myUserId}]);
       addRemoveUser();
     })
   })
 
   $("#buttonSwitch").on("click", "#attendeeRemove", function(){
-    console.log("Remove User");
     $.ajax({
       method: "DELETE",
       url:"/api/event/attend", 
@@ -97,8 +90,6 @@ function buttonActions(){
       }
     })//end of delete
     .then((response) => {
-      console.log(response);
-      console.log("deleted");
       buttonSwap([{id: 0}])
       addRemoveUser("remove");
     })
@@ -109,11 +100,11 @@ function buttonActions(){
 
 }//end of button Actions
 
+//user review gets dog and owner info to display in modal on click in chat and attending list
 function userReview(userID){
     let apiCall = "/api/dog/";
     apiCall += userID;
     $.get(apiCall).then(function(response) {
-      console.log(response);
       infoModal(response)
     });
 
@@ -166,25 +157,23 @@ function infoModal(response){
 }//end of info modal
 
 function checkUser(userArr){
-  console.log(userArr);
   let x = false
   userArr.forEach(user =>{
     if (user.id == myUserId){
       x = true
     }
   })
-  console.log(x);
   return x
 }
 
 function buttonSwap(attending){
   let currentButton;
   if (checkUser(attending)){
-    console.log("Your on the list")
-    currentButton = `<button class="button" id="attendeeRemove">Remove Your Name</button>`
+    // console.log("Your on the list")
+    currentButton = `<button class="button is-danger is-small is-rounded tooltip is-tooltip-danger is-tooltip-bottom" data-tooltip="Remove Your Name" id="attendeeRemove"><i class="fas fa-minus"></i></button>`
   }else{
-    console.log("youre not on the list");
-    currentButton = `<button class="button" id="attendeeBtn">Add Your Name</button>`
+    // console.log("youre not on the list");
+    currentButton = `<button class="button is-primary is-small is-rounded tooltip is-tooltip-primary is-tooltip-bottom" data-tooltip="Add Your Name" id="attendeeBtn"><i class="fas fa-plus"></i></button>`
   }
   $("#buttonSwitch").html(currentButton)
 }
@@ -192,13 +181,34 @@ function buttonSwap(attending){
 function addRemoveUser (action){
   action === "remove" ?  $(`ul [data-user-id = '${myUserId}']`).remove():
   $(".attendee-list").append(`<li data-user-id="${myUserId}"><h4 class="subtitle is-4">${myUserName}</h4></li>`);
-};
+};//end of addRemoveUser
 
+function updatePageTitle(){
+let parkName = eventObject.parkName;
+console.log(formatedDate);
+let formatedInfo = formatDate(formatedDate);
+let title = `
+${parkName}<br>
+${formatedInfo}
+`;
+$("#eventTitle").html(title);
+}//end of updatePageTitle
+
+
+function formatDate(date){
+  let x = date.indexOf(",");
+  let day = date.slice(0, x) + ` ${eventObject.time}</br>${date.slice(x+1, date.legth)}`
+  return day
+
+
+}
 $(document).ready(function(){
   chat();
   chatUpdate();
   buttonActions();
   buttonSwap(attending);
+  updatePageTitle();
+  // console.log(attending);
 
 //click action for dismissing modal
   $("#dogInfoModalBackground").click(function() {

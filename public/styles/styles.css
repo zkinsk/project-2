@@ -2,6 +2,14 @@ html {
   background-color: orange;
 }
 
+.navbar-item img {
+  max-height: 5rem;
+}
+
+.dog-meter {
+  white-space: nowrap;
+}
+
 
 /* list of elements for cursor: pointer */
   .dropdown-item,
@@ -106,6 +114,35 @@ html {
 
 /* ***************************** */
 /* ********event page ********** */
+
+  #attendeesColumn{
+    /* border: black 2px solid; */
+  }
+
+  #attendeesBox{
+    /* border: blue 2px solid; */
+    box-sizing: border-box;
+    background-color: rgb(255, 203, 107);
+    border: 5px solid transparent;
+    border-radius: 1rem;
+    padding: 1em;
+    height: 300px;
+    width: 100%;
+    overflow: auto;
+  }
+
+  #attendeesBox h2 {
+    margin: 0;
+    padding: 0;
+  }
+
+  #attendeesBox h2::after{
+    display:block;
+    content:"";
+    border: orange solid 1px;
+    width: 80%;
+    margin: 1rem auto;
+  }
 
   .attendee {
     color: #0000df;
@@ -233,18 +270,21 @@ chat box css */
     width: 100%;
     overflow: hidden;
     /* background-color: #e9ecef; */
-    background-color: hsl(206, 36%, 20%);
+    /* background-color: hsl(206, 36%, 20%); */
+    background-color: rgb(255, 203, 107);
     padding: 5px;
-    border: 5px solid #212528;
-    border-radius: 3px;
+    /* border: 5px solid #212528; */
+    border: 5px solid transparent;
+    border-radius: 1rem;
     
   }
   #chatForm {
-    border-bottom: solid black 1px
+    /* border-bottom: solid black 1px */
   }
   #chatArea{
     position: relative;
-    background-color: hsl(206, 36%, 20%);
+    /* background-color: hsl(206, 36%, 20%); */
+    background-color: rgb(255, 203, 107);;
     overflow:auto;
     height: 220px;
     border-radius: 3px;

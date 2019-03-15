@@ -18,13 +18,25 @@
 
 <section class="section">
   <div class="container">
-    <h1 class="title">Event</h1>
+    <h3 class="title is-4 has-text-centered"  id="eventTitle">Event</h3>
     <div class="columns">
+      <div class="column has-text-centered" id="attendeesColumn">{{!--attendees column--}}
+        <div id="attendeesBox">
+          <h2 class="title is-4">Attendees <span id="buttonSwitch"></span></h2>
+          <ul class="attendee-list">
+            {{#each attendee}}
+            <li data-user-id="{{this.id}}">
+              <h4 class="subtitle is-4">{{this.name}}</h4> {{!-- list of attendess goes here --}}
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div> {{!--end of attendees column--}}
       <div class="column">
         <div id="chatBox">
           <form class="field has-addons" id="chatForm">
             <div class="control is-expanded">
-              <input class="input" id="chatInput" type="text" placeholder="Chat It Up!">
+              <input class="input" autocomplete="off" id="chatInput" type="text" placeholder="Chat It Up!">
             </div>
             <div class="control">
               <button class="button is-info" type="submit" id="chatButton"><i class="fas fa-share"></i></button>
@@ -37,16 +49,7 @@
         {{!-- ^^^ end of chat box ^^^--}}
       </div>
 
-      <div class="column">
-        <h2 class="title is-4">Attendees <span id="buttonSwitch"></span></h2>
 
-        <ul class="attendee-list">
-          {{#each attendee}}
-          <li data-user-id="{{this.id}}"><h4 class="subtitle is-4">{{this.name}}</h4></li>
-          {{/each}}
-          {{!-- list of attendess goes here --}}
-        </ul>
-      </div>
     </div>
   </div>
 </section>
@@ -58,6 +61,7 @@
 
 <script>
   let attending = {{{attendeeJson}}};
+  let formatedDate = {{{formatedDateJson}}}
 </script>
 
 

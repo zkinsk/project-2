@@ -17,10 +17,10 @@
                     <i class="fas fa-map-marker-alt"></i>
                   </button>
 
-                  <ul class="time-list" park-id-data="{{park.id}}">
+                  <ul class="time-list" data-park-id="{{park.id}}" data-park-name="{{park.name}}">
                     {{#each times as |time|}}
                       <li class="time {{time.name}}">
-                        <a class="time-link" href="#" data-time-name="{{time.name}}">
+                        <a class="time-link" href="#" data-time-name="{{time.name}}" >
                           <span class="time-name">{{time.name}}</span>
                           <span class="time-range">{{time.range}}</span>
                         </a>
