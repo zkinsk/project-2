@@ -29,7 +29,7 @@ $("#searchform").on("submit", function(event) {
       // if dogs results, pushes dog info to dog section
       if (data.dogs.length != 0) {
         var dogCount = $(
-          "<h3 class='subtitle'>Dogs found: " + data.dogs.length + "</h3>"
+          "<h3 class='subtitle search-title'>Dogs found: " + data.dogs.length + "</h3>"
         );
         var dogContainer = $("<div id='dogContainer'></div>");
         for (x in data.dogs) {
@@ -90,7 +90,7 @@ $("#searchform").on("submit", function(event) {
         $("#searchModalBody").append(dogContainer);
       } else {
         var noDogs = $(
-          "<h4 class='subtitle' id='noDogs'>Dogs found: " +
+          "<h4 class='subtitle search-title' id='noDogs'>Dogs found: " +
             data.dogs.length +
             "</h4>"
         );
@@ -102,7 +102,7 @@ $("#searchform").on("submit", function(event) {
 
         var userContainer = $("<div id='userContainer'></div>");
         var userCount = $(
-          "<h3 class='subtitle'>Users found: " + data.users.length + "</h3>"
+          "<h3 class='subtitle search-title'>Users found: " + data.users.length + "</h3>"
         );
 
         for (x in data.users) {
@@ -181,7 +181,7 @@ $("#searchform").on("submit", function(event) {
         $("#searchModalBody").append(userContainer);
       } else {
         var noUsers = $(
-          "<h4 class='subtitle' id='noUsers'>Users found: " +
+          "<h4 class='subtitle search-title' id='noUsers'>Users found: " +
             data.users.length +
             "</h4>"
         );
