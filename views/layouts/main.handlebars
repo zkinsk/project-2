@@ -26,12 +26,13 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/user/profile">
-          <img
-            src="/images/dogs-day-out-logo.jpeg"
-            {{!-- width="112" --}}
-            {{!-- height="28" --}}
-          />
-        </a>
+          <img src="/images/dogs-day-out-logo.jpeg"/></a>
+          <div class="level is-mobile" style="margin: 0">
+            <a class="navbar-item button is-rounded is-warning is-inverted is-outlined navButton" href="/calendar"><i class="far fa-calendar-alt"></i></a>
+            <a class="navbar-item button is-rounded is-warning is-inverted is-outlined navButton" href="/user/profile"><i class="fas fa-user-circle"></i></a>
+            <a class="navbar-item button is-rounded is-warning is-inverted is-outlined navButton" id="searchbutton"><i class="fas fa-search"></i></a>
+          </div>
+
 
         <a
           role="button"
@@ -48,15 +49,9 @@
 
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="/user/profile">
-            My Profile
-          </a>
-          <a class="navbar-item" href="/calendar">
-            Calendar
-          </a>
-          <a class="navbar-item" id="searchbutton">
-            Search
-          </a>
+          {{!-- <a class="navbar-item" href="/user/profile">My Profile</a> --}}
+          {{!-- <a class="navbar-item" href="/calendar">Calendar</a> --}}
+          {{!-- <a class="navbar-item" id="searchbutton">Search</a> --}}
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
