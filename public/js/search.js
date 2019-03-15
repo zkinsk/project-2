@@ -11,17 +11,12 @@ function makeMeterElement(faIconName, stat) {
 
   return $(`<span class="dog-meter">${result}</span>`);
 }
-<<<<<<< HEAD
-$("#searchbuttonmodal").on("click", function(event) {
+$("#searchform").on("submit", function(event) {
+  event.preventDefault();
   $("#dogContainer").remove();
   $("#userContainer").remove();
   $("#noUsers").remove();
   $("#noDogs").remove();
-=======
-$("#searchform").on("submit", function(event) {
-  event.preventDefault();
-  $("#dogResults, #userResults").empty();
->>>>>>> 306c2d7c8d043c04e7e9d42f5431687ae971918e
   console.log("clicked");
   var input = $("#searchinput").val();
   if (input === "") {
@@ -30,10 +25,6 @@ $("#searchform").on("submit", function(event) {
     $.ajax("/api/search/" + input, {
       type: "GET"
     }).then(function(data) {
-      console.log(data);
-      // starts dog section if dog results
-
-      // starts user section if user results
 
       // if dogs results, pushes dog info to dog section
       if (data.dogs.length != 0) {
@@ -209,13 +200,9 @@ $("#searchbutton").click(function() {
 });
 
 $("#search-modal-background").click(function() {
-<<<<<<< HEAD
   $("#dogContainer").remove();
   $("#userContainer").remove();
   $("#noUsers").remove();
   $("#noDogs").remove();
-=======
-  $("#dogResults, #userResults").empty();
->>>>>>> 306c2d7c8d043c04e7e9d42f5431687ae971918e
   $("#searchModal").toggleClass("is-active");
 });
