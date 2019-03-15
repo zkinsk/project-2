@@ -11,7 +11,8 @@ function makeMeterElement(faIconName, stat) {
 
   return $(`<span class="dog-meter">${result}</span>`);
 }
-$("#searchbuttonmodal").on("click", function(event) {
+$("#searchform").on("submit", function(event) {
+  event.preventDefault();
   $("#dogResults, #userResults").empty();
   console.log("clicked");
   var input = $("#searchinput").val();
@@ -164,7 +165,7 @@ $("#searchbutton").click(function() {
   $("#searchModal").toggleClass("is-active");
 });
 
-$("#searchModalBackground").click(function() {
+$("#search-modal-background").click(function() {
   $("#dogResults, #userResults").empty();
   $("#searchModal").toggleClass("is-active");
 });
