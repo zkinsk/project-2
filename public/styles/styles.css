@@ -6,6 +6,16 @@ html {
   max-height: 5rem;
 }
 
+.navButton {
+  margin: 0.1rem;
+  color: orange !important;
+
+}
+
+.navButton i {
+  /* text-shadow: 0 0 .01rem black; */
+}
+
 
 /* list of elements for cursor: pointer */
   .dropdown-item,
