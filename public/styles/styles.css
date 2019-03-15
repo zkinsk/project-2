@@ -29,7 +29,7 @@ html {
   body {
     margin: 40px 10px;
     padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-family: "Carrois Gothic", sans-serif;
     font-size: 14px;
   }
 
@@ -55,6 +55,7 @@ html {
 .park-name {
   font-size: 1.5em;
   font-weight: bold;
+  font-family: "Carrois Gothic", sans-serif;
 }
 
 .show-on-map {
@@ -107,6 +108,11 @@ html {
 #park-list {
   list-style-type: none;
 }
+
+.card-content {
+  font-family: "Carrois Gothic", sans-serif;
+}
+
 
 /* ***************************** */
 /* ********event page ********** */
@@ -220,6 +226,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Carrois Gothic", sans-serif;
 }
 
 .dog-meter {
@@ -230,6 +237,7 @@ html {
 .dog-title-item {
   margin-right: 1em;
   margin-bottom: 1em;
+  font-family: "Carrois Gothic", sans-serif;
 }
 
 .dog-title-item:last-child {
@@ -280,6 +288,22 @@ html {
 
 #upload-progress {
   display: none;
+}
+
+.card-content {
+  font-family: "Carrois Gothic", sans-serif;
+}
+
+.upload-button {
+  font-family: "Carrois Gothic", sans-serif;
+}
+ 
+.button {
+  font-family: "Carrois Gothic", sans-serif;
+}
+
+.navbar-item {
+  font-family: "Carrois Gothic", sans-serif;
 }
 
 /* *************************
