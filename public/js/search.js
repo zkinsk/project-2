@@ -11,11 +11,17 @@ function makeMeterElement(faIconName, stat) {
 
   return $(`<span class="dog-meter">${result}</span>`);
 }
+<<<<<<< HEAD
 $("#searchbuttonmodal").on("click", function(event) {
   $("#dogContainer").remove();
   $("#userContainer").remove();
   $("#noUsers").remove();
   $("#noDogs").remove();
+=======
+$("#searchform").on("submit", function(event) {
+  event.preventDefault();
+  $("#dogResults, #userResults").empty();
+>>>>>>> 306c2d7c8d043c04e7e9d42f5431687ae971918e
   console.log("clicked");
   var input = $("#searchinput").val();
   if (input === "") {
@@ -203,9 +209,13 @@ $("#searchbutton").click(function() {
 });
 
 $("#search-modal-background").click(function() {
+<<<<<<< HEAD
   $("#dogContainer").remove();
   $("#userContainer").remove();
   $("#noUsers").remove();
   $("#noDogs").remove();
+=======
+  $("#dogResults, #userResults").empty();
+>>>>>>> 306c2d7c8d043c04e7e9d42f5431687ae971918e
   $("#searchModal").toggleClass("is-active");
 });

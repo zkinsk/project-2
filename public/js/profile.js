@@ -42,7 +42,7 @@ function clickEvents(){
 function bulmaListeners() {
   var dropdown = document.querySelector('.dropdown');
   dropdown.addEventListener('click', function (event) {
-    event.stopPropagation();
+    event.preventDefault();
     dropdown.classList.toggle('is-active');
   });
 
@@ -110,16 +110,16 @@ $(document).ready(function() {
         var x;
         // loops through results and creates HTML elements for each dog
         for (x in response) {
-          var dogNameLevel = $(`<div class="level content">`);
+          var dogNameLevel = $(`<div class="dog-title-level content">`);
           // name
           var dogName = $(
-            "<div class='level-left'><strong class='level-item'>" +
+            "<strong class='dog-title-item'>" +
               response[x].name +
               "</strong>"
           );
           // delete button
           var dogDelete = $(
-            "<button class='button is-danger is-small is-outlined level-item' id='dogDeleteBtn' data-id=" +
+            "<button class='button is-danger is-small is-outlined dog-title-item' id='dogDeleteBtn' data-id=" +
               response[x].id +
               ">Delete</button>"
           );
@@ -170,7 +170,7 @@ $(document).ready(function() {
           var dogLevel = $("<div class='columns dogLevel'></div>");
           // left column
           var dogPicColumn = $(
-            "<div class='column is-narrow dogPicColumn has-text-centered'></div>"
+            "<div class='column is-narrow dogPicColumn center-column'></div>"
           );
           // right column
           var dogInfoColumn = $(
@@ -185,8 +185,8 @@ $(document).ready(function() {
             dogPatience,
             dogDominance
           );
-          dogName.append(dogDelete);
           dogNameLevel.append(dogName);
+          dogNameLevel.append(dogDelete);
           $(dogPicColumn).prepend(dogPic);
           $(dogLevel).prepend(dogPicColumn, dogInfoColumn);
           $(dogLevel).append(lineBreak);
