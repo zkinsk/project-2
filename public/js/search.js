@@ -109,15 +109,13 @@ $("#searchbuttonmodal").on("click", function(event) {
         );
 
         for (x in data.users) {
-          var userColumns = $(
-            "<hr><div class='columns' id='userColumns'></div>"
-          );
-          var userLeftColumn = $("<div class='column is-narrow'></div>");
-          var userMiddleColumn = $("<div class='column'");
-          var userRightColumn = $("<div class='column'");
-          var userResultName = $("<hr><p>Name: " + data.users[x].name + "</p>");
+          var userResultName = $("<hr><p>User's Name: " + data.users[x].name + "</p>");
           var userResultDogs = $("<p>" + data.users[x].name + "'s dogs: </p>");
           for (y in data.users[x].Dogs) {
+            var userColumns = $("<div class='columns' id='userColumns'></div>");
+            var userLeftColumn = $("<div class='column is-narrow'></div>");
+            var userMiddleColumn = $("<div class='column'</div>");
+            var userRightColumn = $("<div class='column'</div>");
             var userDogResultName = $(
               "<p>Name: " + data.users[x].Dogs[y].name + "</p>"
             );
@@ -161,7 +159,6 @@ $("#searchbuttonmodal").on("click", function(event) {
               <img src="${profileImage}">
             </figure>`
             );
-            $(userCount).after(userResultName, userResultDogs);
             $(userLeftColumn).append(userDogResultPic);
             $(userMiddleColumn).append(
               userDogResultName,
@@ -180,9 +177,10 @@ $("#searchbuttonmodal").on("click", function(event) {
               userRightColumn
             );
             $(userContainer).append(userColumns);
-            $(userContainer).prepend(userCount);
           }
         }
+        $(userContainer).prepend(userCount);
+        $(userCount).after(userResultName, userResultDogs);
         $("#searchModalBody").append(userContainer);
       } else {
         var noUsers = $(
