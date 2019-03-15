@@ -100,6 +100,15 @@ module.exports = function(app) {
     });
   });
 
+<<<<<<< HEAD
+  app.get("/search", isAuthenticated, (request, response) => {
+    response.render("search", {
+      title: "Search meetups",
+    });
+  });
+
+=======
+>>>>>>> 306c2d7c8d043c04e7e9d42f5431687ae971918e
   // Render 404 page for any unmatched routes
   app.get("*", (request, response) => {
     response.render("404");
