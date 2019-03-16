@@ -119,7 +119,7 @@ $(document).ready(function() {
           );
           // delete button
           var dogDelete = $(
-            "<button class='button is-danger is-small is-outlined dog-title-item' id='dogDeleteBtn' data-id=" +
+            "<button class='button is-danger is-small dog-title-item' id='dogDeleteBtn' data-id=" +
               response[x].id +
               ">Delete</button>"
           );
