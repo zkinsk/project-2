@@ -25,18 +25,25 @@ Initial Wireframe Sketch: [CHECK IT OUT](https://xd.adobe.com/view/f894ea2c-7a16
 
 ### Technologies Used: 
 1. Bulma
-  - Responsive CSS Framework
-  - Relatively Easy to use classes
-2. Jquery
-  - Easy access to the DOM for manipluation of screen content
-3. Handlebars Templating
-4. Firebase
-  - Real Time database for instant chat messages
-5. Passport JS & bcrypt.js
-  - Password protected user data
-  - Middleway to verify user authentication before allowing access to various HTML routes
-  - bcrypt.js to hash passwords before entering them into the database
-6. 
+    - Responsive CSS Framework
+    - Relatively Easy to use classes
+1. Jquery
+    - Easy access to the DOM for manipluation of screen content
+1. Handlebars Templating
+    - Easy templating engine
+1. Firebase
+    - Real Time database for instant chat messages
+1. Sequelze
+    - JS style acccess to MySQL database
+1. Express
+    - for HTML routing and API queries
+1. 
+1. Passport JS & bcrypt.js
+    - Password protected user data
+    - Middleway to verify user authentication before allowing access to various HTML routes
+    - bcrypt.js to hash passwords before entering them into the database
+1. Amazon AWS
+    - Due to issues with storing images on Heroku, we upload our images to Amazon for file storage
 
 **Addition Features**
 - Creating a list of favorite dogs or owners to follow
