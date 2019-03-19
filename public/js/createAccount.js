@@ -13,7 +13,7 @@ $(document).ready(function() {
   signUpForm.on("submit", function(event) {
     event.preventDefault();
     var userData = {
-      email: emailInput.val().trim(),
+      email: emailInput.val().trim().toLowerCase(),
       password: passwordInput.val().trim(),
       passwordChek: passwordVerify.val().trim()
     };
