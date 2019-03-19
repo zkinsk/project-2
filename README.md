@@ -37,7 +37,6 @@ Initial Wireframe Sketch: [CHECK IT OUT](https://xd.adobe.com/view/f894ea2c-7a16
     - JS style acccess to MySQL database
 1. Express
     - for HTML routing and API queries
-1. 
 1. Passport JS & bcrypt.js
     - Password protected user data
     - Middleway to verify user authentication before allowing access to various HTML routes
