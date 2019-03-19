@@ -76,7 +76,7 @@ function buttonActions(){
       buttonSwap([{id: myUserId}]);
       addRemoveUser();
     })
-  })
+  });
 
   $("#buttonSwitch").on("click", "#attendeeRemove", function(){
     $.ajax({
@@ -156,6 +156,7 @@ function infoModal(response){
   $("#dogInfoModal").toggleClass("is-active");
 }//end of info modal
 
+//checks to see if the user is in the current list of attendees
 function checkUser(userArr){
   let x = false
   userArr.forEach(user =>{
@@ -166,23 +167,38 @@ function checkUser(userArr){
   return x
 }
 
+//swaps the add and remove button type based on whether or not the user is attending the current event
 function buttonSwap(attending){
   let currentButton;
   if (checkUser(attending)){
     // console.log("Your on the list")
-    currentButton = `<button class="button is-danger is-small is-rounded tooltip is-tooltip-danger is-tooltip-bottom" data-tooltip="Remove Your Name" id="attendeeRemove"><i class="fas fa-minus"></i></button>`
+    currentButton = /*html*/`
+      <button class="button is-danger is-small is-rounded tooltip is-tooltip-danger is-tooltip-bottom" 
+      data-tooltip="Remove Your Name" 
+      id="attendeeRemove">
+      <i class="fas fa-minus"></i>
+      </button>
+    `;
   }else{
     // console.log("youre not on the list");
-    currentButton = `<button class="button is-primary is-small is-rounded tooltip is-tooltip-primary is-tooltip-bottom" data-tooltip="Add Your Name" id="attendeeBtn"><i class="fas fa-plus"></i></button>`
+    currentButton = /*html*/`
+      <button class="button is-primary is-small is-rounded tooltip is-tooltip-primary is-tooltip-bottom" 
+      data-tooltip="Add Your Name" 
+      id="attendeeBtn">
+      <i class="fas fa-plus"></i>
+      </button>
+    `;
   }
   $("#buttonSwitch").html(currentButton)
 }
 
+//adds and removes user from attendees list based on whether or not they are attending the event
 function addRemoveUser (action){
   action === "remove" ?  $(`ul [data-user-id = '${myUserId}']`).remove():
   $(".attendee-list").append(`<li data-user-id="${myUserId}"><h4 class="subtitle is-4">${myUserName}</h4></li>`);
 };//end of addRemoveUser
 
+//updates the page title based on current event Time, Date and Park
 function updatePageTitle(){
 let parkName = eventObject.parkName;
 console.log(formatedDate);
@@ -195,13 +211,13 @@ $("#eventTitle").html(title);
 }//end of updatePageTitle
 
 
+//re-formats the date to insert he time "word" into the phrase
 function formatDate(date){
   let x = date.indexOf(",");
   let day = date.slice(0, x) + ` ${eventObject.time}</br>${date.slice(x+1, date.legth)}`
   return day
+};
 
-
-}
 $(document).ready(function(){
   chat();
   chatUpdate();

@@ -26,15 +26,21 @@ var parks = [
   }
 ];
 
+//seed button for parks to facilitate easier initial deployment on heroku and elsewhere
 $("#parkSeeds").click(function(){
-  console.log("Park Seeds being added");
-  parks.forEach( (park) => {
-    $.post("/api/park/seeds",{
-      name: park.name,
-      lat: park.lat,
-      lon: park.lon
-    }).then( (response) => {
-    console.log(response);
-    });
+  $.get("/api/park/", result => {
+    console.log(result);
+    if(!result.length){ //a check to make sure you haven't already clicked the button and double seeded the table
+      console.log("Park Seeds being added");
+      parks.forEach( park => {
+        $.post("/api/park/seeds",{
+          name: park.name,
+          lat: park.lat,
+          lon: park.lon
+        }).then( response => {
+        console.log(response);
+        });
+      })
+    }
   })
-});
+});//end of seed click
