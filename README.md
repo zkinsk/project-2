@@ -1,6 +1,6 @@
 # Superfecta
 
-### Dogs Day Out
+### Dogs Day Out - [link](https://dogs-day-out.herokuapp.com/)
 
 - Team Members: Andrew Dawson, Alexa Oswald, Jacob Hughes, Scott Zinski
 
