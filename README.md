@@ -44,9 +44,12 @@ Initial Wireframe Sketch: [CHECK IT OUT](https://xd.adobe.com/view/f894ea2c-7a16
 1. Amazon AWS
     - Due to issues with storing images on Heroku, we upload our images to Amazon for file storage
 
-**Addition Features**
+**Future Development **
 - Creating a list of favorite dogs or owners to follow
 - Searching dogs and owners and which parks and events they are signed up for
+- Private Messaging
+- More robust authentication 
+- React based front-end 
     
 
 
